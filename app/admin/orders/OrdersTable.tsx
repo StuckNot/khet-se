@@ -6,7 +6,7 @@ import { updateOrderStatus } from "./actions";
 type Order = {
   id: string;
   created_at: string | null;
-  status: "pending" | "processing" | "shipped" | "delivered" | "cancelled" | null;
+  status: "pending" | "processing" | "out_for_delivery" | "delivered" | "failed" | null;
   total_amount: number;
   user_id: string | null;
   profiles?: { first_name: string | null } | null;
@@ -15,7 +15,7 @@ type Order = {
 export default function OrdersTable({ orders }: { orders: Order[] }) {
   const [isUpdating, setIsUpdating] = useState(false);
 
-  const handleStatusChange = async (id: string, newStatus: any) => {
+  const handleStatusChange = async (id: string, newStatus: "pending" | "processing" | "out_for_delivery" | "delivered" | "failed") => {
     setIsUpdating(true);
     await updateOrderStatus(id, newStatus);
     setIsUpdating(false);
@@ -43,21 +43,21 @@ export default function OrdersTable({ orders }: { orders: Order[] }) {
               <td className="p-4">
                 <select
                   value={order.status || "pending"}
-                  onChange={(e) => handleStatusChange(order.id, e.target.value)}
+                  onChange={(e) => handleStatusChange(order.id, e.target.value as "pending" | "processing" | "out_for_delivery" | "delivered" | "failed")}
                   disabled={isUpdating}
                   className={`rounded-md border-transparent px-2 py-1 text-xs font-bold uppercase tracking-wider focus:border-brand-secondary focus:ring-brand-secondary disabled:opacity-50 ${
                     order.status === 'pending' ? 'bg-yellow-100 text-yellow-700' :
                     order.status === 'processing' ? 'bg-blue-100 text-blue-700' :
-                    order.status === 'shipped' ? 'bg-purple-100 text-purple-700' :
+                    order.status === 'out_for_delivery' ? 'bg-purple-100 text-purple-700' :
                     order.status === 'delivered' ? 'bg-green-100 text-green-700' :
                     'bg-red-100 text-red-700'
                   }`}
                 >
                   <option value="pending">Pending</option>
                   <option value="processing">Processing</option>
-                  <option value="shipped">Shipped</option>
+                  <option value="out_for_delivery">Out for Delivery</option>
                   <option value="delivered">Delivered</option>
-                  <option value="cancelled">Cancelled</option>
+                  <option value="failed">Failed</option>
                 </select>
               </td>
             </tr>

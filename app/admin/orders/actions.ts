@@ -2,7 +2,7 @@
 import { createClient } from "@/utils/supabase/server";
 import { revalidatePath } from "next/cache";
 
-export async function updateOrderStatus(orderId: string, newStatus: "pending" | "processing" | "shipped" | "delivered" | "cancelled") {
+export async function updateOrderStatus(orderId: string, newStatus: "pending" | "processing" | "out_for_delivery" | "delivered" | "failed") {
   const supabase = await createClient();
 
   const { error } = await supabase
