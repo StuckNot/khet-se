@@ -28,7 +28,7 @@ export default async function LoginPage({ searchParams }: LoginPageProps) {
         <div className="mb-8 text-center">
           <Link
             href="/"
-            className="inline-block text-3xl font-bold tracking-tight text-brand-primary mb-2"
+            className="inline-block font-display text-3xl font-bold tracking-tight text-brand-primary mb-2"
           >
             KhetSe
           </Link>

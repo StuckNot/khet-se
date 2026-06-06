@@ -31,7 +31,7 @@ export default function NotFound() {
       <p className="text-sm font-semibold uppercase tracking-widest text-brand-accent mb-3">
         404 — Page Not Found
       </p>
-      <h1 className="text-3xl font-bold text-brand-primary mb-4">
+      <h1 className="font-display text-3xl font-bold text-brand-primary mb-4">
         Looks like this field is empty.
       </h1>
       <p className="text-brand-primary/60 max-w-sm mb-10">

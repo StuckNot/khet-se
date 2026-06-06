@@ -53,7 +53,7 @@ export default async function AdminDashboardPage() {
                     <td className="py-3">
                       <span className={`inline-block rounded-full px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider ${
                         order.status === 'pending' ? 'bg-yellow-100 text-yellow-700' :
-                        order.status === 'delivered' ? 'bg-green-100 text-green-700' :
+                        order.status === 'delivered' ? 'bg-success/10 text-success' :
                         'bg-brand-primary/10 text-brand-primary'
                       }`}>
                         {order.status}

@@ -6,6 +6,12 @@ import AddToCartButton from "../components/AddToCartButton";
 
 type Product = Tables<"products">;
 
+const categoryLabels: Record<string, string> = {
+  staple: "Pantry Staple",
+  add_on: "Add-On",
+  seasonal: "Seasonal Harvest",
+};
+
 /**
  * Page-level SEO metadata.
  * Overrides the root layout defaults for the homepage only.
@@ -44,7 +50,7 @@ export default async function HomePage() {
             Farm to Pantry in 48 Hours
           </span>
 
-          <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-brand-primary mb-6 tracking-tight leading-tight">
+          <h1 className="font-display text-4xl md:text-6xl lg:text-7xl font-bold text-brand-primary mb-6 tracking-tight leading-tight">
             Taste the Organic <br className="hidden sm:inline" />
             Difference.
           </h1>
@@ -88,7 +94,7 @@ export default async function HomePage() {
       <section className="w-full bg-brand-canvas py-20 md:py-28">
         <div className="container mx-auto px-4 md:px-6">
           <div className="text-center mb-14">
-            <h2 className="text-3xl md:text-4xl font-bold text-brand-primary mb-4 tracking-tight">
+            <h2 className="font-display text-3xl md:text-4xl font-bold text-brand-primary mb-4 tracking-tight">
               Featured Harvest
             </h2>
             <p className="text-brand-primary/50 max-w-lg mx-auto">
@@ -119,7 +125,7 @@ export default async function HomePage() {
       <section className="w-full bg-brand-canvas py-20 md:py-28">
         <div className="container mx-auto px-4 md:px-6">
           <div className="text-center mb-14">
-            <h2 className="text-3xl md:text-4xl font-bold text-brand-primary mb-4 tracking-tight">
+            <h2 className="font-display text-3xl md:text-4xl font-bold text-brand-primary mb-4 tracking-tight">
               Why Subscribe with KhetSe?
             </h2>
             <p className="text-brand-primary/50 max-w-lg mx-auto">
@@ -166,8 +172,8 @@ function ProductCard({ product }: { product: Product }) {
   return (
     <div className="group rounded-xl border border-brand-primary/10 bg-brand-canvas p-6 transition-all hover:shadow-lg hover:border-brand-primary/20">
       {/* Category Pill */}
-      <span className="inline-block mb-4 px-3 py-1 rounded-full bg-brand-accent/20 text-brand-primary text-xs font-semibold capitalize">
-        {product.category.replace("_", " ")}
+      <span className="inline-block mb-4 px-3 py-1 rounded-full bg-brand-accent/20 text-brand-primary text-xs font-semibold">
+        {categoryLabels[product.category] || product.category}
       </span>
 
       <h3 className="text-xl font-bold text-brand-primary mb-2 group-hover:text-brand-secondary transition-colors">

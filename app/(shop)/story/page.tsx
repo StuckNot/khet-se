@@ -11,7 +11,7 @@ export default function OurStoryPage() {
           <span className="inline-block mb-4 px-4 py-1.5 rounded-full bg-brand-accent/20 text-brand-primary text-xs font-semibold uppercase tracking-widest">
             Genesis
           </span>
-          <h1 className="text-4xl md:text-6xl font-bold text-brand-primary mb-6 tracking-tight">
+          <h1 className="font-display text-4xl md:text-6xl font-bold text-brand-primary mb-6 tracking-tight">
             Our Story
           </h1>
           <p className="text-lg md:text-xl text-brand-primary/70 leading-relaxed">
@@ -24,7 +24,7 @@ export default function OurStoryPage() {
           
           <div className="flex flex-col md:flex-row gap-10 items-center">
             <div className="flex-1 space-y-4">
-              <h2 className="text-3xl font-bold text-brand-primary">The Disconnect</h2>
+              <h2 className="font-display text-3xl font-bold text-brand-primary">The Disconnect</h2>
               <p>
                 A few years ago, we realized a disturbing truth: the staples sitting in our pantries—the rice, the wheat, the lentils—had traveled through countless middlemen, sitting in warehouses for months, often treated with preservatives just to survive the journey. The connection between the farmer who grew the food and the family who ate it was completely broken.
               </p>
@@ -36,7 +36,7 @@ export default function OurStoryPage() {
 
           <div className="flex flex-col md:flex-row-reverse gap-10 items-center">
             <div className="flex-1 space-y-4">
-              <h2 className="text-3xl font-bold text-brand-primary">The Farm-to-Pantry Vision</h2>
+              <h2 className="font-display text-3xl font-bold text-brand-primary">The Farm-to-Pantry Vision</h2>
               <p>
                 We asked ourselves: What if we could bypass the industrial complex entirely? What if we could source 100% organic, lab-tested staples straight from the harvest and deliver them directly to your door in under 48 hours? That question birthed KhetSe.
               </p>
@@ -50,7 +50,7 @@ export default function OurStoryPage() {
           </div>
 
           <div className="bg-white rounded-3xl p-8 md:p-12 shadow-sm border border-brand-primary/10 text-center mt-16">
-            <h2 className="text-2xl font-bold text-brand-primary mb-4">Our Commitment</h2>
+            <h2 className="font-display text-2xl font-bold text-brand-primary mb-4">Our Commitment</h2>
             <p className="max-w-2xl mx-auto mb-8">
               Today, KhetSe is more than an e-commerce platform. It is a promise of transparency, a commitment to your health, and a fair-trade handshake with the farmers who sustain us.
             </p>

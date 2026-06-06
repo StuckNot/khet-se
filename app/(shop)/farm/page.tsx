@@ -11,7 +11,7 @@ export default function TheFarmPage() {
           <span className="inline-block mb-4 px-4 py-1.5 rounded-full bg-brand-secondary/20 text-brand-secondary text-xs font-semibold uppercase tracking-widest">
             Radical Transparency
           </span>
-          <h1 className="text-4xl md:text-6xl font-bold text-brand-primary mb-6 tracking-tight">
+          <h1 className="font-display text-4xl md:text-6xl font-bold text-brand-primary mb-6 tracking-tight">
             Inside The Farm
           </h1>
           <p className="text-lg md:text-xl text-brand-primary/70 max-w-2xl mx-auto leading-relaxed">
@@ -55,7 +55,7 @@ export default function TheFarmPage() {
         {/* Image / Stats Section */}
         <div className="rounded-3xl bg-brand-primary text-brand-canvas p-10 md:p-16 flex flex-col md:flex-row gap-12 items-center">
           <div className="flex-1 space-y-6">
-            <h2 className="text-3xl md:text-4xl font-bold">Soil Health is Human Health.</h2>
+            <h2 className="font-display text-3xl md:text-4xl font-bold">Soil Health is Human Health.</h2>
             <p className="opacity-80 leading-relaxed">
               We believe that the nutritional density of your food is a direct reflection of the soil it was grown in. That's why we mandate crop rotation and natural nitrogen fixation techniques across all KhetSe partner acres. 
             </p>

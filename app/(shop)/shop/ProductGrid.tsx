@@ -28,6 +28,12 @@ import AddToCartButton from "../../components/AddToCartButton";
 
 type Product = Tables<"products">;
 
+const categoryLabels: Record<string, string> = {
+  staple: "Pantry Staple",
+  add_on: "Add-On",
+  seasonal: "Seasonal Harvest",
+};
+
 interface ProductGridProps {
   products: Product[];
 }
@@ -96,8 +102,8 @@ export default function ProductGrid({ products }: ProductGridProps) {
                   )}
                 </Link>
                 
-                <span className="mb-3 inline-block rounded-full bg-brand-accent/20 px-3 py-1 text-xs font-semibold capitalize text-brand-primary">
-                  {product.category.replace("_", " ")}
+                <span className="mb-3 inline-block rounded-full bg-brand-accent/20 px-3 py-1 text-xs font-semibold text-brand-primary">
+                  {categoryLabels[product.category] || product.category}
                 </span>
                 
                 <Link href={`/shop/${product.id}`}>

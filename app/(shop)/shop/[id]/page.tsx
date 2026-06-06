@@ -3,6 +3,12 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import AddToCartButton from "../../../components/AddToCartButton";
 
+const categoryLabels: Record<string, string> = {
+  staple: "Pantry Staple",
+  add_on: "Add-On",
+  seasonal: "Seasonal Harvest",
+};
+
 export default async function ProductDetailPage({
   params,
 }: {
@@ -31,7 +37,7 @@ export default async function ProductDetailPage({
             Shop All
           </Link>
           <span>/</span>
-          <span className="capitalize">{product.category.replace("_", " ")}</span>
+          <span>{categoryLabels[product.category] || product.category}</span>
           <span>/</span>
           <span className="font-medium text-brand-primary truncate max-w-[200px]">{product.name}</span>
         </nav>
@@ -40,8 +46,8 @@ export default async function ProductDetailPage({
           
           {/* ─── Product Image Placeholder ─── */}
           <div className="aspect-square w-full overflow-hidden rounded-2xl border-2 border-brand-primary/10 bg-brand-primary/5 flex flex-col items-center justify-center relative">
-            <span className="absolute top-4 left-4 rounded-full bg-brand-accent/20 px-3 py-1 text-xs font-semibold capitalize text-brand-primary">
-              {product.category.replace("_", " ")}
+            <span className="absolute top-4 left-4 rounded-full bg-brand-accent/20 px-3 py-1 text-xs font-semibold text-brand-primary">
+              {categoryLabels[product.category] || product.category}
             </span>
             <span className="text-8xl mb-4">🌾</span>
             <p className="text-brand-primary/40 font-mono text-sm">Product Image TBD</p>
@@ -49,7 +55,7 @@ export default async function ProductDetailPage({
 
           {/* ─── Product Info ─── */}
           <div className="flex flex-col justify-center">
-            <h1 className="mb-4 text-4xl font-bold tracking-tight text-brand-primary md:text-5xl">
+            <h1 className="font-display mb-4 text-4xl font-bold tracking-tight text-brand-primary md:text-5xl">
               {product.name}
             </h1>
             

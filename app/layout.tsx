@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { DM_Serif_Display, Inter } from "next/font/google";
 import "./globals.css";
 
 /**
@@ -10,7 +10,7 @@ import "./globals.css";
  * │                                                                              │
  * │  PURPOSE:                                                                    │
  * │  The root layout wraps every page in the application. It is responsible for: │
- * │  1. Setting global fonts (Geist Sans & Mono via next/font/google).           │
+ * │  1. Setting global fonts (DM Serif Display & Inter via next/font/google).    │
  * │  2. Exporting sitewide default metadata for SEO.                             │
  * │  3. Providing the <html> and <body> structure.                               │
  * │                                                                              │
@@ -26,13 +26,14 @@ import "./globals.css";
  * └──────────────────────────────────────────────────────────────────────────────┘
  */
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const dmSerif = DM_Serif_Display({
+  variable: "--font-display",
+  weight: "400",
   subsets: ["latin"],
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const inter = Inter({
+  variable: "--font-sans",
   subsets: ["latin"],
 });
 
@@ -92,7 +93,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${dmSerif.variable} ${inter.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">{children}</body>
     </html>

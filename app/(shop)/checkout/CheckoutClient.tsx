@@ -162,7 +162,7 @@ export default function CheckoutClient() {
             }
           },
           theme: {
-            color: "#2E7D32" // brand-secondary
+            color: "#7B4B2A" // brand-secondary
           }
         };
 
