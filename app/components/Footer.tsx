@@ -10,7 +10,7 @@ const Footer = () => {
         <div className="grid grid-cols-1 gap-12 md:grid-cols-4">
           {/* Brand Mission */}
           <div className="md:col-span-1">
-            <h2 className="text-2xl font-bold mb-4 tracking-tight">KhetSe</h2>
+            <h2 className="font-display text-2xl font-bold mb-4 tracking-tight">KhetSe</h2>
             <p className="text-sm opacity-80 leading-relaxed max-w-xs">
               Organic, farm-to-table staples delivered directly from our soil to your doorstep. Pure, sustainable, and transparent.
             </p>

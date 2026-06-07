@@ -51,7 +51,7 @@ const Navbar = ({ user }: NavbarProps) => {
       <div className="container mx-auto px-4 md:px-6">
         <div className="flex items-center justify-between">
           {/* Logo */}
-          <Link href="/" className="text-2xl font-bold tracking-tight text-brand-primary">
+          <Link href="/" className="font-display text-2xl font-bold tracking-tight text-brand-primary">
             KhetSe
           </Link>
 

@@ -30,7 +30,7 @@ export default async function TrialKitsPage() {
           <span className="inline-block mb-4 px-4 py-1.5 rounded-full bg-brand-accent/20 text-brand-primary text-xs font-semibold uppercase tracking-widest">
             Subscribe & Save
           </span>
-          <h1 className="text-4xl md:text-5xl font-bold text-brand-primary mb-4 tracking-tight">
+          <h1 className="font-display text-4xl md:text-5xl font-bold text-brand-primary mb-4 tracking-tight">
             Curate Your Farm-to-Pantry Routine
           </h1>
           <p className="text-lg text-brand-primary/60 max-w-2xl mx-auto">

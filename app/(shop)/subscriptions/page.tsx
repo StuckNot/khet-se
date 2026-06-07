@@ -11,7 +11,7 @@ export default function SubscriptionsPage() {
           <span className="inline-block mb-4 px-4 py-1.5 rounded-full bg-brand-primary/10 text-brand-primary text-xs font-semibold uppercase tracking-widest">
             Set It & Forget It
           </span>
-          <h1 className="text-4xl md:text-6xl font-bold text-brand-primary mb-6 tracking-tight">
+          <h1 className="font-display text-4xl md:text-6xl font-bold text-brand-primary mb-6 tracking-tight">
             The Auto-Pilot Pantry
           </h1>
           <p className="text-lg md:text-xl text-brand-primary/70 max-w-2xl mx-auto leading-relaxed">
@@ -22,7 +22,7 @@ export default function SubscriptionsPage() {
         {/* Why Subscribe? */}
         <div className="grid md:grid-cols-2 gap-12 items-center mb-24">
           <div className="space-y-6">
-            <h2 className="text-3xl font-bold text-brand-primary">Why Subscribe?</h2>
+            <h2 className="font-display text-3xl font-bold text-brand-primary">Why Subscribe?</h2>
             <p className="text-brand-primary/80 leading-relaxed">
               When you subscribe, you aren't just saving time—you are fundamentally changing how agriculture works. Subscriptions allow our farmers to predict demand accurately, resulting in <strong>zero food waste</strong> and stable incomes.
             </p>
@@ -54,7 +54,7 @@ export default function SubscriptionsPage() {
              <div className="border border-white/20 rounded-2xl p-6 bg-white/5">
                 <div className="flex justify-between items-center mb-6">
                   <span className="font-mono text-sm opacity-60">Order #KHT-AUTO</span>
-                  <span className="bg-green-500/20 text-green-300 text-xs px-2 py-1 rounded font-bold uppercase tracking-wider">Active</span>
+                  <span className="bg-brand-green/20 text-brand-green text-xs px-2 py-1 rounded font-bold uppercase tracking-wider">Active</span>
                 </div>
                 <h3 className="text-xl font-bold mb-1">Monthly Organic Staples</h3>
                 <p className="text-sm opacity-70 mb-6">Delivering every 30 days</p>
@@ -83,7 +83,7 @@ export default function SubscriptionsPage() {
 
         {/* Pricing/Plans CTA */}
         <div className="text-center bg-white rounded-3xl p-10 md:p-16 border border-brand-primary/10 shadow-sm">
-          <h2 className="text-3xl font-bold text-brand-primary mb-4">Ready to start?</h2>
+          <h2 className="font-display text-3xl font-bold text-brand-primary mb-4">Ready to start?</h2>
           <p className="text-brand-primary/70 max-w-xl mx-auto mb-8">
             Choose from our pre-curated Trial Kits. Try it once, or set it to auto-renew weekly, bi-weekly, or monthly.
           </p>

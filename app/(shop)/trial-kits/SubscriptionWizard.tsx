@@ -95,7 +95,7 @@ export default function SubscriptionWizard({ products }: SubscriptionWizardProps
               setIsSubmitting(false);
             }
           },
-          theme: { color: "#2E7D32" }
+          theme: { color: "#7B4B2A" }
         };
 
         const rzp = new window.Razorpay(options);

@@ -40,7 +40,7 @@ export default async function ShopPage() {
     <div className="min-h-screen bg-brand-canvas py-16">
       <div className="container mx-auto px-4 md:px-6">
         <div className="mb-12 text-center">
-          <h1 className="mb-4 text-4xl font-bold tracking-tight text-brand-primary md:text-5xl">
+          <h1 className="font-display mb-4 text-4xl font-bold tracking-tight text-brand-primary md:text-5xl">
             The KhetSe Harvest
           </h1>
           <p className="mx-auto max-w-2xl text-lg text-brand-primary/60">

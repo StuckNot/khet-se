@@ -66,8 +66,8 @@ export default function InventoryTable({ products }: { products: Product[] }) {
                   disabled={isUpdating}
                   className={`inline-flex items-center rounded-full px-3 py-1 text-xs font-bold uppercase tracking-wider transition-colors disabled:opacity-50 ${
                     product.is_active
-                      ? "bg-green-100 text-green-700 hover:bg-red-100 hover:text-red-700"
-                      : "bg-red-100 text-red-700 hover:bg-green-100 hover:text-green-700"
+                      ? "bg-success/10 text-success hover:bg-error/10 hover:text-error"
+                      : "bg-error/10 text-error hover:bg-success/10 hover:text-success"
                   }`}
                 >
                   {product.is_active ? "Active" : "Inactive"}
@@ -80,7 +80,7 @@ export default function InventoryTable({ products }: { products: Product[] }) {
                     <button
                       onClick={() => handleSaveStock(product.id)}
                       disabled={isUpdating}
-                      className="text-xs font-bold text-green-600 hover:underline disabled:opacity-50"
+                      className="text-xs font-bold text-success hover:underline disabled:opacity-50"
                     >
                       Save
                     </button>
