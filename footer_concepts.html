@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Footer Readability Concepts</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              primary: '#4A2C1A',
+              secondary: '#7B4B2A',
+              accent: '#C26D3A',
+              canvas: '#FAF7F2',
+              beige: '#F3E9DC',
+              green: '#6D8B74',
+            },
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body {
+      background-color: #FAF7F2;
+      font-family: system-ui, sans-serif;
+    }
+    .footer-content {
+      position: relative;
+      z-index: 10;
+    }
+    
+    /* Variation A: Ultra-Low Opacity (Watermark) */
+    .bg-var-a {
+      position: relative;
+      background-color: #F3E9DC;
+    }
+    .bg-var-a::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image: url('file:///C:/Users/ygrov/.gemini/antigravity-ide/brain/bff3ec4c-e026-48a4-b982-f8cd138012f0/footer_concept_vintage_1787638274018.jpg');
+      background-size: cover;
+      background-position: bottom;
+      background-repeat: no-repeat;
+      opacity: 0.08; /* Extremely low opacity for readability */
+      mix-blend-mode: multiply;
+      pointer-events: none;
+    }
+
+    /* Variation B: Bottom-Edge Only + Top Fade */
+    .bg-var-b {
+      position: relative;
+      background-color: #F3E9DC;
+    }
+    .bg-var-b::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image: url('file:///C:/Users/ygrov/.gemini/antigravity-ide/brain/bff3ec4c-e026-48a4-b982-f8cd138012f0/footer_concept_vintage_1787638274018.jpg');
+      background-size: 100% auto;
+      background-position: bottom;
+      background-repeat: no-repeat;
+      opacity: 0.35;
+      mix-blend-mode: multiply;
+      pointer-events: none;
+      /* CSS mask to fade out the top of the image completely so text above it has a solid background */
+      -webkit-mask-image: linear-gradient(to bottom, transparent 30%, black 100%);
+      mask-image: linear-gradient(to bottom, transparent 30%, black 100%);
+    }
+
+    /* Variation C: Translucent Content Cards */
+    .bg-var-c {
+      position: relative;
+      background-color: #F3E9DC;
+    }
+    .bg-var-c::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image: url('file:///C:/Users/ygrov/.gemini/antigravity-ide/brain/bff3ec4c-e026-48a4-b982-f8cd138012f0/footer_concept_vintage_1787638274018.jpg');
+      background-size: cover;
+      background-position: bottom;
+      opacity: 0.25;
+      mix-blend-mode: multiply;
+      pointer-events: none;
+    }
+  </style>
+</head>
+<body class="py-12 space-y-24">
+
+  <div class="max-w-7xl mx-auto px-4 text-center">
+    <h1 class="text-3xl font-bold text-brand-primary mb-2">Fixing Readability: Concept 2</h1>
+    <p class="text-brand-secondary">Here are 3 ways to fix the contrast so the text remains 100% legible.</p>
+  </div>
+
+  <!-- VARIATION A -->
+  <div>
+    <div class="max-w-7xl mx-auto px-4 mb-4">
+      <h2 class="text-xl font-bold text-brand-primary">Variation A: The Faint Watermark</h2>
+      <p class="text-sm text-brand-secondary">Opacity reduced to 8%. The illustration acts as a very subtle texture that doesn't compete with the text.</p>
+    </div>
+    <footer class="bg-var-a text-brand-primary pt-16 pb-12 border-y border-brand-secondary/15">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 footer-content">
+        <!-- Footer Content Structure -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 pb-12 border-b border-brand-secondary/15">
+          <div class="lg:col-span-4 space-y-4 text-left">
+            <div class="inline-block">
+              <div class="flex items-baseline gap-2">
+                <span class="text-3xl text-brand-primary font-serif">KhetSe</span>
+                <span class="text-xs text-brand-green uppercase tracking-widest font-bold">खेत से</span>
+              </div>
+            </div>
+            <p class="text-xs text-brand-secondary leading-relaxed max-w-sm">
+              Chemical free, farm-to-table staples delivered directly from our soil to your doorstep. Pure, sustainable, and transparent. Milled to order in under 48 hours.
+            </p>
+          </div>  
+          <div class="lg:col-span-2 space-y-3 text-left">
+            <h4 class="text-xs uppercase font-bold text-brand-secondary tracking-wider">Shop</h4>
+            <ul class="space-y-2 text-xs font-medium">
+              <li>Shop All Staples</li>
+              <li>Trial Starter Kits</li>
+              <li>Subscription Plans</li>
+            </ul>
+          </div>
+          <div class="lg:col-span-2 space-y-3 text-left">
+            <h4 class="text-xs uppercase font-bold text-brand-secondary tracking-wider">About & Farm</h4>
+            <ul class="space-y-2 text-xs font-medium">
+              <li>Our Story</li>
+              <li>The Farm & Soil</li>
+              <li>Contact Us</li>
+            </ul>
+          </div>
+          <div class="lg:col-span-4 space-y-3 text-left">
+            <h4 class="text-xs uppercase font-bold text-brand-secondary tracking-wider">Farm Newsletter</h4>
+            <p class="text-xs text-brand-secondary leading-relaxed">Join our community for farm updates and recipes.</p>
+            <div class="flex gap-2">
+              <input type="email" placeholder="Enter your email" class="bg-white/90 border border-brand-secondary/20 rounded-xl px-3.5 py-2 text-xs flex-1" />
+              <button class="bg-brand-accent text-white px-4 py-2 rounded-xl text-xs font-medium">Subscribe</button>
+            </div>
+          </div>
+        </div>
+        <div class="pt-8 flex items-center justify-between gap-4 text-xs font-medium text-brand-secondary">
+          <div>© 2026 KhetSe Organics India Pvt Ltd.</div>
+          <div class="flex gap-6">
+            <span>Help & Support</span>
+            <span>Privacy Policy</span>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <!-- VARIATION B -->
+  <div>
+    <div class="max-w-7xl mx-auto px-4 mb-4">
+      <h2 class="text-xl font-bold text-brand-primary">Variation B: Bottom Gradient Mask</h2>
+      <p class="text-sm text-brand-secondary">Image is kept slightly darker (35%), but a CSS gradient completely fades it out at the top. This keeps the text links on a solid beige background, while the illustration anchors the very bottom.</p>
+    </div>
+    <footer class="bg-var-b text-brand-primary pt-16 pb-12 border-y border-brand-secondary/15">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 footer-content">
+        <!-- Footer Content Structure -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 pb-12 border-b border-brand-secondary/15">
+          <div class="lg:col-span-4 space-y-4 text-left">
+            <div class="inline-block">
+              <div class="flex items-baseline gap-2">
+                <span class="text-3xl text-brand-primary font-serif">KhetSe</span>
+                <span class="text-xs text-brand-green uppercase tracking-widest font-bold">खेत से</span>
+              </div>
+            </div>
+            <p class="text-xs text-brand-secondary leading-relaxed max-w-sm">
+              Chemical free, farm-to-table staples delivered directly from our soil to your doorstep. Pure, sustainable, and transparent. Milled to order in under 48 hours.
+            </p>
+          </div>  
+          <div class="lg:col-span-2 space-y-3 text-left">
+            <h4 class="text-xs uppercase font-bold text-brand-secondary tracking-wider">Shop</h4>
+            <ul class="space-y-2 text-xs font-medium">
+              <li>Shop All Staples</li>
+              <li>Trial Starter Kits</li>
+              <li>Subscription Plans</li>
+            </ul>
+          </div>
+          <div class="lg:col-span-2 space-y-3 text-left">
+            <h4 class="text-xs uppercase font-bold text-brand-secondary tracking-wider">About & Farm</h4>
+            <ul class="space-y-2 text-xs font-medium">
+              <li>Our Story</li>
+              <li>The Farm & Soil</li>
+              <li>Contact Us</li>
+            </ul>
+          </div>
+          <div class="lg:col-span-4 space-y-3 text-left">
+            <h4 class="text-xs uppercase font-bold text-brand-secondary tracking-wider">Farm Newsletter</h4>
+            <p class="text-xs text-brand-secondary leading-relaxed">Join our community for farm updates and recipes.</p>
+            <div class="flex gap-2">
+              <input type="email" placeholder="Enter your email" class="bg-white/90 border border-brand-secondary/20 rounded-xl px-3.5 py-2 text-xs flex-1" />
+              <button class="bg-brand-accent text-white px-4 py-2 rounded-xl text-xs font-medium">Subscribe</button>
+            </div>
+          </div>
+        </div>
+        <div class="pt-8 flex items-center justify-between gap-4 text-xs font-medium text-brand-secondary">
+          <div class="bg-brand-canvas/80 px-2 py-1 rounded">© 2026 KhetSe Organics India Pvt Ltd.</div>
+          <div class="flex gap-6 bg-brand-canvas/80 px-2 py-1 rounded">
+            <span>Help & Support</span>
+            <span>Privacy Policy</span>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <!-- VARIATION C -->
+  <div>
+    <div class="max-w-7xl mx-auto px-4 mb-4">
+      <h2 class="text-xl font-bold text-brand-primary">Variation C: Glassmorphism / Frosted Panels</h2>
+      <p class="text-sm text-brand-secondary">The background stays rich, but the text is wrapped in subtle frosted translucent panels to guarantee readability while letting the art shine through.</p>
+    </div>
+    <footer class="bg-var-c text-brand-primary pt-16 pb-12 border-y border-brand-secondary/15">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 footer-content">
+        <!-- Frosted Panel Wrapper -->
+        <div class="bg-white/40 backdrop-blur-md rounded-3xl p-8 border border-white/50 shadow-sm">
+          <!-- Footer Content Structure -->
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 pb-8 border-b border-brand-secondary/15">
+            <div class="lg:col-span-4 space-y-4 text-left">
+              <div class="inline-block">
+                <div class="flex items-baseline gap-2">
+                  <span class="text-3xl text-brand-primary font-serif">KhetSe</span>
+                  <span class="text-xs text-brand-green uppercase tracking-widest font-bold">खेत से</span>
+                </div>
+              </div>
+              <p class="text-xs text-brand-secondary leading-relaxed max-w-sm">
+                Chemical free, farm-to-table staples delivered directly from our soil to your doorstep. Pure, sustainable, and transparent. Milled to order in under 48 hours.
+              </p>
+            </div>  
+            <div class="lg:col-span-2 space-y-3 text-left">
+              <h4 class="text-xs uppercase font-bold text-brand-secondary tracking-wider">Shop</h4>
+              <ul class="space-y-2 text-xs font-medium">
+                <li>Shop All Staples</li>
+                <li>Trial Starter Kits</li>
+                <li>Subscription Plans</li>
+              </ul>
+            </div>
+            <div class="lg:col-span-2 space-y-3 text-left">
+              <h4 class="text-xs uppercase font-bold text-brand-secondary tracking-wider">About & Farm</h4>
+              <ul class="space-y-2 text-xs font-medium">
+                <li>Our Story</li>
+                <li>The Farm & Soil</li>
+                <li>Contact Us</li>
+              </ul>
+            </div>
+            <div class="lg:col-span-4 space-y-3 text-left">
+              <h4 class="text-xs uppercase font-bold text-brand-secondary tracking-wider">Farm Newsletter</h4>
+              <p class="text-xs text-brand-secondary leading-relaxed">Join our community for farm updates and recipes.</p>
+              <div class="flex gap-2">
+                <input type="email" placeholder="Enter your email" class="bg-white border border-brand-secondary/20 rounded-xl px-3.5 py-2 text-xs flex-1 shadow-sm" />
+                <button class="bg-brand-accent text-white px-4 py-2 rounded-xl text-xs font-medium">Subscribe</button>
+              </div>
+            </div>
+          </div>
+          <div class="pt-6 flex items-center justify-between gap-4 text-xs font-medium text-brand-secondary">
+            <div>© 2026 KhetSe Organics India Pvt Ltd.</div>
+            <div class="flex gap-6">
+              <span>Help & Support</span>
+              <span>Privacy Policy</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+</body>
+</html>

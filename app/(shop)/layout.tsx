@@ -25,26 +25,17 @@
 import React from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
-import CartDrawer from "../components/CartDrawer";
-import { createClient } from "@/utils/supabase/server";
+import SelectionDrawer from "../components/SelectionDrawer";
 
-export default async function ShopLayout({
+export default function ShopLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const supabase = await createClient();
-
-  // Fetch user session server-side. getUser() validates the JWT with Supabase
-  // Auth (unlike getSession() which only reads the cookie without validation).
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-
   return (
     <div className="flex min-h-screen flex-col bg-brand-canvas">
-      <Navbar user={user} />
-      <CartDrawer />
+      <Navbar />
+      <SelectionDrawer />
       <main className="flex-grow">
         {children}
       </main>

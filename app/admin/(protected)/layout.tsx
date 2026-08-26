@@ -2,7 +2,7 @@ import React from "react";
 import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
 import Link from "next/link";
-import { signout } from "../(shop)/login/actions";
+import { signout } from "../login/actions";
 
 export default async function AdminLayout({
   children,
@@ -16,7 +16,7 @@ export default async function AdminLayout({
   } = await supabase.auth.getUser();
 
   if (!user) {
-    redirect("/login");
+    redirect("/admin/login");
   }
 
   // Verify Admin Status

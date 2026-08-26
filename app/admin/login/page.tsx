@@ -12,7 +12,7 @@
  */
 
 import Link from "next/link";
-import { login, signup } from "./actions";
+import { login } from "./actions";
 
 interface LoginPageProps {
   searchParams: Promise<{ error?: string }>;
@@ -33,7 +33,7 @@ export default async function LoginPage({ searchParams }: LoginPageProps) {
             KhetSe
           </Link>
           <p className="text-brand-primary/50 text-sm">
-            Join the farm-to-table movement.
+            Admin Portal
           </p>
         </div>
 
@@ -80,41 +80,6 @@ export default async function LoginPage({ searchParams }: LoginPageProps) {
               />
             </div>
 
-            {/* Registration-only fields (grouped for visual distinction) */}
-            <div className="pt-2 flex flex-col gap-5 border-t border-brand-primary/5">
-              <p className="text-[10px] font-bold uppercase tracking-widest text-brand-primary/40">
-                Required for New Accounts
-              </p>
-              
-              {/* First Name */}
-              <div className="flex flex-col gap-1.5">
-                <label htmlFor="firstName" className="text-sm font-medium text-brand-primary">
-                  First Name
-                </label>
-                <input
-                  id="firstName"
-                  name="firstName"
-                  type="text"
-                  placeholder="Arjun"
-                  className="w-full rounded-lg border border-brand-primary/20 bg-brand-canvas px-4 py-3 text-sm text-brand-primary placeholder:text-brand-primary/30 transition-colors focus:border-brand-secondary focus:outline-none focus:ring-2 focus:ring-brand-secondary/20"
-                />
-              </div>
-
-              {/* Phone Number */}
-              <div className="flex flex-col gap-1.5">
-                <label htmlFor="phone" className="text-sm font-medium text-brand-primary">
-                  Phone Number
-                </label>
-                <input
-                  id="phone"
-                  name="phone"
-                  type="tel"
-                  placeholder="+91 98765 43210"
-                  className="w-full rounded-lg border border-brand-primary/20 bg-brand-canvas px-4 py-3 text-sm text-brand-primary placeholder:text-brand-primary/30 transition-colors focus:border-brand-secondary focus:outline-none focus:ring-2 focus:ring-brand-secondary/20"
-                />
-              </div>
-            </div>
-
             {/* ─── Actions ─── */}
             <div className="mt-2 flex flex-col gap-3">
               <button
@@ -122,13 +87,6 @@ export default async function LoginPage({ searchParams }: LoginPageProps) {
                 className="w-full rounded-lg bg-brand-primary py-3 text-sm font-bold text-brand-canvas transition-opacity hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-brand-primary/50"
               >
                 Log In
-              </button>
-
-              <button
-                formAction={signup}
-                className="w-full rounded-lg border-2 border-brand-secondary py-3 text-sm font-bold text-brand-secondary transition-colors hover:bg-brand-secondary hover:text-brand-canvas focus:outline-none focus:ring-2 focus:ring-brand-secondary/50"
-              >
-                Create Account
               </button>
             </div>
           </form>

@@ -8,14 +8,12 @@
  * │  A 2-step interactive form allowing users to select a product and a delivery │
  * │  frequency (weekly, bi-weekly, monthly) for subscription creation.           │
  * │                                                                              │
- * │  HOW IT WORKS:                                                               │
  * │  1. Uses standard React state to track user selections.                      │
- * │  2. Submits data to `createSubscription` (a Server Action) using `FormData`. │
+ * │  2. Integrates with generateGeneralWhatsAppLink for the WhatsApp inquiry flow. │
  * │                                                                              │
- * │  INCOMPLETE STATUS:                                                          │
- * │  Currently, the form successfully creates a subscription record in Supabase, │
- * │  but it skips payment collection. See TASKS.md -> R-3 for the remaining      │
- * │  Razorpay integration steps (creating a mandate via checkout popup).         │
+ * │  STATUS:                                                                     │
+ * │  Converted to an informational-only component for the WhatsApp MVP.          │
+ * │  Checkout steps and database submissions have been removed.                  │
  * └──────────────────────────────────────────────────────────────────────────────┘
  */
 
@@ -23,10 +21,7 @@
 
 import React, { useState } from "react";
 import type { Tables } from "@/types/database.types";
-import { createSubscriptionAndOrder } from "./actions";
-import { useRouter } from "next/navigation";
-import Script from "next/script";
-import type { RazorpayPaymentResponse, RazorpayPaymentFailedResponse } from "@/types/razorpay.d";
+import { generateGeneralWhatsAppLink } from "@/utils/whatsapp";
 
 type Product = Tables<"products">;
 
@@ -37,258 +32,181 @@ interface SubscriptionWizardProps {
 export default function SubscriptionWizard({ products }: SubscriptionWizardProps) {
   const [selectedProductId, setSelectedProductId] = useState<string>(products[0]?.id || "");
   const [frequency, setFrequency] = useState<number>(7);
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [errorMsg, setErrorMsg] = useState("");
-  const router = useRouter();
 
   const selectedProduct = products.find((p) => p.id === selectedProductId);
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-    setErrorMsg("");
-
-    const formData = new FormData(e.currentTarget);
-    try {
-      const result = await createSubscriptionAndOrder(formData);
-      
-      if (result?.error) {
-        setErrorMsg(result.error);
-        setIsSubmitting(false);
-      } else if (result?.success) {
-        // Initialize Razorpay
-        const rzpKey = process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID;
-        if (!rzpKey) {
-          setErrorMsg("Razorpay Key is missing on the client. Please restart your Next.js server.");
-          setIsSubmitting(false);
-          return;
-        }
-
-        const options = {
-          key: rzpKey,
-          amount: Math.round(result.totalAmount! * 100),
-          currency: "INR",
-          name: "KhetSe",
-          description: "Fresh Farm Staples Subscription",
-          order_id: result.razorpayOrderId,
-          handler: async function (response: RazorpayPaymentResponse) {
-            try {
-              const verifyRes = await fetch('/api/payment-verify', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                  razorpay_payment_id: response.razorpay_payment_id,
-                  razorpay_order_id: response.razorpay_order_id,
-                  razorpay_signature: response.razorpay_signature,
-                  order_id: result.orderId
-                })
-              });
-              
-              if (verifyRes.ok) {
-                router.push("/account?subscription=success");
-              } else {
-                setErrorMsg("Payment verification failed. Please contact support.");
-                setIsSubmitting(false);
-              }
-            } catch (err) {
-              setErrorMsg("An error occurred during verification.");
-              setIsSubmitting(false);
-            }
-          },
-          theme: { color: "#7B4B2A" }
-        };
-
-        const rzp = new window.Razorpay(options);
-        rzp.on('payment.failed', function (response: RazorpayPaymentFailedResponse) {
-          setErrorMsg(response.error.description || "Payment failed. Please try again.");
-          setIsSubmitting(false);
-        });
-        rzp.open();
-      }
-    } catch (err) {
-      setErrorMsg("An unexpected error occurred.");
-      setIsSubmitting(false);
-    }
-  };
-
   if (products.length === 0) {
-    return <div className="text-center py-12">No trial kits currently available. Please check back later.</div>;
+    return <div className="text-center py-12 text-brand-secondary">No trial kits currently available. Please check back later.</div>;
   }
 
-  const isTestMode = process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID?.startsWith('rzp_test_') ?? false;
+  const getFrequencyLabel = (days: number) => {
+    if (days === 7) return "Weekly";
+    if (days === 14) return "Bi-Weekly";
+    if (days === 30) return "Monthly";
+    return `${days} days`;
+  };
+
+  const whatsappMessage = `Hi, I have a question about Trial Kits — interested in the ${selectedProduct?.name} with ${getFrequencyLabel(frequency)} delivery.`;
 
   return (
     <>
-      <Script src="https://checkout.razorpay.com/v1/checkout.js" />
-      <form onSubmit={handleSubmit} className="w-full max-w-4xl mx-auto grid gap-8 md:grid-cols-2">
+      <div className="w-full max-w-5xl mx-auto grid gap-10 md:grid-cols-12 text-left items-start">
         {/* ─── Column 1: Selection ─── */}
-        <div className="space-y-8">
+        <div className="space-y-10 md:col-span-7">
           {/* ─── Step 1: Select Box ─── */}
           <div>
-            <div>
-              <h2 className="text-2xl font-bold text-brand-primary mb-2">1. Choose Your Box</h2>
-              <p className="text-sm text-brand-primary/60 mb-4">Select the organic staples you want delivered.</p>
+            <div className="mb-5">
+              <h2 className="font-display text-2xl text-brand-primary mb-1">1. Choose Your Box</h2>
+              <p className="text-sm text-brand-secondary">Select the organic staples you want delivered.</p>
             </div>
             <div className="space-y-4">
-              {products.map((product) => (
-                <label
-                  key={product.id}
-                  className={`block cursor-pointer rounded-xl border-2 p-4 transition-all ${
-                    selectedProductId === product.id
-                      ? "border-brand-secondary bg-brand-secondary/5"
-                      : "border-brand-primary/10 bg-white hover:border-brand-primary/30"
-                  }`}
-                >
-                  <div className="flex items-start gap-4">
-                    <input
-                      type="radio"
-                      name="productId"
-                      value={product.id}
-                      checked={selectedProductId === product.id}
-                      onChange={() => setSelectedProductId(product.id)}
-                      className="mt-1 text-brand-secondary focus:ring-brand-secondary"
-                    />
-                    <div className="flex-1">
-                      <h3 className="font-bold text-brand-primary">{product.name}</h3>
-                      <p className="text-sm text-brand-primary/60 mt-1 line-clamp-2">{product.description}</p>
-                      <p className="font-bold text-brand-primary mt-2">₹{product.base_price} <span className="text-xs font-normal text-brand-primary/50">/ delivery</span></p>
+              {products.map((product) => {
+                const isActive = selectedProductId === product.id;
+                return (
+                  <label
+                    key={product.id}
+                    className={`block cursor-pointer rounded-2xl border-2 p-5 transition-all outline-none focus-within:ring-2 focus-within:ring-brand-accent/50 focus-within:ring-offset-2 ${
+                      isActive
+                        ? "border-brand-accent bg-brand-accent/5 shadow-sm"
+                        : "border-brand-secondary/15 bg-brand-canvas hover:border-brand-primary/30 hover:shadow-sm"
+                    }`}
+                  >
+                    <div className="flex items-start gap-4">
+                      {/* We keep the radio button for form submission and a11y, but hide it visually and use a custom icon */}
+                      <input
+                        type="radio"
+                        name="productId"
+                        value={product.id}
+                        checked={isActive}
+                        onChange={() => setSelectedProductId(product.id)}
+                        className="sr-only" // visually hidden
+                      />
+                      
+                      {/* Custom Radio Icon */}
+                      <div className={`mt-0.5 shrink-0 flex items-center justify-center w-5 h-5 rounded-full border transition-colors ${
+                        isActive ? "border-brand-accent bg-brand-accent text-white" : "border-brand-secondary/40"
+                      }`}>
+                        {isActive && <CheckCircleIcon className="w-3.5 h-3.5" />}
+                      </div>
+
+                      <div className="flex-1">
+                        <h3 className="font-display text-lg text-brand-primary leading-tight">{product.name}</h3>
+                        <p className="text-xs text-brand-secondary mt-1.5 leading-relaxed line-clamp-2">{product.description}</p>
+                        <p className="font-display text-lg text-brand-primary mt-3">₹{product.base_price} <span className="text-xs font-sans text-brand-secondary">/ delivery</span></p>
+                      </div>
                     </div>
-                  </div>
-                </label>
-              ))}
+                  </label>
+                );
+              })}
             </div>
           </div>
 
           {/* ─── Step 2: Select Frequency ─── */}
           <div>
-            <div>
-              <h2 className="text-2xl font-bold text-brand-primary mb-2">2. Delivery Schedule</h2>
-              <p className="text-sm text-brand-primary/60 mb-4">How often do you want your pantry restocked?</p>
+            <div className="mb-5">
+              <h2 className="font-display text-2xl text-brand-primary mb-1">2. Delivery Schedule</h2>
+              <p className="text-sm text-brand-secondary">How often do you want your pantry restocked?</p>
             </div>
             <div className="grid grid-cols-2 gap-4">
               {[
                 { label: "Weekly", days: 7, desc: "Best for large families" },
                 { label: "Bi-Weekly", days: 14, desc: "Most popular choice" },
                 { label: "Monthly", days: 30, desc: "Perfect for couples" },
-              ].map((option) => (
-                <label
-                  key={option.days}
-                  className={`cursor-pointer rounded-xl border-2 p-4 text-center transition-all ${
-                    frequency === option.days
-                      ? "border-brand-secondary bg-brand-secondary/5"
-                      : "border-brand-primary/10 bg-white hover:border-brand-primary/30"
-                  }`}
-                >
-                  <input
-                    type="radio"
-                    name="frequency"
-                    value={option.days}
-                    checked={frequency === option.days}
-                    onChange={() => setFrequency(option.days)}
-                    className="sr-only" // Hidden visually, but captures form data
-                  />
-                  <span className="block font-bold text-brand-primary">{option.label}</span>
-                  <span className="block text-xs text-brand-primary/50 mt-1">{option.desc}</span>
-                </label>
-              ))}
+              ].map((option) => {
+                const isActive = frequency === option.days;
+                return (
+                  <label
+                    key={option.days}
+                    className={`cursor-pointer rounded-2xl border-2 p-5 text-center transition-all outline-none focus-within:ring-2 focus-within:ring-brand-accent/50 focus-within:ring-offset-2 ${
+                      isActive
+                        ? "border-brand-accent bg-brand-accent/5 shadow-sm"
+                        : "border-brand-secondary/15 bg-brand-canvas hover:border-brand-primary/30 hover:shadow-sm"
+                    }`}
+                  >
+                    <input
+                      type="radio"
+                      name="frequency"
+                      value={option.days}
+                      checked={isActive}
+                      onChange={() => setFrequency(option.days)}
+                      className="sr-only"
+                    />
+                    <span className="block font-display text-lg text-brand-primary">{option.label}</span>
+                    <span className="block text-xs text-brand-secondary mt-1.5">{option.desc}</span>
+                  </label>
+                );
+              })}
             </div>
           </div>
+          
+
         </div>
 
-        {/* ─── Column 2: Delivery & Summary ─── */}
-        <div className="space-y-8">
-          {/* ─── Step 3: Delivery Details ─── */}
-          <div>
-            <div>
-              <h2 className="text-2xl font-bold text-brand-primary mb-2">3. Delivery Details</h2>
-              <p className="text-sm text-brand-primary/60 mb-4">Where should we send your first box?</p>
-            </div>
-            <div className="space-y-4 rounded-xl border border-brand-primary/10 bg-white p-6 shadow-sm">
-              <div>
-                <label htmlFor="address" className="block text-sm font-medium text-brand-primary mb-1">Street Address</label>
-                <input
-                  type="text"
-                  id="address"
-                  name="address"
-                  required
-                  placeholder="123 Farm Lane, Apt 4B"
-                  className="w-full rounded-lg border border-brand-primary/20 bg-brand-canvas px-4 py-3 text-sm text-brand-primary placeholder:text-brand-primary/30 focus:border-brand-secondary focus:outline-none focus:ring-2 focus:ring-brand-secondary/20"
-                />
-              </div>
-              <div className="grid grid-cols-2 gap-4">
-                <div>
-                  <label htmlFor="city" className="block text-sm font-medium text-brand-primary mb-1">City</label>
-                  <input
-                    type="text"
-                    id="city"
-                    name="city"
-                    required
-                    placeholder="New Delhi"
-                    className="w-full rounded-lg border border-brand-primary/20 bg-brand-canvas px-4 py-3 text-sm text-brand-primary placeholder:text-brand-primary/30 focus:border-brand-secondary focus:outline-none focus:ring-2 focus:ring-brand-secondary/20"
-                  />
-                </div>
-                <div>
-                  <label htmlFor="pincode" className="block text-sm font-medium text-brand-primary mb-1">PIN Code</label>
-                  <input
-                    type="text"
-                    id="pincode"
-                    name="pincode"
-                    required
-                    pattern="[0-9]{6}"
-                    placeholder="110001"
-                    className="w-full rounded-lg border border-brand-primary/20 bg-brand-canvas px-4 py-3 text-sm text-brand-primary placeholder:text-brand-primary/30 focus:border-brand-secondary focus:outline-none focus:ring-2 focus:ring-brand-secondary/20"
-                  />
-                </div>
-              </div>
-            </div>
-            {isTestMode && (
-              <div className="mt-4 rounded-lg bg-brand-accent/10 p-4 border border-brand-accent/20">
-                <p className="text-sm text-brand-primary font-medium flex items-start gap-2">
-                  <span className="text-brand-accent text-lg leading-none">ℹ</span>
-                  <span>You are currently in Test Mode. Use dummy card details.</span>
-                </p>
-              </div>
-            )}
-          </div>
-
-          {/* ─── Order Summary ─── */}
-          <div className="rounded-xl bg-brand-primary p-6 text-brand-canvas shadow-lg">
-            <h3 className="text-lg font-bold mb-4">Subscription Summary</h3>
-            <div className="space-y-2 text-sm mb-6 opacity-90">
-              <div className="flex justify-between">
-                <span>Selected Kit</span>
-                <span className="font-bold">{selectedProduct?.name}</span>
-              </div>
-              <div className="flex justify-between">
-                <span>Delivery</span>
-                <span className="font-bold">Every {frequency} Days</span>
-              </div>
-              <div className="flex justify-between border-t border-brand-canvas/20 pt-2 mt-2">
-                <span>First delivery total</span>
-                <span className="font-bold text-brand-accent">₹{selectedProduct?.base_price}</span>
-              </div>
-            </div>
-
-            {errorMsg && (
-              <div className="mb-4 rounded-md bg-red-500/20 px-3 py-2 text-sm text-red-100">
-                {errorMsg}
-              </div>
-            )}
-
-            <button
-              type="submit"
-              disabled={isSubmitting}
-              className="w-full rounded-lg bg-brand-secondary py-4 text-sm font-bold text-brand-canvas transition-opacity hover:opacity-90 disabled:opacity-50"
-            >
-              {isSubmitting ? "Setting up..." : "Pay & Subscribe Now"}
-            </button>
+        {/* ─── Column 2: Order Summary ─── */}
+        <div className="md:col-span-5 sticky top-24">
+          <div className="rounded-3xl bg-brand-beige p-6 sm:p-8 border border-brand-secondary/20 shadow-sm relative overflow-hidden">
+            {/* Subtle decor */}
+            <div className="absolute top-0 right-0 w-32 h-32 bg-brand-green/5 rounded-full blur-2xl -translate-y-1/2 translate-x-1/2 pointer-events-none" />
             
-            <p className="mt-3 text-center text-xs opacity-60">
-              MVP Launch Flow: You'll be charged for your first box now. Future boxes will be invoiced separately.
+            <h3 className="font-display text-2xl text-brand-primary mb-6">Order Summary</h3>
+            
+            <div className="space-y-4 text-sm mb-8 text-brand-primary">
+              <div className="flex justify-between items-start gap-4">
+                <span className="text-brand-secondary">Selected Box</span>
+                <span className="font-semibold text-right">{selectedProduct?.name}</span>
+              </div>
+              <div className="flex justify-between items-center">
+                <span className="text-brand-secondary">Delivery Cycle</span>
+                <span className="font-semibold">Every {frequency} Days</span>
+              </div>
+              
+              <div className="pt-4 border-t border-brand-secondary/15 flex items-center gap-2 mb-2">
+                <ShieldCheckIcon className="w-4 h-4 text-success" />
+                <span className="text-xs font-semibold text-success">Free Farm Dispatch</span>
+              </div>
+
+              <div className="flex justify-between items-end border-t border-brand-secondary/20 pt-4 mt-2">
+                <span className="text-brand-secondary">First delivery total</span>
+                <span className="font-display text-3xl text-brand-primary">₹{selectedProduct?.base_price}</span>
+              </div>
+            </div>
+
+            <a
+              href={generateGeneralWhatsAppLink(whatsappMessage)}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-full rounded-xl bg-[#25D366] py-4 text-sm font-medium text-white transition-all shadow-md hover:bg-[#20bd5a] hover:shadow-lg flex items-center justify-center gap-2 mt-6"
+            >
+              <WhatsAppIcon className="w-5 h-5" />
+              <span>Ask us on WhatsApp</span>
+            </a>
+            
+            <p className="mt-4 text-center text-[10px] text-brand-secondary uppercase tracking-widest font-bold">
+              We usually reply within 5 minutes
             </p>
           </div>
         </div>
-      </form>
+      </div>
     </>
   );
 }
+
+// --- Icons ---
+const CheckCircleIcon = ({ className }: { className?: string }) => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className={className}>
+    <path d="M20 6 9 17l-5-5" />
+  </svg>
+);
+
+const ShieldCheckIcon = ({ className }: { className?: string }) => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
+    <path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z" />
+    <path d="m9 12 2 2 4-4" />
+  </svg>
+);
+
+const WhatsAppIcon = ({ className }: { className?: string }) => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" className={className}>
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z" />
+  </svg>
+);
