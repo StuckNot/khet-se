@@ -49,7 +49,7 @@ export default async function AccountPage() {
   const displayName = profile?.first_name || user.email?.split("@")[0] || "Farmer";
 
   return (
-    <div className="min-h-screen bg-brand-canvas py-12">
+    <div className="min-h-screen bg-white py-12">
       <div className="container mx-auto px-4 md:px-6">
         {/* --- Header --- */}
         <div className="mb-10">
@@ -83,7 +83,7 @@ export default async function AccountPage() {
               ) : (
                 <div className="py-8 text-center">
                   <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-brand-accent/10">
-                    <LeafIcon className="h-6 w-6 text-brand-accent" />
+                    <LeafIcon className="h-6 w-6 text-brand-green" />
                   </div>
                   <p className="text-sm font-medium text-brand-primary/60">You have no active harvests.</p>
                   <p className="mt-1 text-xs text-brand-primary/40 text-balance">Subscribe to a trial kit to start your organic journey.</p>
@@ -130,7 +130,7 @@ export default async function AccountPage() {
 
           {/* --- Sidebar (Profile Summary) --- */}
           <div className="lg:col-span-1">
-            <aside className="sticky top-24 rounded-xl border border-brand-primary/10 bg-brand-primary p-6 text-brand-canvas shadow-lg">
+            <aside className="sticky top-24 rounded-xl border border-brand-primary/10 bg-brand-secondary p-6 text-brand-canvas shadow-lg">
               <h3 className="mb-4 text-lg font-bold">Profile Details</h3>
               <div className="space-y-4">
                 <div>

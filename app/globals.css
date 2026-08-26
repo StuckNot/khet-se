@@ -2,17 +2,59 @@
 @config "../tailwind.config.ts";
 
 @theme inline {
-  --color-brand-primary: #1E2A38;
-  --color-brand-secondary: #2E7D32;
-  --color-brand-accent: #C59B27;
-  --color-brand-canvas: #FDFBF7;
+  /* ─── Brand Palette (Brown-led — per design review) ─── */
+  --color-brand-primary: #4A2C1A;      /* Deep Brown — body text, headers */
+  --color-brand-secondary: #7B4B2A;    /* Warm Brown — subheadings, secondary text */
+  --color-brand-accent: #C26D3A;       /* Terracotta — CTAs, highlights */
+  --color-brand-canvas: #FAF7F2;       /* Off White — page background */
+  --color-brand-beige: #F3E9DC;        /* Beige — card backgrounds, sections */
+  --color-brand-green: #6D8B74;        /* Muted Green — decorative/large text ONLY */
 
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  /* ─── Semantic Colors ─── */
+  --color-success: #2E7D32;
+  --color-error: #D32F2F;
+  --color-warning: #F57C00;
+  --color-sale: #C26D3A;
+  --color-info: #1976D2;
+
+  /* ─── Typography ─── */
+  --font-sans: "Inter", system-ui, sans-serif;
+  --font-display: "DM Serif Display", Georgia, serif;
+
+  /* ─── Type Scale ─── */
+  --text-display: 3rem;      /* 48px — Hero headings (DM Serif Display) */
+  --text-h1: 2.25rem;        /* 36px */
+  --text-h2: 1.875rem;       /* 30px */
+  --text-h3: 1.5rem;         /* 24px */
+  --text-body: 1rem;         /* 16px */
+  --text-small: 0.875rem;    /* 14px */
+  --text-caption: 0.75rem;   /* 12px */
 }
 
 body {
   background-color: var(--color-brand-canvas);
   color: var(--color-brand-primary);
-  font-family: var(--font-sans), system-ui, sans-serif;
+  font-family: var(--font-sans);
+  scroll-behavior: smooth;
+}
+
+/* Subtle paper/earth texture grain overlay */
+.bg-grain {
+  background-image: radial-gradient(rgba(74, 44, 26, 0.04) 1px, transparent 1px);
+  background-size: 16px 16px;
+}
+
+/* Custom smooth scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #FAF7F2;
+}
+::-webkit-scrollbar-thumb {
+  background: #E4D5C3;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #C26D3A;
 }

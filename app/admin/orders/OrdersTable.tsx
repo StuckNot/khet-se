@@ -49,7 +49,7 @@ export default function OrdersTable({ orders }: { orders: Order[] }) {
                     order.status === 'pending' ? 'bg-yellow-100 text-yellow-700' :
                     order.status === 'processing' ? 'bg-blue-100 text-blue-700' :
                     order.status === 'out_for_delivery' ? 'bg-purple-100 text-purple-700' :
-                    order.status === 'delivered' ? 'bg-green-100 text-green-700' :
+                    order.status === 'delivered' ? 'bg-success/10 text-success' :
                     'bg-red-100 text-red-700'
                   }`}
                 >

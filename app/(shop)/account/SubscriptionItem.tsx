@@ -41,7 +41,7 @@ export default function SubscriptionItem({ subscription }: { subscription: Subsc
         </div>
         <span
           className={`rounded-full px-3 py-1 text-xs font-bold uppercase tracking-wider ${
-            isActive ? "bg-green-100 text-green-700" :
+            isActive ? "bg-success/10 text-success" :
             isPaused ? "bg-yellow-100 text-yellow-700" :
             "bg-red-100 text-red-700"
           }`}
@@ -66,7 +66,7 @@ export default function SubscriptionItem({ subscription }: { subscription: Subsc
             <button
               onClick={() => handleUpdate("active")}
               disabled={isLoading}
-              className="text-xs font-bold text-green-600 hover:text-green-700 transition-colors disabled:opacity-50"
+              className="text-xs font-bold text-success hover:text-success/80 transition-colors disabled:opacity-50"
             >
               Resume Delivery
             </button>
