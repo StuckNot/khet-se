@@ -34,7 +34,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import type { Tables } from "@/types/database.types";
-import AddToCartButton from "./AddToCartButton";
+import SelectProductButton from "./SelectProductButton";
 import { categoryLabels } from "@/app/lib/categoryLabels";
 
 type Product = Tables<"products">;
@@ -118,7 +118,7 @@ export default function ProductCard({ product }: { product: Product }) {
               ₹{product.base_price}
             </span>
           </div>
-          <AddToCartButton product={product} />
+          <SelectProductButton product={product} />
         </div>
       </div>
     </div>

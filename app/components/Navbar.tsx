@@ -24,19 +24,12 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { User } from "@supabase/supabase-js";
-import { signout } from "../(shop)/login/actions";
-import { useCartStore } from "@/store/cartStore";
-
-interface NavbarProps {
-  user: User | null;
-}
-
-const Navbar = ({ user }: NavbarProps) => {
+import { useSelectionStore } from "@/store/selectionStore";
+const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const { getItemCount, toggleDrawer } = useCartStore();
-  const itemCount = getItemCount();
+  const { getSelectedCount, toggleDrawer } = useSelectionStore();
+  const itemCount = getSelectedCount();
   const [mounted, setMounted] = useState(false);
   const pathname = usePathname();
 
@@ -148,44 +141,14 @@ const Navbar = ({ user }: NavbarProps) => {
             {/* Right Action Buttons */}
             <div className="flex items-center gap-3 sm:gap-4">
 
-              {/* Auth */}
-              {user ? (
-                <div className="flex items-center gap-3">
-                  <Link
-                    href="/account"
-                    className="flex items-center gap-2 text-xs sm:text-sm font-medium text-brand-primary hover:text-brand-accent px-3 py-2 rounded-lg hover:bg-brand-beige transition-colors"
-                    aria-label="Account"
-                  >
-                    <UserIcon className="w-4 h-4 text-brand-secondary" />
-                    <span className="hidden sm:inline">Account</span>
-                  </Link>
-                  <form action={signout}>
-                    <button
-                      type="submit"
-                      className="text-xs font-bold text-brand-primary/60 hover:text-brand-primary transition-colors"
-                    >
-                      Sign Out
-                    </button>
-                  </form>
-                </div>
-              ) : (
-                <Link
-                  href="/login"
-                  className="flex items-center gap-2 text-xs sm:text-sm font-medium text-brand-primary hover:text-brand-accent px-3 py-2 rounded-lg hover:bg-brand-beige transition-colors"
-                >
-                  <UserIcon className="w-4 h-4 text-brand-secondary" />
-                  <span className="hidden sm:inline">Log In</span>
-                </Link>
-              )}
-
-              {/* Cart "Pantry Box" Button */}
+              {/* Selected Items Button */}
               <button
                 onClick={() => toggleDrawer()}
                 className="relative flex items-center gap-2 bg-transparent hover:bg-brand-beige text-brand-primary border border-brand-secondary/25 px-3.5 py-2 rounded-xl transition-all duration-200 active:scale-95 cursor-pointer"
-                aria-label="Cart"
+                aria-label="Selected Items"
               >
-                <BagIcon className="w-4 h-4 text-brand-secondary" />
-                <span className="font-medium text-xs sm:text-sm tracking-wide">Pantry Box</span>
+                <ChecklistIcon className="w-4 h-4 text-brand-secondary" />
+                <span className="font-medium text-xs sm:text-sm tracking-wide">Selected Items</span>
                 {mounted && itemCount > 0 && (
                   <span className="bg-brand-accent text-white text-[11px] font-bold px-2 py-0.5 rounded-full ml-0.5">
                     {itemCount}
@@ -228,37 +191,7 @@ const Navbar = ({ user }: NavbarProps) => {
                   )}
                 </Link>
               ))}
-              <div className="pt-3 border-t border-brand-beige flex items-center justify-between px-3">
-                {user ? (
-                  <div className="flex items-center gap-4">
-                    <Link
-                      href="/account"
-                      className="flex items-center gap-2 text-sm font-medium text-brand-primary py-2"
-                      onClick={() => setIsMenuOpen(false)}
-                    >
-                      <UserIcon className="w-4 h-4 text-brand-secondary" />
-                      <span>My Account</span>
-                    </Link>
-                    <form action={signout} onSubmit={() => setIsMenuOpen(false)}>
-                      <button
-                        type="submit"
-                        className="text-sm font-medium text-red-600"
-                      >
-                        Sign Out
-                      </button>
-                    </form>
-                  </div>
-                ) : (
-                  <Link
-                    href="/login"
-                    className="flex items-center gap-2 text-sm font-medium text-brand-primary py-2"
-                    onClick={() => setIsMenuOpen(false)}
-                  >
-                    <UserIcon className="w-4 h-4 text-brand-secondary" />
-                    <span>Log In / Subscribe</span>
-                  </Link>
-                )}
-              </div>
+              <div className="pt-3 border-t border-brand-beige flex items-center justify-between px-3" />
             </div>
           </div>
         )}
@@ -305,6 +238,13 @@ const SproutIcon = ({ className }: { className?: string }) => (
     <path d="M10 20c5.5-2.5.8-6.4 3-10" />
     <path d="M9.5 9.4c1.1.8 1.8 2.2 2.3 3.7-2 .4-3.5.4-4.8-.3-1.2-.6-2.3-1.9-3-4.2 2.8-.5 4.4 0 5.5.8z" />
     <path d="M14.1 6a7 7 0 0 0-1.1 4c1.9-.1 3.3-.6 4.3-1.4 1-1 1.6-2.3 1.7-4.6-2.7.1-4 1-4.9 2z" />
+  </svg>
+);
+
+const ChecklistIcon = ({ className }: { className?: string }) => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
+    <path d="m9 11 3 3L22 4" />
+    <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" />
   </svg>
 );
 

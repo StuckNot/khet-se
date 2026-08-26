@@ -10,24 +10,23 @@
  * │                                                                              │
  * │  RULES:                                                                      │
  * │  - Allow all paths by default.                                               │
- * │  - Disallow /admin/ (no reason to index admin dashboards).                   │
- * │  - Disallow /checkout (transactional page, should not appear in search).     │
- * │  - Disallow /account (private, user-specific content).                       │
- * │  - Disallow /login (login pages rarely need indexing).                       │
- * │  - Disallow /api/ (API routes should not be crawled).                        │
+ * │  - Disallow /admin/ (protects admin routes).                                 │
+ * │  - Disallow /account (user dashboard, irrelevant to search).                 │
+ * │  - Disallow /api/ (backend routes).                                          │
  * └──────────────────────────────────────────────────────────────────────────────┘
  */
 
-import type { MetadataRoute } from "next";
+import { MetadataRoute } from "next";
 
 export default function robots(): MetadataRoute.Robots {
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://khetse.com";
+
   return {
     rules: {
       userAgent: "*",
       allow: "/",
-      disallow: ["/admin/", "/checkout", "/account", "/login", "/api/"],
+      disallow: ["/admin/", "/account", "/admin/login", "/api/"],
     },
-    // Update this to your production domain before go-live.
-    sitemap: "https://khetse.in/sitemap.xml",
+    sitemap: `${baseUrl}/sitemap.xml`,
   };
 }

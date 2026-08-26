@@ -8,14 +8,12 @@
  * │  A 2-step interactive form allowing users to select a product and a delivery │
  * │  frequency (weekly, bi-weekly, monthly) for subscription creation.           │
  * │                                                                              │
- * │  HOW IT WORKS:                                                               │
  * │  1. Uses standard React state to track user selections.                      │
- * │  2. Submits data to `createSubscription` (a Server Action) using `FormData`. │
+ * │  2. Integrates with generateGeneralWhatsAppLink for the WhatsApp inquiry flow. │
  * │                                                                              │
- * │  INCOMPLETE STATUS:                                                          │
- * │  Currently, the form successfully creates a subscription record in Supabase, │
- * │  but it skips payment collection. See TASKS.md -> R-3 for the remaining      │
- * │  Razorpay integration steps (creating a mandate via checkout popup).         │
+ * │  STATUS:                                                                     │
+ * │  Converted to an informational-only component for the WhatsApp MVP.          │
+ * │  Checkout steps and database submissions have been removed.                  │
  * └──────────────────────────────────────────────────────────────────────────────┘
  */
 
@@ -23,10 +21,7 @@
 
 import React, { useState } from "react";
 import type { Tables } from "@/types/database.types";
-import { createSubscriptionAndOrder } from "./actions";
-import { useRouter } from "next/navigation";
-import Script from "next/script";
-import type { RazorpayPaymentResponse, RazorpayPaymentFailedResponse } from "@/types/razorpay.d";
+import { generateGeneralWhatsAppLink } from "@/utils/whatsapp";
 
 type Product = Tables<"products">;
 
@@ -37,90 +32,25 @@ interface SubscriptionWizardProps {
 export default function SubscriptionWizard({ products }: SubscriptionWizardProps) {
   const [selectedProductId, setSelectedProductId] = useState<string>(products[0]?.id || "");
   const [frequency, setFrequency] = useState<number>(7);
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [errorMsg, setErrorMsg] = useState("");
-  const router = useRouter();
 
   const selectedProduct = products.find((p) => p.id === selectedProductId);
-
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-    setErrorMsg("");
-
-    const formData = new FormData(e.currentTarget);
-    try {
-      const result = await createSubscriptionAndOrder(formData);
-      
-      if (result?.error) {
-        setErrorMsg(result.error);
-        setIsSubmitting(false);
-      } else if (result?.success) {
-        // Initialize Razorpay
-        const rzpKey = process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID;
-        if (!rzpKey) {
-          setErrorMsg("Razorpay Key is missing on the client. Please restart your Next.js server.");
-          setIsSubmitting(false);
-          return;
-        }
-
-        const options = {
-          key: rzpKey,
-          amount: Math.round(result.totalAmount! * 100),
-          currency: "INR",
-          name: "KhetSe",
-          description: "Fresh Farm Staples Subscription",
-          order_id: result.razorpayOrderId,
-          handler: async function (response: RazorpayPaymentResponse) {
-            try {
-              const verifyRes = await fetch('/api/payment-verify', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                  razorpay_payment_id: response.razorpay_payment_id,
-                  razorpay_order_id: response.razorpay_order_id,
-                  razorpay_signature: response.razorpay_signature,
-                  order_id: result.orderId
-                })
-              });
-              
-              if (verifyRes.ok) {
-                router.push("/account?subscription=success");
-              } else {
-                setErrorMsg("Payment verification failed. Please contact support.");
-                setIsSubmitting(false);
-              }
-            } catch (err) {
-              setErrorMsg("An error occurred during verification.");
-              setIsSubmitting(false);
-            }
-          },
-          theme: { color: "#C26D3A" } // Updated to brand accent color
-        };
-
-        const rzp = new window.Razorpay(options);
-        rzp.on('payment.failed', function (response: RazorpayPaymentFailedResponse) {
-          setErrorMsg(response.error.description || "Payment failed. Please try again.");
-          setIsSubmitting(false);
-        });
-        rzp.open();
-      }
-    } catch (err) {
-      setErrorMsg("An unexpected error occurred.");
-      setIsSubmitting(false);
-    }
-  };
 
   if (products.length === 0) {
     return <div className="text-center py-12 text-brand-secondary">No trial kits currently available. Please check back later.</div>;
   }
 
-  const isTestMode = process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID?.startsWith('rzp_test_') ?? false;
+  const getFrequencyLabel = (days: number) => {
+    if (days === 7) return "Weekly";
+    if (days === 14) return "Bi-Weekly";
+    if (days === 30) return "Monthly";
+    return `${days} days`;
+  };
+
+  const whatsappMessage = `Hi, I have a question about Trial Kits — interested in the ${selectedProduct?.name} with ${getFrequencyLabel(frequency)} delivery.`;
 
   return (
     <>
-      <Script src="https://checkout.razorpay.com/v1/checkout.js" />
-      <form onSubmit={handleSubmit} className="w-full max-w-5xl mx-auto grid gap-10 md:grid-cols-12 text-left items-start">
+      <div className="w-full max-w-5xl mx-auto grid gap-10 md:grid-cols-12 text-left items-start">
         {/* ─── Column 1: Selection ─── */}
         <div className="space-y-10 md:col-span-7">
           {/* ─── Step 1: Select Box ─── */}
@@ -209,59 +139,7 @@ export default function SubscriptionWizard({ products }: SubscriptionWizardProps
             </div>
           </div>
           
-          {/* ─── Step 3: Delivery Details ─── */}
-          <div>
-            <div className="mb-5">
-              <h2 className="font-display text-2xl text-brand-primary mb-1">3. Delivery Details</h2>
-              <p className="text-sm text-brand-secondary">Where should we send your first box?</p>
-            </div>
-            <div className="space-y-4 rounded-3xl border border-brand-secondary/15 bg-brand-canvas p-6 sm:p-8 shadow-sm">
-              <div>
-                <label htmlFor="address" className="block text-xs font-bold uppercase tracking-wider text-brand-primary mb-2">Street Address</label>
-                <input
-                  type="text"
-                  id="address"
-                  name="address"
-                  required
-                  placeholder="123 Farm Lane, Apt 4B"
-                  className="w-full rounded-xl border border-brand-secondary/30 bg-brand-beige px-4 py-3.5 text-sm text-brand-primary placeholder:text-brand-secondary/60 focus:border-brand-accent focus:outline-none focus:ring-1 focus:ring-brand-accent transition-shadow"
-                />
-              </div>
-              <div className="grid grid-cols-2 gap-4">
-                <div>
-                  <label htmlFor="city" className="block text-xs font-bold uppercase tracking-wider text-brand-primary mb-2">City</label>
-                  <input
-                    type="text"
-                    id="city"
-                    name="city"
-                    required
-                    placeholder="New Delhi"
-                    className="w-full rounded-xl border border-brand-secondary/30 bg-brand-beige px-4 py-3.5 text-sm text-brand-primary placeholder:text-brand-secondary/60 focus:border-brand-accent focus:outline-none focus:ring-1 focus:ring-brand-accent transition-shadow"
-                  />
-                </div>
-                <div>
-                  <label htmlFor="pincode" className="block text-xs font-bold uppercase tracking-wider text-brand-primary mb-2">PIN Code</label>
-                  <input
-                    type="text"
-                    id="pincode"
-                    name="pincode"
-                    required
-                    pattern="[0-9]{6}"
-                    placeholder="110001"
-                    className="w-full rounded-xl border border-brand-secondary/30 bg-brand-beige px-4 py-3.5 text-sm text-brand-primary placeholder:text-brand-secondary/60 focus:border-brand-accent focus:outline-none focus:ring-1 focus:ring-brand-accent transition-shadow"
-                  />
-                </div>
-              </div>
-            </div>
-            {isTestMode && (
-              <div className="mt-4 rounded-xl bg-brand-accent/10 p-4 border border-brand-accent/20 flex items-start gap-3">
-                <span className="text-brand-accent text-lg leading-none mt-0.5">ℹ</span>
-                <p className="text-sm text-brand-primary font-medium">
-                  You are currently in Test Mode. Use dummy card details.
-                </p>
-              </div>
-            )}
-          </div>
+
         </div>
 
         {/* ─── Column 2: Order Summary ─── */}
@@ -293,34 +171,22 @@ export default function SubscriptionWizard({ products }: SubscriptionWizardProps
               </div>
             </div>
 
-            {errorMsg && (
-              <div className="mb-6 rounded-xl bg-red-50 p-4 border border-red-100 text-sm text-red-600 flex items-start gap-2">
-                <span className="mt-0.5">⚠️</span>
-                <span>{errorMsg}</span>
-              </div>
-            )}
-
-            <button
-              type="submit"
-              disabled={isSubmitting}
-              className="w-full rounded-xl bg-brand-accent py-4 text-sm font-medium text-white transition-all shadow-md hover:bg-brand-accent/85 hover:shadow-lg disabled:opacity-50 disabled:hover:bg-brand-accent disabled:hover:shadow-md flex items-center justify-center gap-2"
+            <a
+              href={generateGeneralWhatsAppLink(whatsappMessage)}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-full rounded-xl bg-[#25D366] py-4 text-sm font-medium text-white transition-all shadow-md hover:bg-[#20bd5a] hover:shadow-lg flex items-center justify-center gap-2 mt-6"
             >
-              {isSubmitting ? (
-                "Setting up..."
-              ) : (
-                <>
-                  <LockIcon className="w-4 h-4" />
-                  <span>Pay &amp; Subscribe Now</span>
-                </>
-              )}
-            </button>
+              <WhatsAppIcon className="w-5 h-5" />
+              <span>Ask us on WhatsApp</span>
+            </a>
             
             <p className="mt-4 text-center text-[10px] text-brand-secondary uppercase tracking-widest font-bold">
-              Secure Encrypted Checkout
+              We usually reply within 5 minutes
             </p>
           </div>
         </div>
-      </form>
+      </div>
     </>
   );
 }
@@ -339,9 +205,8 @@ const ShieldCheckIcon = ({ className }: { className?: string }) => (
   </svg>
 );
 
-const LockIcon = ({ className }: { className?: string }) => (
-  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
-    <rect width="18" height="11" x="3" y="11" rx="2" ry="2" />
-    <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+const WhatsAppIcon = ({ className }: { className?: string }) => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" className={className}>
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z" />
   </svg>
 );
