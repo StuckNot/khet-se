@@ -1,6 +1,6 @@
 /**
- * ┌──────────────────────────────────────────────────────────────────────────────┐
- * │  KhetSe — sitemap.ts                                                         │
+ * ┌──────────────────────────────────────────────────────────────────────────────â”
+ * │  Farm and Friends — sitemap.ts                                                         │
  * │  File: app/sitemap.ts                                                        │
  * ├──────────────────────────────────────────────────────────────────────────────┤
  * │                                                                              │
@@ -15,7 +15,7 @@
  * │  If you add individual product pages (e.g. /shop/[productId]), fetch all     │
  * │  active product IDs from Supabase and add entries here. Example:             │
  * │  const { data: products } = await supabase.from("products").select("id");    │
- * │  products.map(p => ({ url: `https://khetse.in/shop/${p.id}`, ... }))        │
+ * │  products.map(p => ({ url: `https://farmandfriends.in/shop/${p.id}`, ... }))        │
  * │                                                                              │
  * │  NOTE:                                                                       │
  * │  Update `baseUrl` to your production domain before going live.               │
@@ -24,7 +24,7 @@
 
 import type { MetadataRoute } from "next";
 
-const baseUrl = "https://khetse.in";
+const baseUrl = "https://farmandfriends.in";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   return [

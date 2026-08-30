@@ -1,6 +1,6 @@
 /**
- * ┌──────────────────────────────────────────────────────────────────────────────┐
- * │  KhetSe — Homepage                                                           │
+ * ┌──────────────────────────────────────────────────────────────────────────────â”
+ * │  Farm and Friends — Homepage                                                           │
  * │  File: app/(shop)/page.tsx                                                   │
  * ├──────────────────────────────────────────────────────────────────────────────┤
  * │                                                                              │
@@ -20,27 +20,25 @@
  * │  IMAGES:                                                                     │
  * │  Hero and decorative images use temporary placeholder photography            │
  * │  stored in public/images/. These should be replaced with authentic           │
- * │  KhetSe farm/product photography for production.                             │
+ * │  Farm and Friends farm/product photography for production.                             │
  * └──────────────────────────────────────────────────────────────────────────────┘
  */
 
 import Link from "next/link";
 import Image from "next/image";
-import { createClient } from "@/utils/supabase/server";
-import type { Tables } from "@/types/database.types";
+import { getProductRepo, getTestimonialRepo } from "@/app/lib/repositories";
+import type { Product } from "@/app/lib/types";
 import type { Metadata } from "next";
 import ProductCard from "../components/ProductCard";
 import TestimonialsSection from "../components/TestimonialsSection";
 
-type Product = Tables<"products">;
-
 /**
  * Page-level SEO metadata.
  * Overrides the root layout defaults for the homepage only.
- * The title template in root layout will produce: "KhetSe — Farm-to-Pantry Organic Staples"
+ * The title template in root layout will produce: "Farm and Friends — Farm-to-Pantry Organic Staples"
  */
 export const metadata: Metadata = {
-  title: "KhetSe — Farm-to-Pantry Organic Staples",
+  title: "Farm and Friends — Farm-to-Pantry Organic Staples",
   description:
     "Get 100% chemical-free organic staples — rice, lentils, flour, and spices — delivered from Indian farms to your pantry in under 48 hours. Subscribe and never run out.",
 };
@@ -55,25 +53,15 @@ export const metadata: Metadata = {
 export const revalidate = 3600;
 
 export default async function HomePage() {
-  const supabase = await createClient();
-
-  const { data: products, error } = await supabase
-    .from("products")
-    .select("*")
-    .eq("is_active", true)
-    .limit(4);
-
-  const { data: testimonials } = await supabase
-    .from("testimonials")
-    .select("*")
-    .eq("is_active", true)
-    .order("sort_order", { ascending: true });
+  const products = await getProductRepo().getFeaturedProducts(4);
+  const testimonials = await getTestimonialRepo().getActiveTestimonials();
+  const error = null; // Repositories handle errors internally and return empty arrays on failure
 
   return (
     <div className="space-y-0 bg-brand-canvas">
-      {/* ═══════════════════════════════════════════════════
+      {/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
           SECTION 1: Hero
-          ═══════════════════════════════════════════════════ */}
+          â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */}
       <section className="relative overflow-hidden pt-10 pb-16 lg:pt-16 lg:pb-24">
         {/* Subtle organic background glows */}
         <div className="absolute top-0 right-0 w-96 h-96 bg-brand-green/10 rounded-full blur-3xl -z-10 translate-x-1/3 -translate-y-1/4" />
@@ -165,8 +153,8 @@ export default async function HomePage() {
               <div className="rounded-3xl bg-brand-beige/80 p-4 sm:p-5 border border-brand-secondary/15 shadow-sm space-y-4">
                 {/*
                  * TEMPORARY PLACEHOLDER IMAGE
-                 * Replace with authentic KhetSe farm/product photography.
-                 * See: khetse-supabase-schema-gaps.md → "Hero / Marketing Image Source"
+                 * Replace with authentic Farm and Friends farm/product photography.
+                 * See: farmandfriends-supabase-schema-gaps.md → "Hero / Marketing Image Source"
                  */}
                 <div className="relative h-72 sm:h-80 w-full rounded-2xl overflow-hidden bg-brand-beige">
                   <Image
@@ -223,9 +211,9 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* ═══════════════════════════════════════════════════
+      {/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
           SECTION 2: Trust Badges
-          ═══════════════════════════════════════════════════ */}
+          â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */}
       <section className="py-8 bg-brand-beige/60 border-y border-brand-secondary/10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
@@ -257,9 +245,9 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* ═══════════════════════════════════════════════════
+      {/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
           SECTION 3: Featured Harvest
-          ═══════════════════════════════════════════════════ */}
+          â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */}
       <section className="py-12 bg-brand-canvas">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
@@ -319,9 +307,9 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* ═══════════════════════════════════════════════════
+      {/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
           SECTION 4: Why Subscribe
-          ═══════════════════════════════════════════════════ */}
+          â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */}
       <section className="py-16 bg-brand-beige/60 border-y border-brand-secondary/10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
@@ -331,7 +319,7 @@ export default async function HomePage() {
               The 3-Step Method
             </span>
             <h2 className="font-display text-3xl sm:text-4xl text-brand-primary">
-              Why Subscribe with KhetSe?
+              Why Subscribe with Farm and Friends?
             </h2>
             <p className="text-base text-brand-secondary">
               Freshly milled staples on your schedule, delivered with zero middleman markups.
@@ -377,16 +365,16 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* ═══════════════════════════════════════════════════
+      {/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
           SECTION 4.5: Testimonials
-          ═══════════════════════════════════════════════════ */}
+          â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */}
       {testimonials && testimonials.length > 0 && (
         <TestimonialsSection testimonials={testimonials} />
       )}
 
-      {/* ═══════════════════════════════════════════════════
+      {/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
           SECTION 5: Trial Kit Teaser Banner
-          ═══════════════════════════════════════════════════ */}
+          â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */}
       <section className="py-8 pb-16 bg-brand-canvas">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="bg-brand-beige rounded-3xl p-8 sm:p-12 border border-brand-secondary/20 flex flex-col md:flex-row items-center justify-between gap-8 text-left">
@@ -416,9 +404,9 @@ export default async function HomePage() {
   );
 }
 
-// ═══════════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 // Sub-components (inline, page-specific)
-// ═══════════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 function TrustBadge({
   icon,
@@ -502,9 +490,9 @@ function EmptyHarvestState() {
   );
 }
 
-// ═══════════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 // Inline SVG Icons (no external dependency)
-// ═══════════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 const ArrowRightIcon = ({ className }: { className?: string }) => (
   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>

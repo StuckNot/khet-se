@@ -1,6 +1,6 @@
 /**
- * ┌──────────────────────────────────────────────────────────────────────────────┐
- * │  KhetSe — Trial Kits / Subscription Wizard Form                              │
+ * ┌──────────────────────────────────────────────────────────────────────────────â”
+ * │  Farm and Friends — Trial Kits / Subscription Wizard Form                              │
  * │  File: app/(shop)/trial-kits/SubscriptionWizard.tsx                          │
  * ├──────────────────────────────────────────────────────────────────────────────┤
  * │                                                                              │
@@ -20,10 +20,8 @@
 "use client";
 
 import React, { useState } from "react";
-import type { Tables } from "@/types/database.types";
+import type { Product } from "@/app/lib/types";
 import { generateGeneralWhatsAppLink } from "@/utils/whatsapp";
-
-type Product = Tables<"products">;
 
 interface SubscriptionWizardProps {
   products: Product[];

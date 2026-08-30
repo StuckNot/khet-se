@@ -1,6 +1,6 @@
 /**
- * ┌──────────────────────────────────────────────────────────────────────────────┐
- * │  KhetSe — Shared Product Card Component                                      │
+ * ┌──────────────────────────────────────────────────────────────────────────────â”
+ * │  Farm and Friends — Shared Product Card Component                                      │
  * │  File: app/components/ProductCard.tsx                                        │
  * ├──────────────────────────────────────────────────────────────────────────────┤
  * │                                                                              │
@@ -33,11 +33,9 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import type { Tables } from "@/types/database.types";
+import type { Product } from "@/app/lib/types";
 import SelectProductButton from "./SelectProductButton";
 import { categoryLabels } from "@/app/lib/categoryLabels";
-
-type Product = Tables<"products">;
 
 export default function ProductCard({ product }: { product: Product }) {
   return (
@@ -125,9 +123,9 @@ export default function ProductCard({ product }: { product: Product }) {
   );
 }
 
-// ═══════════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 // Inline SVG Icons (no external dependency)
-// ═══════════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 const MapPinIcon = ({ className }: { className?: string }) => (
   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>

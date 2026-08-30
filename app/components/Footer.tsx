@@ -42,8 +42,8 @@ const Footer = () => {
             <div className="lg:col-span-4 space-y-4 text-left">
               <Link href="/" className="inline-block">
                 <div className="flex items-baseline gap-2">
-                  <span className="font-display text-3xl text-brand-primary">KhetSe</span>
-                  <span className="text-xs text-brand-green uppercase tracking-widest font-bold">खेत से</span>
+                  <span className="font-display text-3xl text-brand-primary">Farm and Friends</span>
+                  {/* <span className="text-xs text-brand-green uppercase tracking-widest font-bold">खेत से</span> */}
                 </div>
               </Link>
               <p className="text-xs text-brand-secondary leading-relaxed max-w-sm">
@@ -150,7 +150,7 @@ const Footer = () => {
           {/* Bottom Bar */}
           <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-brand-secondary">
             <div className="shadow-sm px-2 py-1 rounded bg-brand-canvas/20">
-              © {new Date().getFullYear()} KhetSe Organics India Pvt Ltd. All rights reserved.
+              © {new Date().getFullYear()} Farm and Friends Organics India Pvt Ltd. All rights reserved.
             </div>
 
             <div className="flex items-center gap-6 shadow-sm px-2 py-1 rounded bg-brand-canvas/20">
@@ -192,8 +192,8 @@ export default Footer;
 
 
 // /**
-//  * ┌──────────────────────────────────────────────────────────────────────────────┐
-//  * │  KhetSe — Site Footer                                                        │
+//  * ┌──────────────────────────────────────────────────────────────────────────────â”
+//  * │  Farm and Friends — Site Footer                                                        │
 //  * │  File: app/components/Footer.tsx                                             │
 //  * ├──────────────────────────────────────────────────────────────────────────────┤
 //  * │                                                                              │
@@ -237,7 +237,7 @@ export default Footer;
 //           <div className="lg:col-span-4 space-y-4 text-left">
 //             <Link href="/" className="inline-block">
 //               <div className="flex items-baseline gap-2">
-//                 <span className="font-display text-3xl text-brand-primary">KhetSe</span>
+//                 <span className="font-display text-3xl text-brand-primary">Farm and Friends</span>
 //                 <span className="text-xs text-brand-green uppercase tracking-widest font-bold">खेत से</span>
 //               </div>
 //             </Link>
@@ -354,7 +354,7 @@ export default Footer;
 //         {/* Bottom Bar */}
 //         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-brand-secondary">
 //           <div>
-//             © {new Date().getFullYear()} KhetSe Organics India Pvt Ltd. All rights reserved.
+//             © {new Date().getFullYear()} Farm and Friends Organics India Pvt Ltd. All rights reserved.
 //           </div>
 
 //           <div className="flex items-center gap-6">

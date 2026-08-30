@@ -89,7 +89,7 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <span className="text-[10px] uppercase font-bold text-brand-secondary">Email Care</span>
-                    <p className="font-bold text-brand-primary">info@khetse.in</p>
+                    <p className="font-bold text-brand-primary">info@farmandfriends.in</p>
                     <p className="text-[11px] text-brand-secondary">Responses within 4 business hours</p>
                   </div>
                 </div>

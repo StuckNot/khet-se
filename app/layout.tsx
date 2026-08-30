@@ -3,8 +3,8 @@ import { DM_Serif_Display, Inter } from "next/font/google";
 import "./globals.css";
 
 /**
- * ┌──────────────────────────────────────────────────────────────────────────────┐
- * │  KhetSe — Root Layout                                                        │
+ * ┌──────────────────────────────────────────────────────────────────────────────â”
+ * │  Farm and Friends — Root Layout                                                        │
  * │  File: app/layout.tsx                                                        │
  * ├──────────────────────────────────────────────────────────────────────────────┤
  * │                                                                              │
@@ -41,16 +41,16 @@ const inter = Inter({
  * Default SEO metadata — applied to every page unless overridden.
  *
  * Individual pages export their own `metadata` to override title/description.
- * The `template` in `title` appends " | KhetSe" to each page's title string.
+ * The `template` in `title` appends " | Farm and Friends" to each page's title string.
  * Example: a page exporting title: "Shop All Staples" renders as:
- *   "Shop All Staples | KhetSe"
+ *   "Shop All Staples | Farm and Friends"
  *
  * @see https://nextjs.org/docs/app/api-reference/functions/generate-metadata
  */
 export const metadata: Metadata = {
   title: {
-    default: "KhetSe — Farm-to-Pantry Organic Staples",
-    template: "%s | KhetSe",
+    default: "Farm and Friends — Farm-to-Pantry Organic Staples",
+    template: "%s | Farm and Friends",
   },
   description:
     "100% chemical-free organic staples delivered directly from verified Indian farms to your pantry in under 48 hours. Subscribe and never run out of rice, lentils, flour, or spices again.",
@@ -60,22 +60,22 @@ export const metadata: Metadata = {
     "organic staples delivery",
     "chemical-free food",
     "organic subscription",
-    "KhetSe",
+    "Farm and Friends",
   ],
-  authors: [{ name: "KhetSe" }],
-  creator: "KhetSe",
+  authors: [{ name: "Farm and Friends" }],
+  creator: "Farm and Friends",
   openGraph: {
     type: "website",
     locale: "en_IN",
-    url: "https://khetse.in",
-    siteName: "KhetSe",
-    title: "KhetSe — Farm-to-Pantry Organic Staples",
+    url: "https://farmandfriends.in",
+    siteName: "Farm and Friends",
+    title: "Farm and Friends — Farm-to-Pantry Organic Staples",
     description:
       "100% chemical-free, lab-tested staples from farm to your pantry in under 48 hours.",
   },
   twitter: {
     card: "summary_large_image",
-    title: "KhetSe — Farm-to-Pantry Organic Staples",
+    title: "Farm and Friends — Farm-to-Pantry Organic Staples",
     description:
       "100% chemical-free, lab-tested staples from farm to your pantry in under 48 hours.",
   },

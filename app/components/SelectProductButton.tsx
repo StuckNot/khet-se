@@ -1,10 +1,8 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import type { Tables } from "@/types/database.types";
+import type { Product } from "@/app/lib/types";
 import { useSelectionStore } from "@/store/selectionStore";
-
-type Product = Tables<"products">;
 
 export default function SelectProductButton({ product }: { product: Product }) {
   const { isSelected, toggleSelection } = useSelectionStore();

@@ -22,7 +22,7 @@ export default function TestimonialsSection({ testimonials }: TestimonialsSectio
             Loved by Conscious Indian Kitchens
           </h2>
           <p className="text-sm sm:text-base text-brand-secondary">
-            Over 14,000 households have switched their daily staples subscription to KhetSe.
+            Over 14,000 households have switched their daily staples subscription to Farm and Friends.
           </p>
         </div>
 
@@ -74,9 +74,9 @@ export default function TestimonialsSection({ testimonials }: TestimonialsSectio
   );
 }
 
-// ═══════════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 // Inline SVG Icons
-// ═══════════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 const StarIcon = ({ className }: { className?: string }) => (
   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>

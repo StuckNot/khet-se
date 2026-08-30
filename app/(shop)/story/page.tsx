@@ -6,7 +6,7 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Our Story",
   description:
-    "Reclaiming the soul of Indian staples. Learn why we started KhetSe and our 48-hour farm-to-doorstep promise.",
+    "Reclaiming the soul of Indian staples. Learn why we started Farm and Friends and our 48-hour farm-to-doorstep promise.",
 };
 
 export default function OurStoryPage() {
@@ -24,7 +24,7 @@ export default function OurStoryPage() {
             Reclaiming the Soul of Indian Staples
           </h1>
           <p className="text-base sm:text-lg text-brand-secondary max-w-2xl mx-auto leading-relaxed">
-            Everyday food in India was never meant to sit on a supermarket shelf for 9 months under chemical fumigation. Here is why we started KhetSe.
+            Everyday food in India was never meant to sit on a supermarket shelf for 9 months under chemical fumigation. Here is why we started Farm and Friends.
           </p>
         </div>
 
@@ -71,14 +71,14 @@ export default function OurStoryPage() {
 
         </div>
 
-        {/* Supply Chain Comparison: Supermarket vs KhetSe */}
+        {/* Supply Chain Comparison: Supermarket vs Farm and Friends */}
         <div className="bg-brand-beige/60 rounded-3xl p-8 sm:p-12 border border-brand-secondary/15 shadow-sm">
           <div className="text-center max-w-2xl mx-auto mb-10 space-y-2">
             <h2 className="font-display text-2xl sm:text-3xl text-brand-primary">
               The 48-Hour Difference
             </h2>
             <p className="text-sm text-brand-secondary">
-              How traditional supermarket staples compare to a KhetSe freshly milled delivery.
+              How traditional supermarket staples compare to a Farm and Friends freshly milled delivery.
             </p>
           </div>
 
@@ -94,19 +94,19 @@ export default function OurStoryPage() {
               </div>
               <ul className="space-y-3 text-xs sm:text-sm text-brand-primary">
                 <li className="flex items-start gap-2 text-red-900/80">
-                  <span className="text-red-500 font-bold shrink-0 mt-px">✕</span>
+                  <span className="text-red-500 font-bold shrink-0 mt-px">✖</span>
                   <span>
                     <strong>Bleached &amp; Polished:</strong> Stripped of outer bran layer with talc and liquid paraffin oil for artificial shine.
                   </span>
                 </li>
                 <li className="flex items-start gap-2 text-red-900/80">
-                  <span className="text-red-500 font-bold shrink-0 mt-px">✕</span>
+                  <span className="text-red-500 font-bold shrink-0 mt-px">✖</span>
                   <span>
                     <strong>Chemical Fumigation:</strong> Grains stored in high-temp godowns treated with methyl bromide gas to prevent weevils.
                   </span>
                 </li>
                 <li className="flex items-start gap-2 text-red-900/80">
-                  <span className="text-red-500 font-bold shrink-0 mt-px">✕</span>
+                  <span className="text-red-500 font-bold shrink-0 mt-px">✖</span>
                   <span>
                     <strong>Nutrient Depleted:</strong> High-speed roller mills reach 95°C, denaturing live enzymes and healthy fatty acids.
                   </span>
@@ -114,11 +114,11 @@ export default function OurStoryPage() {
               </ul>
             </div>
 
-            {/* KhetSe Column */}
+            {/* Farm and Friends Column */}
             <div className="bg-brand-canvas p-6 rounded-2xl border border-brand-green space-y-4 shadow-sm">
               <div className="flex items-center justify-between flex-wrap gap-2">
                 <span className="text-[10px] font-bold uppercase tracking-wider text-success bg-brand-green/15 px-2.5 py-1 rounded-md">
-                  KhetSe Living Staples
+                  Farm and Friends Living Staples
                 </span>
                 <span className="text-xs font-bold text-brand-primary">&lt; 48 Hours Fresh</span>
               </div>

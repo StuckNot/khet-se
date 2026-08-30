@@ -1,6 +1,4 @@
-import type { Tables } from "@/types/database.types";
-
-type Product = Tables<"products">;
+import type { Product } from "@/app/lib/types";
 
 /**
  * generateMultiProductWhatsAppLink

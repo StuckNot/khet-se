@@ -1,6 +1,6 @@
 /**
- * ┌──────────────────────────────────────────────────────────────────────────────┐
- * │  KhetSe — Main Navigation Bar                                                │
+ * ┌──────────────────────────────────────────────────────────────────────────────â”
+ * │  Farm and Friends — Main Navigation Bar                                                │
  * │  File: app/components/Navbar.tsx                                             │
  * ├──────────────────────────────────────────────────────────────────────────────┤
  * │                                                                              │
@@ -98,11 +98,11 @@ const Navbar = () => {
               <Link href="/" className="group text-left focus:outline-none">
                 <div className="flex items-baseline gap-2">
                   <span className="font-display text-3xl sm:text-4xl text-brand-primary tracking-tight group-hover:text-brand-secondary transition-colors">
-                    KhetSe
+                    Farm and Friends
                   </span>
-                  <span className="font-sans text-xs tracking-widest text-brand-green uppercase font-bold">
+                  {/* <span className="font-sans text-xs tracking-widest text-brand-green uppercase font-bold">
                     खेत से
-                  </span>
+                  </span> */}
                 </div>
                 <p className="text-[10px] tracking-wider text-brand-secondary/80 uppercase -mt-1 font-medium">
                   Farm-to-Pantry Staples

@@ -36,7 +36,7 @@ export default async function AdminLayout({
       <aside className="w-64 border-r border-brand-primary/10 bg-brand-primary p-6 text-brand-canvas flex flex-col">
         <div className="mb-10">
           <Link href="/admin" className="text-2xl font-bold tracking-tight">
-            KhetSe <span className="text-brand-accent">Admin</span>
+            Farm and Friends <span className="text-brand-accent">Admin</span>
           </Link>
         </div>
 
@@ -60,7 +60,7 @@ export default async function AdminLayout({
             </button>
           </form>
           <Link href="/" className="block mt-4 text-center text-xs font-semibold text-brand-accent hover:underline">
-            ← Back to Store
+            â† Back to Store
           </Link>
         </div>
       </aside>

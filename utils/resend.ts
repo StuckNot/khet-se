@@ -1,6 +1,6 @@
 /**
- * ┌──────────────────────────────────────────────────────────────────────────────┐
- * │  KhetSe — Transactional Email Utility (Resend)                               │
+ * ┌──────────────────────────────────────────────────────────────────────────────â”
+ * │  Farm and Friends — Transactional Email Utility (Resend)                               │
  * │  File: utils/resend.ts                                                       │
  * ├──────────────────────────────────────────────────────────────────────────────┤
  * │                                                                              │
@@ -13,9 +13,9 @@
  * │                                                                              │
  * │  KNOWN LIMITATION (see TASKS.md → L-4):                                      │
  * │  The "from" address uses `onboarding@resend.dev` which is Resend's shared   │
- * │  test domain. Before going live, verify a custom domain (e.g. khetse.in)    │
+ * │  test domain. Before going live, verify a custom domain (e.g. farmandfriends.in)    │
  * │  in the Resend dashboard and update the `from` field to                      │
- * │  `orders@khetse.in` or similar.                                              │
+ * │  `orders@farmandfriends.in` or similar.                                              │
  * │                                                                              │
  * │  USAGE:                                                                      │
  * │  Call sendOrderReceipt() after confirming a successful payment. The function │
@@ -61,9 +61,9 @@ export async function sendOrderReceipt(
   try {
     await resend.emails.send({
       // TODO (TASKS.md L-4): Replace with verified custom domain before going live.
-      from: "KhetSe Orders <onboarding@resend.dev>",
+      from: "Farm and Friends Orders <onboarding@resend.dev>",
       to: email,
-      subject: `KhetSe Order Confirmation - #${orderId.slice(0, 8)}`,
+      subject: `Farm and Friends Order Confirmation - #${orderId.slice(0, 8)}`,
       html: `
         <div style="font-family: sans-serif; padding: 20px; max-width: 600px; margin: 0 auto; border: 1px solid #eee; border-radius: 8px;">
           <h1 style="color: #2E7D32;">Thank you for your order! 🌾</h1>
@@ -72,7 +72,7 @@ export async function sendOrderReceipt(
           <p>Your organic staples are being packed and will be delivered straight from the farm to your pantry soon.</p>
           <br />
           <p>Warmly,</p>
-          <p><strong>The KhetSe Team</strong></p>
+          <p><strong>The Farm and Friends Team</strong></p>
         </div>
       `,
     });

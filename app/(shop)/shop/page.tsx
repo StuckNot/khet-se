@@ -1,4 +1,4 @@
-import { createClient } from "@/utils/supabase/server";
+import { getProductRepo } from "@/app/lib/repositories";
 import ProductGrid from "./ProductGrid";
 import type { Metadata } from "next";
 
@@ -8,7 +8,7 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Shop All Staples",
   description:
-    "Browse KhetSe's full range of 100% organic, lab-tested staples. Filter by pantry staples, add-ons, and seasonal harvests.",
+    "Browse Farm and Friends's full range of 100% organic, lab-tested staples. Filter by pantry staples, add-ons, and seasonal harvests.",
 };
 
 /**
@@ -27,13 +27,8 @@ export const revalidate = 3600;
  */
 
 export default async function ShopPage() {
-  const supabase = await createClient();
-
-  const { data: products, error } = await supabase
-    .from("products")
-    .select("*")
-    .eq("is_active", true)
-    .order("created_at", { ascending: false });
+  const products = await getProductRepo().getActiveProducts();
+  const error = null;
 
   return (
     <div className="py-10 sm:py-16 bg-brand-canvas min-h-screen">

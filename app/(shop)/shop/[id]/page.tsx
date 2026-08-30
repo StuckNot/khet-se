@@ -1,4 +1,4 @@
-import { createClient } from "@/utils/supabase/server";
+import { getProductRepo } from "@/app/lib/repositories";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
@@ -11,17 +11,12 @@ export async function generateMetadata({
 }: {
   params: Promise<{ id: string }>;
 }): Promise<Metadata> {
-  const supabase = await createClient();
   const { id } = await params;
-  const { data: product } = await supabase
-    .from("products")
-    .select("name, description")
-    .eq("id", id)
-    .single();
+  const product = await getProductRepo().getProductById(id);
 
   return {
     title: product?.name ?? "Product",
-    description: product?.description ?? "Farm-fresh organic staple from KhetSe.",
+    description: product?.description ?? "Farm-fresh organic staple from Farm and Friends.",
   };
 }
 
@@ -30,27 +25,16 @@ export default async function ProductDetailPage({
 }: {
   params: Promise<{ id: string }>;
 }) {
-  const supabase = await createClient();
   const { id } = await params;
+  const product = await getProductRepo().getProductById(id);
 
-  const { data: product, error } = await supabase
-    .from("products")
-    .select("*")
-    .eq("id", id)
-    .single();
-
-  if (error || !product || !product.is_active) {
+  if (!product || !product.is_active) {
     notFound();
   }
 
   let kitItems = null;
   if (product.category === "kit") {
-    const { data } = await supabase
-      .from("product_kit_items")
-      .select("*")
-      .eq("kit_product_id", id)
-      .order("sort_order", { ascending: true });
-    kitItems = data;
+    kitItems = await getProductRepo().getKitItems(id);
   }
 
   return (

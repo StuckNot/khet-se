@@ -1,7 +1,7 @@
-# KhetSe Web — Architecture & Layout Guide
+# Farm and Friends Web — Architecture & Layout Guide
 
-> **Repository:** `khetse-web`  
-> **Purpose:** Next.js 16 storefront and admin dashboard for the KhetSe organic food brand.  
+> **Repository:** `farmandfriends-web`  
+> **Purpose:** Next.js 16 storefront and admin dashboard for the Farm and Friends organic food brand.  
 > **Key Tech:** Next.js (App Router), TypeScript, Tailwind CSS v4, @supabase/ssr.
 
 ---
@@ -9,10 +9,10 @@
 ## High-Level Architecture
 
 ```
-┌─────────────────────────────────────────────────────────────────────────┐
+┌─────────────────────────────────────────────────────────────────────────â”
 │                          BROWSER (Client)                               │
 │                                                                         │
-│  ┌───────────────────────┐    ┌──────────────────────────────────────┐  │
+│  ┌───────────────────────â”    ┌──────────────────────────────────────â”  │
 │  │  Server Components    │    │  Client Components ("use client")    │  │
 │  │  (HTML streamed)      │    │  (JS hydrated)                      │  │
 │  │                       │    │                                      │  │
@@ -26,16 +26,16 @@
                │  Server Actions (form submissions)
                │  Data fetching (RSC await)
                ▼
-┌─────────────────────────────────────────────────────────────────────────┐
+┌─────────────────────────────────────────────────────────────────────────â”
 │                      NEXT.JS SERVER (Node.js)                           │
 │                                                                         │
-│  ┌──────────────────────────────────────────────────────────────────┐   │
+│  ┌──────────────────────────────────────────────────────────────────â”   │
 │  │  Server Actions ("use server")                                   │   │
 │  │  - login()   → supabase.auth.signInWithPassword()               │   │
 │  │  - signup()  → supabase.auth.signUp()                           │   │
 │  └──────────────────────────────────────────────────────────────────┘   │
 │                                                                         │
-│  ┌──────────────────────────────────────────────────────────────────┐   │
+│  ┌──────────────────────────────────────────────────────────────────â”   │
 │  │  Supabase Client (utils/supabase/server.ts)                     │   │
 │  │  - Creates cookie-based server client via @supabase/ssr          │   │
 │  │  - Auth tokens stored in httpOnly cookies (XSS safe)            │   │
@@ -46,9 +46,9 @@
                                │
                                │  PostgREST API + GoTrue Auth
                                ▼
-                    ┌─────────────────────┐
+                    ┌─────────────────────â”
                     │   Supabase          │
-                    │   (khetse-backend)  │
+                    │   (farmandfriends-backend)  │
                     │                     │
                     │   PostgreSQL DB     │
                     │   Auth (GoTrue)     │
@@ -61,7 +61,7 @@
 ## Directory Layout
 
 ```
-khetse-web/
+farmandfriends-web/
 │
 ├── app/                                  # Next.js App Router root
 │   │
@@ -98,7 +98,7 @@ khetse-web/
 │
 ├── types/
 │   └── database.types.ts                 # TypeScript types generated from
-│                                           khetse-backend/types.ts (copied)
+│                                           farmandfriends-backend/types.ts (copied)
 │                                           Exports: Database, Tables<>,
 │                                           TablesInsert<>, Enums<>
 │
@@ -122,14 +122,14 @@ khetse-web/
 ```
 GET /                   Next.js App Router
   │                           │
-  │                     ┌─────┴──────┐
+  │                     ┌─────┴──────â”
   │                     │ (shop)/     │
-  │                     │ layout.tsx  │   ← Renders Navbar + Footer
+  │                     │ layout.tsx  │   â† Renders Navbar + Footer
   │                     └─────┬──────┘
   │                           │
-  │                     ┌─────┴──────┐
+  │                     ┌─────┴──────â”
   │                     │ (shop)/     │
-  │                     │ page.tsx    │   ← RSC: fetches products server-side
+  │                     │ page.tsx    │   â† RSC: fetches products server-side
   │                     └─────┬──────┘
   │                           │
   │                    createClient()
@@ -170,7 +170,7 @@ POST /login             Next.js Server
   │                    supabase.auth
   │                    .signInWithPassword()
   │                           │
-  │                     ┌─────┴─────┐
+  │                     ┌─────┴─────â”
   │                     │           │
   │                  Success     Error
   │                     │           │

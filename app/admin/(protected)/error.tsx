@@ -1,8 +1,8 @@
 "use client";
 
 /**
- * ┌──────────────────────────────────────────────────────────────────────────────┐
- * │  KhetSe — Admin Error Boundary                                               │
+ * ┌──────────────────────────────────────────────────────────────────────────────â”
+ * │  Farm and Friends — Admin Error Boundary                                               │
  * │  File: app/admin/error.tsx                                                   │
  * ├──────────────────────────────────────────────────────────────────────────────┤
  * │                                                                              │
@@ -31,7 +31,7 @@ export default function AdminError({ error, reset }: ErrorProps) {
   return (
     <div className="flex h-full items-center justify-center p-10">
       <div className="max-w-md text-center">
-        <span className="text-5xl mb-6 block">⚠️</span>
+        <span className="text-5xl mb-6 block">âš ï¸</span>
         <h2 className="text-2xl font-bold text-brand-primary mb-3">
           Admin Panel Error
         </h2>

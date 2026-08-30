@@ -5,7 +5,7 @@ import { resend } from "@/utils/resend";
 /**
  * submitContactMessage — Server Action for the /contact page form.
  *
- * Sends the customer's inquiry to info@khetse.in via Resend.
+ * Sends the customer's inquiry to info@farmandfriends.in via Resend.
  *
  * ENVIRONMENT VARIABLE REQUIRED:
  *   RESEND_API_KEY — set this in .env.local before this action will work.
@@ -14,10 +14,10 @@ import { resend } from "@/utils/resend";
  * FROM ADDRESS:
  *   Uses Resend's shared sandbox sender (onboarding@resend.dev) by default,
  *   matching the existing order receipt setup. Replace with a verified
- *   @khetse.in address once the domain is verified in the Resend dashboard.
+ *   @farmandfriends.in address once the domain is verified in the Resend dashboard.
  *
  * TO ADDRESS:
- *   Currently set to info@khetse.in — update this to the correct support
+ *   Currently set to info@farmandfriends.in — update this to the correct support
  *   inbox before going live.
  */
 export async function submitContactMessage(formData: FormData) {
@@ -41,10 +41,10 @@ export async function submitContactMessage(formData: FormData) {
   const subjectLabel = subjectLabels[subject ?? ""] ?? subject ?? "General Inquiry";
 
   const { error } = await resend.emails.send({
-    from: "KhetSe Contact <onboarding@resend.dev>",
-    to:   "info@khetse.in",
+    from: "Farm and Friends Contact <onboarding@resend.dev>",
+    to:   "info@farmandfriends.in",
     replyTo: email,
-    subject: `[KhetSe Contact] ${subjectLabel} — from ${name}`,
+    subject: `[Farm and Friends Contact] ${subjectLabel} — from ${name}`,
     html: `
       <div style="font-family: sans-serif; padding: 24px; max-width: 600px; margin: 0 auto; border: 1px solid #eee; border-radius: 8px;">
         <h2 style="color: #4A2C1A; margin-top: 0;">New Contact Form Submission</h2>
@@ -58,7 +58,7 @@ export async function submitContactMessage(formData: FormData) {
         <h3 style="color: #4A2C1A; margin-bottom: 8px;">Message</h3>
         <p style="color: #333; line-height: 1.6; white-space: pre-wrap;">${message}</p>
         <hr style="border: none; border-top: 1px solid #eee; margin: 16px 0;" />
-        <p style="font-size: 12px; color: #999;">Submitted via khetse.in/contact · Reply-To is set to the customer's email.</p>
+        <p style="font-size: 12px; color: #999;">Submitted via farmandfriends.in/contact Â· Reply-To is set to the customer's email.</p>
       </div>
     `,
   });

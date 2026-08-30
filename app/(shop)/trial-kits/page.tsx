@@ -1,4 +1,4 @@
-import { createClient } from "@/utils/supabase/server";
+import { getProductRepo } from "@/app/lib/repositories";
 import SubscriptionWizard from "./SubscriptionWizard";
 import type { Metadata } from "next";
 import Link from "next/link";
@@ -9,18 +9,13 @@ import Link from "next/link";
 export const metadata: Metadata = {
   title: "Trial Kits & Subscriptions",
   description:
-    "Choose your organic staple box, set your delivery frequency, and start your KhetSe subscription. Weekly, bi-weekly, or monthly — cancel anytime.",
+    "Choose your organic staple box, set your delivery frequency, and start your Farm and Friends subscription. Weekly, bi-weekly, or monthly — cancel anytime.",
 };
 
 export default async function TrialKitsPage() {
-  const supabase = await createClient();
-
   // Fetch only active products
-  const { data: products, error } = await supabase
-    .from("products")
-    .select("*")
-    .eq("is_active", true)
-    .order("created_at", { ascending: false });
+  const products = await getProductRepo().getActiveProducts();
+  const error = null;
 
   const faqs = [
     {
@@ -33,7 +28,7 @@ export default async function TrialKitsPage() {
     },
     {
       q: "How fresh are the items in the trial kit?",
-      a: "All grains and dals are milled and packed within 24–48 hours of dispatch from our partner farm hubs in Maharashtra and Karnataka.",
+      a: "All grains and dals are milled and packed within 24â€“48 hours of dispatch from our partner farm hubs in Maharashtra and Karnataka.",
     },
     {
       q: "Can I convert my trial kit to a monthly subscription?",
