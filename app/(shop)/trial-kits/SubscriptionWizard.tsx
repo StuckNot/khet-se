@@ -1,5 +1,5 @@
 /**
- * ┌──────────────────────────────────────────────────────────────────────────────┐
+ * ┌──────────────────────────────────────────────────────────────────────────────â”
  * │  KhetSe — Trial Kits / Subscription Wizard Form                              │
  * │  File: app/(shop)/trial-kits/SubscriptionWizard.tsx                          │
  * ├──────────────────────────────────────────────────────────────────────────────┤
@@ -30,11 +30,13 @@ interface SubscriptionWizardProps {
 }
 
 export default function SubscriptionWizard({ products }: SubscriptionWizardProps) {
-  const [selectedProductId, setSelectedProductId] = useState<string>(products[0]?.id || "");
-  const [frequency, setFrequency] = useState<number>(7);
+  const [selectedProductIds, setSelectedProductIds] = useState<string[]>(
+    products[0]?.id ? [products[0].id] : []
+  ); const [frequency, setFrequency] = useState<number>(7);
 
-  const selectedProduct = products.find((p) => p.id === selectedProductId);
-
+  const selectedProducts = products.filter((p) =>
+    selectedProductIds.includes(p.id)
+  );
   if (products.length === 0) {
     return <div className="text-center py-12 text-brand-secondary">No trial kits currently available. Please check back later.</div>;
   }
@@ -46,8 +48,11 @@ export default function SubscriptionWizard({ products }: SubscriptionWizardProps
     return `${days} days`;
   };
 
-  const whatsappMessage = `Hi, I have a question about Trial Kits — interested in the ${selectedProduct?.name} with ${getFrequencyLabel(frequency)} delivery.`;
+  const productNames = selectedProducts
+    .map((product) => product.name)
+    .join(", ");
 
+  const whatsappMessage = `Hi, I have a question about Trial Kits — interested in ${productNames} with ${getFrequencyLabel(frequency)} delivery.`;
   return (
     <>
       <div className="w-full max-w-5xl mx-auto grid gap-10 md:grid-cols-12 text-left items-start">
@@ -61,31 +66,34 @@ export default function SubscriptionWizard({ products }: SubscriptionWizardProps
             </div>
             <div className="space-y-4">
               {products.map((product) => {
-                const isActive = selectedProductId === product.id;
-                return (
+                const isActive = selectedProductIds.includes(product.id); return (
                   <label
                     key={product.id}
-                    className={`block cursor-pointer rounded-2xl border-2 p-5 transition-all outline-none focus-within:ring-2 focus-within:ring-brand-accent/50 focus-within:ring-offset-2 ${
-                      isActive
-                        ? "border-brand-accent bg-brand-accent/5 shadow-sm"
-                        : "border-brand-secondary/15 bg-brand-canvas hover:border-brand-primary/30 hover:shadow-sm"
-                    }`}
+                    className={`block cursor-pointer rounded-2xl border-2 p-5 transition-all outline-none focus-within:ring-2 focus-within:ring-brand-accent/50 focus-within:ring-offset-2 ${isActive
+                      ? "border-brand-accent bg-brand-accent/5 shadow-sm"
+                      : "border-brand-secondary/15 bg-brand-canvas hover:border-brand-primary/30 hover:shadow-sm"
+                      }`}
                   >
                     <div className="flex items-start gap-4">
                       {/* We keep the radio button for form submission and a11y, but hide it visually and use a custom icon */}
                       <input
-                        type="radio"
-                        name="productId"
+                        type="checkbox"
+                        name="productIds"
                         value={product.id}
                         checked={isActive}
-                        onChange={() => setSelectedProductId(product.id)}
-                        className="sr-only" // visually hidden
+                        onChange={() => {
+                          setSelectedProductIds((prev) =>
+                            prev.includes(product.id)
+                              ? prev.filter((id) => id !== product.id)
+                              : [...prev, product.id]
+                          );
+                        }}
+                        className="sr-only"
                       />
-                      
+
                       {/* Custom Radio Icon */}
-                      <div className={`mt-0.5 shrink-0 flex items-center justify-center w-5 h-5 rounded-full border transition-colors ${
-                        isActive ? "border-brand-accent bg-brand-accent text-white" : "border-brand-secondary/40"
-                      }`}>
+                      <div className={`mt-0.5 shrink-0 flex items-center justify-center w-5 h-5 rounded-full border transition-colors ${isActive ? "border-brand-accent bg-brand-accent text-white" : "border-brand-secondary/40"
+                        }`}>
                         {isActive && <CheckCircleIcon className="w-3.5 h-3.5" />}
                       </div>
 
@@ -117,11 +125,10 @@ export default function SubscriptionWizard({ products }: SubscriptionWizardProps
                 return (
                   <label
                     key={option.days}
-                    className={`cursor-pointer rounded-2xl border-2 p-5 text-center transition-all outline-none focus-within:ring-2 focus-within:ring-brand-accent/50 focus-within:ring-offset-2 ${
-                      isActive
-                        ? "border-brand-accent bg-brand-accent/5 shadow-sm"
-                        : "border-brand-secondary/15 bg-brand-canvas hover:border-brand-primary/30 hover:shadow-sm"
-                    }`}
+                    className={`cursor-pointer rounded-2xl border-2 p-5 text-center transition-all outline-none focus-within:ring-2 focus-within:ring-brand-accent/50 focus-within:ring-offset-2 ${isActive
+                      ? "border-brand-accent bg-brand-accent/5 shadow-sm"
+                      : "border-brand-secondary/15 bg-brand-canvas hover:border-brand-primary/30 hover:shadow-sm"
+                      }`}
                   >
                     <input
                       type="radio"
@@ -138,7 +145,7 @@ export default function SubscriptionWizard({ products }: SubscriptionWizardProps
               })}
             </div>
           </div>
-          
+
 
         </div>
 
@@ -147,19 +154,28 @@ export default function SubscriptionWizard({ products }: SubscriptionWizardProps
           <div className="rounded-3xl bg-brand-beige p-6 sm:p-8 border border-brand-secondary/20 shadow-sm relative overflow-hidden">
             {/* Subtle decor */}
             <div className="absolute top-0 right-0 w-32 h-32 bg-brand-green/5 rounded-full blur-2xl -translate-y-1/2 translate-x-1/2 pointer-events-none" />
-            
+
             <h3 className="font-display text-2xl text-brand-primary mb-6">Order Summary</h3>
-            
+
             <div className="space-y-4 text-sm mb-8 text-brand-primary">
               <div className="flex justify-between items-start gap-4">
                 <span className="text-brand-secondary">Selected Box</span>
-                <span className="font-semibold text-right">{selectedProduct?.name}</span>
-              </div>
+                <div className="font-semibold text-right">
+                  {selectedProducts.length > 0 ? (
+                    <div className="space-y-1">
+                      {selectedProducts.map((product) => (
+                        <div key={product.id}>{product.name}</div>
+                      ))}
+                    </div>
+                  ) : (
+                    "No products selected"
+                  )}
+                </div>              </div>
               <div className="flex justify-between items-center">
                 <span className="text-brand-secondary">Delivery Cycle</span>
                 <span className="font-semibold">Every {frequency} Days</span>
               </div>
-              
+
               <div className="pt-4 border-t border-brand-secondary/15 flex items-center gap-2 mb-2">
                 <ShieldCheckIcon className="w-4 h-4 text-success" />
                 <span className="text-xs font-semibold text-success">Free Farm Dispatch</span>
@@ -167,7 +183,10 @@ export default function SubscriptionWizard({ products }: SubscriptionWizardProps
 
               <div className="flex justify-between items-end border-t border-brand-secondary/20 pt-4 mt-2">
                 <span className="text-brand-secondary">First delivery total</span>
-                <span className="font-display text-3xl text-brand-primary">₹{selectedProduct?.base_price}</span>
+                <span className="font-semibold">₹{selectedProducts.reduce(
+                  (total, product) => total + Number(product.base_price),
+                  0
+                )}</span>
               </div>
             </div>
 
@@ -180,7 +199,7 @@ export default function SubscriptionWizard({ products }: SubscriptionWizardProps
               <WhatsAppIcon className="w-5 h-5" />
               <span>Ask us on WhatsApp</span>
             </a>
-            
+
             <p className="mt-4 text-center text-[10px] text-brand-secondary uppercase tracking-widest font-bold">
               We usually reply within 5 minutes
             </p>

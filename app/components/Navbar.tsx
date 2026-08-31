@@ -1,5 +1,5 @@
 /**
- * ┌──────────────────────────────────────────────────────────────────────────────┐
+ * ┌──────────────────────────────────────────────────────────────────────────────â”
  * │  KhetSe — Main Navigation Bar                                                │
  * │  File: app/components/Navbar.tsx                                             │
  * ├──────────────────────────────────────────────────────────────────────────────┤
@@ -53,9 +53,9 @@ const Navbar = () => {
   const navLinks = [
     { name: "Shop All", href: "/shop" },
     { name: "Trial Kits", href: "/trial-kits", badge: "Starter" },
-    { name: "Subscription Plans", href: "/subscriptions" },
+    // { name: "Subscription Plans", href: "/subscriptions" },
     { name: "Our Story", href: "/story" },
-    { name: "The Farm", href: "/farm" },
+    // { name: "The Farm", href: "/farm" },
     { name: "Contact", href: "/contact" },
   ];
 
