@@ -69,12 +69,12 @@ export default function ProductCard({ product }: { product: Product }) {
                 {product.badge}
               </span>
             )}
-            {product.region && (
+            {/* {product.region && (
               <span className="bg-brand-canvas/95 text-brand-primary text-[10px] font-semibold px-2 py-0.5 rounded-md flex items-center gap-1 shadow-sm">
                 <MapPinIcon className="w-3 h-3 text-brand-accent" />
                 {product.region.split(",")[0]}
               </span>
-            )}
+            )} */}
           </div>
         )}
       </Link>

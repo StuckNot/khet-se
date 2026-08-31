@@ -87,7 +87,7 @@ export default async function HomePage() {
               {/* Tagline Pill */}
               <div className="inline-flex items-center gap-2 bg-brand-beige text-brand-secondary px-3.5 py-1.5 rounded-full text-xs font-semibold tracking-wide border border-brand-secondary/15">
                 <span className="flex h-2 w-2 rounded-full bg-brand-accent" />
-                <span>Farm-to-Pantry in Under 48 Hours</span>
+                <span>Farm-to-Pantry within 7 Days</span>
                 <span className="text-brand-secondary/50">|</span>
                 <span className="text-brand-primary font-medium">Stone-Milled on Order</span>
               </div>
@@ -109,7 +109,7 @@ export default async function HomePage() {
               </div>
 
               {/* Value Checkpoints */}
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2 text-sm text-brand-primary">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2 text-sm text-brand-primary">
                 <div className="flex items-center gap-2">
                   <CheckCircleIcon className="w-4 h-4 text-brand-green shrink-0" />
                   <span className="font-medium text-xs sm:text-sm">0% Mineral Oil Polish</span>
@@ -118,10 +118,10 @@ export default async function HomePage() {
                   <CheckCircleIcon className="w-4 h-4 text-brand-green shrink-0" />
                   <span className="font-medium text-xs sm:text-sm">Slow Cold Stone Ground</span>
                 </div>
-                <div className="flex items-center gap-2">
+                {/* <div className="flex items-center gap-2">
                   <CheckCircleIcon className="w-4 h-4 text-brand-green shrink-0" />
                   <span className="font-medium text-xs sm:text-sm">100% Traceable to Farmer</span>
-                </div>
+                </div> */}
               </div>
 
               {/* CTAs */}
@@ -134,7 +134,7 @@ export default async function HomePage() {
                   <ArrowRightIcon className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </Link>
                 <Link
-                  href="/subscriptions"
+                  href="/trial-kits"
                   className="bg-brand-beige hover:bg-brand-beige/80 text-brand-primary font-medium px-7 py-4 rounded-xl transition-all duration-200 border border-brand-secondary/20 flex items-center justify-center gap-2 text-base"
                 >
                   <span>See How It Works</span>
@@ -189,10 +189,10 @@ export default async function HomePage() {
                   {/* Caption */}
                   <div className="absolute bottom-0 left-0 right-0 p-5 sm:p-6 text-white text-left space-y-1">
                     <h3 className="font-display text-xl sm:text-2xl text-brand-canvas leading-tight">
-                      Indrayani Rice &amp; Khapli Wheat
+                      Chemical-Free Rice &amp; Wheat
                     </h3>
                     <p className="text-xs text-brand-canvas/90 font-sans">
-                      Harvested at Maval &amp; Solapur • Tested 0% Chemical Residue
+                      Freshly Harvested • Tested 0% Chemical Residue
                     </p>
                   </div>
                 </div>
@@ -230,8 +230,8 @@ export default async function HomePage() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
             <TrustBadge
               icon={<WheatIcon className="w-6 h-6" />}
-              title="100% Organic Certified"
-              subtitle="NPOP & PGS-India verified soil, zero synthetic inputs or GMOs"
+              title="Freshly Stone-Milled"
+              subtitle="Small-batch milled for maximum freshness, aroma and natural flavour"
               badge="Zero Chemicals"
             />
             <TrustBadge

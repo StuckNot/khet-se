@@ -22,7 +22,7 @@ export default function TestimonialsSection({ testimonials }: TestimonialsSectio
             Loved by Conscious Indian Kitchens
           </h2>
           <p className="text-sm sm:text-base text-brand-secondary">
-            Over 14,000 households have switched their daily staples subscription to KhetSe.
+            Over 100+ households have switched their daily staples subscription to KhetSe.
           </p>
         </div>
 

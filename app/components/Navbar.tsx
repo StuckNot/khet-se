@@ -70,22 +70,22 @@ const Navbar = () => {
             <div className="flex items-center gap-2 pr-8 shrink-0">
               <span className="inline-block w-2 h-2 rounded-full bg-brand-accent animate-pulse shrink-0 ml-4" />
               <span className="font-semibold tracking-wide text-xs">
-                Fresh Batch Milling: Delivered from farm to pantry in &lt; 48 hours
+                Fresh Batch Milling: Delivered from farm to pantry in &lt; 7 days
               </span>
               <span className="inline-block text-brand-green font-bold px-1">•</span>
               <span className="inline-block text-brand-secondary">
-                Free nationwide delivery on all monthly subscriptions
+                Free delivery on all monthly subscriptions
               </span>
             </div>
             {/* Second Set (Duplicate for seamless loop) */}
             <div className="flex items-center gap-2 pr-8 shrink-0">
               <span className="inline-block w-2 h-2 rounded-full bg-brand-accent animate-pulse shrink-0 ml-4" />
               <span className="font-semibold tracking-wide text-xs">
-                Fresh Batch Milling: Delivered from farm to pantry in &lt; 48 hours
+                Fresh Batch Milling: Delivered from farm to pantry in &lt; 7 days
               </span>
               <span className="inline-block text-brand-green font-bold px-1">•</span>
               <span className="inline-block text-brand-secondary">
-                Free nationwide delivery on all monthly subscriptions
+                Free delivery on all monthly subscriptions
               </span>
             </div>
           </div>
@@ -96,16 +96,16 @@ const Navbar = () => {
           <div className="flex items-center gap-2 mx-auto sm:mx-0">
             <span className="inline-block w-2 h-2 rounded-full bg-brand-accent animate-pulse" />
             <span className="font-semibold tracking-wide text-xs">
-              Fresh Batch Milling: Delivered from farm to pantry in &lt; 48 hours
+              Fresh Batch Milling: Delivered from farm to pantry in &lt; 7 days
             </span>
             <span className="hidden md:inline-block text-brand-green font-bold">•</span>
             <span className="hidden md:inline-block text-brand-secondary">
-              Free nationwide delivery on all monthly subscriptions
+              Free delivery on all monthly subscriptions
             </span>
           </div>
           <div className="hidden lg:flex items-center gap-3 text-brand-primary text-[11px] uppercase tracking-wider font-semibold">
             <span className="flex items-center gap-1 text-success">
-              <SproutIcon className="w-3.5 h-3.5" /> 100% Certified Organic Soil
+              <SproutIcon className="w-3.5 h-3.5" /> 100% Chemical-Free
             </span>
           </div>
         </div>
