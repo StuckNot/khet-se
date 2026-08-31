@@ -64,10 +64,10 @@ const Navbar = () => {
       {/* Announcement Bar */}
       <div className="bg-brand-green/15 text-brand-primary text-xs py-2 border-b border-brand-green/20 overflow-hidden relative">
         {/* Mobile Marquee (Visible only on small screens) */}
-        <div className="flex sm:hidden whitespace-nowrap">
-          <div className="animate-marquee flex min-w-full w-max">
+        <div className="block sm:hidden whitespace-nowrap overflow-hidden">
+          <div className="animate-marquee flex w-max min-w-full">
             {/* First Set */}
-            <div className="flex items-center gap-2 pr-8">
+            <div className="flex items-center gap-2 pr-8 shrink-0">
               <span className="inline-block w-2 h-2 rounded-full bg-brand-accent animate-pulse shrink-0 ml-4" />
               <span className="font-semibold tracking-wide text-xs">
                 Fresh Batch Milling: Delivered from farm to pantry in &lt; 48 hours
@@ -78,7 +78,7 @@ const Navbar = () => {
               </span>
             </div>
             {/* Second Set (Duplicate for seamless loop) */}
-            <div className="flex items-center gap-2 pr-8">
+            <div className="flex items-center gap-2 pr-8 shrink-0">
               <span className="inline-block w-2 h-2 rounded-full bg-brand-accent animate-pulse shrink-0 ml-4" />
               <span className="font-semibold tracking-wide text-xs">
                 Fresh Batch Milling: Delivered from farm to pantry in &lt; 48 hours

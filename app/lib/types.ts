@@ -21,11 +21,13 @@
 // Product
 // â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
+export type ProductCategory = "staple" | "add_on" | "seasonal" | "rice" | "lentils" | "flour" | "spices" | "kit" | "dairy" | string;
+
 export interface Product {
   id: string;
   name: string;
   description: string | null;
-  category: string;
+  category: ProductCategory;
   base_price: number;
   stock_quantity: number;
   is_active: boolean | null;

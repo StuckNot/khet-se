@@ -1,4 +1,4 @@
-import { createClient } from "@/utils/supabase/server";
+import { getProductRepo } from "@/app/lib/repositories";
 import SubscriptionWizard from "./SubscriptionWizard";
 import type { Metadata } from "next";
 import Link from "next/link";
@@ -13,14 +13,15 @@ export const metadata: Metadata = {
 };
 
 export default async function TrialKitsPage() {
-  const supabase = await createClient();
+  let products: any[] = [];
+  let error = null;
 
-  // Fetch only active products
-  const { data: products, error } = await supabase
-    .from("products")
-    .select("*")
-    .eq("is_active", true)
-    .order("created_at", { ascending: false });
+  try {
+    const productRepo = getProductRepo();
+    products = await productRepo.getActiveProducts();
+  } catch (err) {
+    error = err;
+  }
 
   const faqs = [
     {

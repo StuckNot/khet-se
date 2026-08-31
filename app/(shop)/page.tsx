@@ -26,13 +26,11 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { createClient } from "@/utils/supabase/server";
-import type { Tables } from "@/types/database.types";
 import type { Metadata } from "next";
 import ProductCard from "../components/ProductCard";
 import TestimonialsSection from "../components/TestimonialsSection";
-
-type Product = Tables<"products">;
+import { getProductRepo, getTestimonialRepo } from "../lib/repositories";
+import type { Product, Testimonial } from "../lib/types";
 
 /**
  * Page-level SEO metadata.
@@ -55,19 +53,20 @@ export const metadata: Metadata = {
 export const revalidate = 3600;
 
 export default async function HomePage() {
-  const supabase = await createClient();
+  let products: Product[] = [];
+  let testimonials: Testimonial[] = [];
+  let error = null;
 
-  const { data: products, error } = await supabase
-    .from("products")
-    .select("*")
-    .eq("is_active", true)
-    .limit(4);
-
-  const { data: testimonials } = await supabase
-    .from("testimonials")
-    .select("*")
-    .eq("is_active", true)
-    .order("sort_order", { ascending: true });
+  try {
+    const productRepo = getProductRepo();
+    const testimonialRepo = getTestimonialRepo();
+    
+    products = await productRepo.getFeaturedProducts(4);
+    testimonials = await testimonialRepo.getActiveTestimonials();
+  } catch (err) {
+    console.error("Error fetching homepage data:", err);
+    error = err;
+  }
 
   return (
     <div className="space-y-0 bg-brand-canvas">
@@ -300,7 +299,7 @@ export default async function HomePage() {
           ) : (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
               {products.map((product: Product) => (
-                <ProductCard key={product.id} product={product} />
+                <ProductCard key={product.id} product={product as any} />
               ))}
             </div>
           )}
@@ -381,7 +380,7 @@ export default async function HomePage() {
           SECTION 4.5: Testimonials
           ═══════════════════════════════════════════════════ */}
       {testimonials && testimonials.length > 0 && (
-        <TestimonialsSection testimonials={testimonials} />
+        <TestimonialsSection testimonials={testimonials as any} />
       )}
 
       {/* ═══════════════════════════════════════════════════

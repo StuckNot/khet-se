@@ -1,4 +1,4 @@
-import { createClient } from "@/utils/supabase/server";
+import { getProductRepo } from "@/app/lib/repositories";
 import ProductGrid from "./ProductGrid";
 import type { Metadata } from "next";
 
@@ -27,13 +27,16 @@ export const revalidate = 3600;
  */
 
 export default async function ShopPage() {
-  const supabase = await createClient();
+  let products: any[] = [];
+  let error = null;
 
-  const { data: products, error } = await supabase
-    .from("products")
-    .select("*")
-    .eq("is_active", true)
-    .order("created_at", { ascending: false });
+  try {
+    const productRepo = getProductRepo();
+    products = await productRepo.getActiveProducts();
+  } catch (err) {
+    console.error("Error fetching shop data:", err);
+    error = err;
+  }
 
   return (
     <div className="py-10 sm:py-16 bg-brand-canvas min-h-screen">

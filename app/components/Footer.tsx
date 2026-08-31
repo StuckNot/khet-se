@@ -30,7 +30,11 @@ const Footer = () => {
 
   return (
     <>
-      <style>{`.custom-footer-bg::before { ${beforeB} }`}</style>
+      <style>{`
+        @media (min-width: 640px) {
+          .custom-footer-bg::before { ${beforeB} }
+        }
+      `}</style>
 
       <footer className="custom-footer-bg relative bg-brand-beige text-brand-primary pt-16 pb-12 border-t border-brand-secondary/15">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">

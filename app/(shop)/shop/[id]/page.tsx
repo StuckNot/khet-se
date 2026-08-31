@@ -1,4 +1,4 @@
-import { createClient } from "@/utils/supabase/server";
+import { getProductRepo } from "@/app/lib/repositories";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
@@ -11,13 +11,9 @@ export async function generateMetadata({
 }: {
   params: Promise<{ id: string }>;
 }): Promise<Metadata> {
-  const supabase = await createClient();
   const { id } = await params;
-  const { data: product } = await supabase
-    .from("products")
-    .select("name, description")
-    .eq("id", id)
-    .single();
+  const productRepo = getProductRepo();
+  const product = await productRepo.getProductById(id);
 
   return {
     title: product?.name ?? "Product",
@@ -30,27 +26,17 @@ export default async function ProductDetailPage({
 }: {
   params: Promise<{ id: string }>;
 }) {
-  const supabase = await createClient();
   const { id } = await params;
+  const productRepo = getProductRepo();
+  const product = await productRepo.getProductById(id);
 
-  const { data: product, error } = await supabase
-    .from("products")
-    .select("*")
-    .eq("id", id)
-    .single();
-
-  if (error || !product || !product.is_active) {
+  if (!product || !product.is_active) {
     notFound();
   }
 
   let kitItems = null;
   if (product.category === "kit") {
-    const { data } = await supabase
-      .from("product_kit_items")
-      .select("*")
-      .eq("kit_product_id", id)
-      .order("sort_order", { ascending: true });
-    kitItems = data;
+    kitItems = await productRepo.getKitItems(id);
   }
 
   return (
@@ -181,7 +167,7 @@ export default async function ProductDetailPage({
             <div className="flex flex-col sm:flex-row gap-3 pt-2">
               <div className="flex-1">
                 <a
-                  href={generateSingleProductWhatsAppLink(product)}
+                  href={generateSingleProductWhatsAppLink(product as any)}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center justify-center gap-2 rounded-xl bg-[#25D366] hover:bg-[#20bd5a] px-6 py-3 text-xs sm:text-sm font-bold text-white transition-colors shadow-sm w-full h-full"
