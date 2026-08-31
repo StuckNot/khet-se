@@ -1,5 +1,5 @@
-import { initializeApp, getApps, getApp } from "firebase/app";
-import { initializeFirestore } from "firebase/firestore";
+import { initializeApp, getApps, getApp, FirebaseApp } from "firebase/app";
+import { getFirestore, initializeFirestore, Firestore } from "firebase/firestore";
 
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
@@ -11,10 +11,16 @@ const firebaseConfig = {
   measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID,
 };
 
-// Initialize Firebase only if it hasn't been initialized yet
-const app = getApps().length > 0 ? getApp() : initializeApp(firebaseConfig);
+let app: FirebaseApp;
+let db: Firestore;
 
-// Initialize Firestore with long polling to prevent Vercel Serverless Function hangs
-const db = initializeFirestore(app, { experimentalForceLongPolling: true });
+if (getApps().length === 0) {
+  app = initializeApp(firebaseConfig);
+  // Initialize Firestore with long polling to prevent Vercel Serverless Function hangs
+  db = initializeFirestore(app, { experimentalForceLongPolling: true });
+} else {
+  app = getApp();
+  db = getFirestore(app);
+}
 
 export { app, db };

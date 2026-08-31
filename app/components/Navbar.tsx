@@ -62,8 +62,37 @@ const Navbar = () => {
   return (
     <>
       {/* Announcement Bar */}
-      <div className="bg-brand-green/15 text-brand-primary text-xs py-2 px-4 border-b border-brand-green/20">
-        <div className="max-w-7xl mx-auto flex items-center justify-between">
+      <div className="bg-brand-green/15 text-brand-primary text-xs py-2 border-b border-brand-green/20 overflow-hidden relative">
+        {/* Mobile Marquee (Visible only on small screens) */}
+        <div className="flex sm:hidden whitespace-nowrap">
+          <div className="animate-marquee flex min-w-full w-max">
+            {/* First Set */}
+            <div className="flex items-center gap-2 pr-8">
+              <span className="inline-block w-2 h-2 rounded-full bg-brand-accent animate-pulse shrink-0 ml-4" />
+              <span className="font-semibold tracking-wide text-xs">
+                Fresh Batch Milling: Delivered from farm to pantry in &lt; 48 hours
+              </span>
+              <span className="inline-block text-brand-green font-bold px-1">•</span>
+              <span className="inline-block text-brand-secondary">
+                Free nationwide delivery on all monthly subscriptions
+              </span>
+            </div>
+            {/* Second Set (Duplicate for seamless loop) */}
+            <div className="flex items-center gap-2 pr-8">
+              <span className="inline-block w-2 h-2 rounded-full bg-brand-accent animate-pulse shrink-0 ml-4" />
+              <span className="font-semibold tracking-wide text-xs">
+                Fresh Batch Milling: Delivered from farm to pantry in &lt; 48 hours
+              </span>
+              <span className="inline-block text-brand-green font-bold px-1">•</span>
+              <span className="inline-block text-brand-secondary">
+                Free nationwide delivery on all monthly subscriptions
+              </span>
+            </div>
+          </div>
+        </div>
+
+        {/* Desktop Static (Visible only on sm and above) */}
+        <div className="hidden sm:flex max-w-7xl mx-auto items-center justify-between px-4">
           <div className="flex items-center gap-2 mx-auto sm:mx-0">
             <span className="inline-block w-2 h-2 rounded-full bg-brand-accent animate-pulse" />
             <span className="font-semibold tracking-wide text-xs">
@@ -144,13 +173,14 @@ const Navbar = () => {
               {/* Selected Items Button */}
               <button
                 onClick={() => toggleDrawer()}
-                className="relative flex items-center gap-2 bg-transparent hover:bg-brand-beige text-brand-primary border border-brand-secondary/25 px-3.5 py-2 rounded-xl transition-all duration-200 active:scale-95 cursor-pointer"
+                className="relative flex items-center justify-center gap-2 bg-transparent hover:bg-brand-beige text-brand-primary border border-brand-secondary/25 p-2 sm:px-3.5 sm:py-2 rounded-xl transition-all duration-200 active:scale-95 cursor-pointer"
                 aria-label="Selected Items"
               >
-                <ChecklistIcon className="w-4 h-4 text-brand-secondary" />
-                <span className="font-medium text-xs sm:text-sm tracking-wide">Selected Items</span>
+                <BagIcon className="w-5 h-5 sm:hidden text-brand-secondary" />
+                <ChecklistIcon className="hidden sm:block w-4 h-4 text-brand-secondary" />
+                <span className="hidden sm:inline font-medium text-xs sm:text-sm tracking-wide">Selected Items</span>
                 {mounted && itemCount > 0 && (
-                  <span className="bg-brand-accent text-white text-[11px] font-bold px-2 py-0.5 rounded-full ml-0.5">
+                  <span className="absolute -top-1.5 -right-1.5 sm:relative sm:top-0 sm:right-0 bg-brand-accent text-white text-[10px] sm:text-[11px] font-bold px-1.5 py-0.5 sm:px-2 rounded-full sm:ml-0.5 shadow-sm">
                     {itemCount}
                   </span>
                 )}
