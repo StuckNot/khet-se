@@ -55,7 +55,7 @@ export default function SubscriptionsPage() {
         "16 kg Multi-Grain Ancient Wheats & Atta",
         "8 kg Fragrant & Daily Heritage Rice",
         "6 kg Native Unpolished Dals Selection",
-        "Grand Organic Spices & Cold-Pressed Mustard Oil Pack",
+        "Grand Spices & Cold-Pressed Mustard Oil Pack",
       ],
       description: "Comprehensive monthly coverage for rich, traditional kitchens cooking authentic feasts every day.",
     },

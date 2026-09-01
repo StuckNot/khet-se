@@ -8,7 +8,7 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Shop All Staples",
   description:
-    "Browse KhetSe's full range of 100% organic, lab-tested staples. Filter by pantry staples, add-ons, and seasonal harvests.",
+    "Browse KhetSe's full range of 100% trusted staples. Filter by pantry staples, add-ons, and seasonal harvests.",
 };
 
 /**
@@ -47,19 +47,19 @@ export default async function ShopPage() {
           <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-3">
             <div className="inline-flex items-center gap-2 text-xs font-bold text-brand-green uppercase tracking-wider">
               <SproutIcon className="w-4 h-4" />
-              100% Certified Organic Pantry
+              100% Trusted Pantry
             </div>
             {/* Batch freshness indicator */}
             <div className="inline-flex items-center gap-1.5 text-xs text-brand-secondary self-start sm:self-auto">
               <span className="w-2 h-2 rounded-full bg-success shrink-0" />
-              Batch freshness guaranteed &lt; 48 hours from mill
+              Batch freshness guaranteed &lt; 7 days from mill
             </div>
           </div>
           <h1 className="font-display text-3xl sm:text-5xl text-brand-primary tracking-tight">
             Shop All Farm-to-Pantry Staples
           </h1>
           <p className="text-sm sm:text-base text-brand-secondary max-w-2xl leading-relaxed">
-            Every grain, pulse, and flour is grown by our partner organic farmers, stone-milled to order, and delivered unpolished in under 48 hours.
+            Every grain, pulse, and flour is grown by our partner farmers, stone-milled to order, and delivered unpolished.
           </p>
         </div>
 

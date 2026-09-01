@@ -135,17 +135,17 @@ export default function ProductGrid({ products }: ProductGridProps) {
 
       {/* Product Count & Freshness Banner */}
       <div className="flex items-center justify-between text-xs text-brand-secondary pt-2">
-        <span>Showing {filteredAndSortedProducts.length} organic staple items</span>
+        <span>Showing {filteredAndSortedProducts.length} staple items</span>
         <span className="flex items-center gap-1 text-success font-medium">
-          <ShieldCheckIcon className="w-3.5 h-3.5" /> 100% Unpolished &amp; NABL Lab Certified
+          <ShieldCheckIcon className="w-3.5 h-3.5" /> 100% Unpolished
         </span>
       </div>
 
       {/* Product Cards Grid */}
       {filteredAndSortedProducts.length > 0 ? (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 sm:gap-8 pt-4">
-          {filteredAndSortedProducts.map((product) => (
-            <ProductCard key={product.id} product={product} />
+          {filteredAndSortedProducts.map((product, index) => (
+            <ProductCard key={product.id} product={product} priority={index < 4} />
           ))}
         </div>
       ) : (

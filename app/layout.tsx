@@ -69,13 +69,13 @@ export const metadata: Metadata = {
     locale: "en_IN",
     url: "https://khetse.in",
     siteName: "KhetSe",
-    title: "KhetSe — Farm-to-Pantry Organic Staples",
+    title: "KhetSe — Farm-to-Pantry Staples",
     description:
       "100% chemical-free, lab-tested staples from farm to your pantry in under 48 hours.",
   },
   twitter: {
     card: "summary_large_image",
-    title: "KhetSe — Farm-to-Pantry Organic Staples",
+    title: "KhetSe — Farm-to-Pantry Staples",
     description:
       "100% chemical-free, lab-tested staples from farm to your pantry in under 48 hours.",
   },

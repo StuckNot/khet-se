@@ -69,7 +69,7 @@ export async function sendOrderReceipt(
           <h1 style="color: #2E7D32;">Thank you for your order! 🌾</h1>
           <p>Hi ${firstName},</p>
           <p>We've successfully received your payment of <strong>₹${amount}</strong> for order <strong>#${orderId.slice(0, 8)}</strong>.</p>
-          <p>Your organic staples are being packed and will be delivered straight from the farm to your pantry soon.</p>
+          <p>Your staples are being packed and will be delivered straight from the farm to your pantry soon.</p>
           <br />
           <p>Warmly,</p>
           <p><strong>The KhetSe Team</strong></p>

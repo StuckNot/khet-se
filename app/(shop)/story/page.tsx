@@ -13,7 +13,7 @@ export default function OurStoryPage() {
   return (
     <div className="py-12 sm:py-20 bg-brand-canvas space-y-16 min-h-screen">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-20">
-        
+
         {/* Story Intro Header */}
         <div className="max-w-3xl mx-auto text-center space-y-4">
           <span className="inline-flex items-center gap-2 bg-brand-green/20 text-success px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider border border-brand-green/30">
@@ -30,7 +30,7 @@ export default function OurStoryPage() {
 
         {/* Story Split Narrative */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center text-left">
-          
+
           <div className="lg:col-span-6 space-y-6">
             <h2 className="font-display text-3xl sm:text-4xl text-brand-primary">
               The Invisible Tragedy of the Supermarket Aisle
@@ -51,7 +51,7 @@ export default function OurStoryPage() {
               <div className="relative w-full h-[420px]">
                 <Image
                   src="/images/story/story_farm_soil.png"
-                  alt="Living organic soil and wheat farm in Maharashtra"
+                  alt="Living soil and wheat farm in Maharashtra"
                   fill
                   className="object-cover"
                   sizes="(max-width: 1024px) 100vw, 50vw"
@@ -75,7 +75,7 @@ export default function OurStoryPage() {
         <div className="bg-brand-beige/60 rounded-3xl p-8 sm:p-12 border border-brand-secondary/15 shadow-sm">
           <div className="text-center max-w-2xl mx-auto mb-10 space-y-2">
             <h2 className="font-display text-2xl sm:text-3xl text-brand-primary">
-              The 48-Hour Difference
+              The Difference
             </h2>
             <p className="text-sm text-brand-secondary">
               How traditional supermarket staples compare to a KhetSe freshly milled delivery.
@@ -120,7 +120,7 @@ export default function OurStoryPage() {
                 <span className="text-[10px] font-bold uppercase tracking-wider text-success bg-brand-green/15 px-2.5 py-1 rounded-md">
                   KhetSe Living Staples
                 </span>
-                <span className="text-xs font-bold text-brand-primary">&lt; 48 Hours Fresh</span>
+                <span className="text-xs font-bold text-brand-primary">&lt; 7 days Fresh</span>
               </div>
               <ul className="space-y-3 text-xs sm:text-sm text-brand-primary">
                 <li className="flex items-start gap-2">
@@ -138,7 +138,7 @@ export default function OurStoryPage() {
                 <li className="flex items-start gap-2">
                   <span className="text-success font-bold shrink-0 mt-px">✓</span>
                   <span>
-                    <strong>Cold Stone Ground (&lt;50 RPM):</strong> Preserves heat-sensitive B-vitamins, iron, and natural essential aroma oils.
+                    <strong>No Flour Blending:</strong>Each variety is milled and packed separately rather than mixing different grain lots.
                   </span>
                 </li>
               </ul>
@@ -154,19 +154,19 @@ export default function OurStoryPage() {
               From Soil to Chulha
             </span>
             <h3 className="font-display text-3xl text-brand-primary">
-              The 48-Hour Farm-to-Doorstep Journey
+              The 7-days Farm-to-Doorstep Journey
             </h3>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-            
+
             <div className="bg-brand-canvas p-6 rounded-2xl border border-brand-secondary/15 space-y-3 shadow-sm hover:border-brand-green/30 transition-colors">
               <div className="w-10 h-10 rounded-xl bg-brand-green/20 text-success flex items-center justify-center font-display text-xl font-bold">
                 1
               </div>
               <h4 className="font-display text-lg text-brand-primary">Living Soil</h4>
               <p className="text-xs text-brand-secondary leading-relaxed">
-                Native heritage seeds nurtured with organic cow-based Jeevamrit and zero synthetic sprays.
+                Native heritage seeds nurtured with cow-based Jeevamrit and zero synthetic sprays.
               </p>
             </div>
 
@@ -184,17 +184,16 @@ export default function OurStoryPage() {
               <div className="w-10 h-10 rounded-xl bg-brand-accent/20 text-brand-accent flex items-center justify-center font-display text-xl font-bold">
                 3
               </div>
-              <h4 className="font-display text-lg text-brand-primary">Cold Stone-Milling</h4>
+              <h4 className="font-display text-lg text-brand-primary">Small-Batch Processing</h4>
               <p className="text-xs text-brand-secondary leading-relaxed">
-                Upon order confirmation, grains are cold ground at &lt;50 RPM to preserve volatile wheat germ oils.
-              </p>
+                Grains are processed in smaller batches rather than through continuous bulk production.              </p>
             </div>
 
             <div className="bg-brand-canvas p-6 rounded-2xl border border-brand-secondary/15 space-y-3 shadow-sm hover:border-brand-green/30 transition-colors">
               <div className="w-10 h-10 rounded-xl bg-brand-green/20 text-success flex items-center justify-center font-display text-xl font-bold">
                 4
               </div>
-              <h4 className="font-display text-lg text-brand-primary">48h Doorstep Arrival</h4>
+              <h4 className="font-display text-lg text-brand-primary">7-days Doorstep Arrival</h4>
               <p className="text-xs text-brand-secondary leading-relaxed">
                 Eco-packaged and delivered fresh to your kitchen, filling your home with authentic harvest aroma.
               </p>
@@ -215,12 +214,12 @@ export default function OurStoryPage() {
             >
               Shop Fresh Staples
             </Link>
-            <Link
+            {/* <Link
               href="/farm"
               className="bg-brand-beige hover:bg-[#ebdccb] text-brand-primary font-medium px-8 py-3.5 rounded-xl border border-brand-secondary/20 transition-all text-sm inline-flex items-center justify-center shadow-sm"
             >
               Meet Our Farmers
-            </Link>
+            </Link> */}
           </div>
         </div>
 

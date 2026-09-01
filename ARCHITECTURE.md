@@ -1,7 +1,7 @@
 # KhetSe Web — Architecture & Layout Guide
 
 > **Repository:** `khetse-web`  
-> **Purpose:** Next.js 16 storefront and admin dashboard for the KhetSe organic food brand.  
+> **Purpose:** Next.js 16 storefront and admin dashboard for the KhetSe food brand.  
 > **Key Tech:** Next.js (App Router), TypeScript, Tailwind CSS v4, @supabase/ssr.
 
 ---

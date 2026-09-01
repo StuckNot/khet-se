@@ -39,7 +39,7 @@ import { categoryLabels } from "@/app/lib/categoryLabels";
 
 type Product = Tables<"products">;
 
-export default function ProductCard({ product }: { product: Product }) {
+export default function ProductCard({ product, priority = false }: { product: Product, priority?: boolean }) {
   return (
     <div className="group bg-brand-canvas rounded-2xl border border-brand-secondary/15 overflow-hidden transition-all duration-300 hover:shadow-md hover:border-brand-green/50 flex flex-col justify-between">
       {/* Product Image — links to detail page */}
@@ -52,6 +52,7 @@ export default function ProductCard({ product }: { product: Product }) {
             src={product.image_url}
             alt={product.name}
             fill
+            priority={priority}
             className="object-cover group-hover:scale-105 transition-transform duration-500"
             sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
           />
@@ -112,12 +113,12 @@ export default function ProductCard({ product }: { product: Product }) {
         </div>
 
         {/* Price & Action Button */}
-        <div className="flex items-center justify-between pt-3 border-t border-brand-beige">
-          <div className="text-left">
+        <div className="flex items-center justify-around pt-3 border-t border-brand-beige">
+          {/* <div className="text-left">
             <span className="font-display text-xl sm:text-2xl text-brand-primary">
               ₹{product.base_price}
             </span>
-          </div>
+          </div> */}
           <SelectProductButton product={product} />
         </div>
       </div>

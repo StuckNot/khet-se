@@ -51,7 +51,7 @@ const Footer = () => {
                 </div>
               </Link>
               <p className="text-xs text-brand-secondary leading-relaxed max-w-sm">
-                Chemical free, farm-to-table staples delivered directly from our soil to your doorstep. Pure, sustainable, and transparent. Milled to order in under 48 hours.
+                Chemical free, farm-to-table staples delivered directly from our soil to your doorstep. Pure, sustainable, and transparent. Milled to order in within 7 days.
               </p>
             </div>  
 
@@ -71,11 +71,11 @@ const Footer = () => {
                     Trial Starter Kits
                   </Link>
                 </li>
-                <li>
+                {/* <li>
                   <Link href="/subscriptions" className="hover:text-brand-accent transition-colors">
                     Subscription Plans
                   </Link>
-                </li>
+                </li> */}
               </ul>
             </div>
 
@@ -90,21 +90,21 @@ const Footer = () => {
                     Our Story
                   </Link>
                 </li>
-                <li>
+                {/* <li>
                   <Link href="/farm" className="hover:text-brand-accent transition-colors">
                     The Farm &amp; Soil
                   </Link>
-                </li>
+                </li> */}
                 <li>
                   <Link href="/contact" className="hover:text-brand-accent transition-colors">
                     Contact Us
                   </Link>
                 </li>
-                <li>
+                {/* <li>
                   <Link href="/subscriptions" className="hover:text-brand-accent transition-colors">
                     How Subscriptions Work
                   </Link>
-                </li>
+                </li> */}
               </ul>
             </div>
 
@@ -114,7 +114,7 @@ const Footer = () => {
                 Farm Newsletter
               </h4>
               <p className="text-xs text-brand-secondary leading-relaxed">
-                Join our community for farm updates and recipes. Receive seasonal harvest alerts and traditional heirloom cooking notes.
+                Join our community for farm updates and recipes. Receive seasonal harvest alerts and traditional cooking notes.
               </p>
 
               <form onSubmit={handleNewsletterSubmit} className="space-y-2">
@@ -145,7 +145,7 @@ const Footer = () => {
               </form>
 
               <div className="pt-1 text-[11px] text-brand-secondary">
-                Direct dispatch hub: Pune &amp; Bangalore • Delivering to 18,000+ PIN codes across India
+                Direct dispatch hub, across Delhi
               </div>
             </div>
 
@@ -154,7 +154,7 @@ const Footer = () => {
           {/* Bottom Bar */}
           <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-brand-secondary">
             <div className="shadow-sm px-2 py-1 rounded bg-brand-canvas/20">
-              © {new Date().getFullYear()} KhetSe Organics India Pvt Ltd. All rights reserved.
+              © {new Date().getFullYear()} KhetSe India Pvt Ltd. All rights reserved.
             </div>
 
             <div className="flex items-center gap-6 shadow-sm px-2 py-1 rounded bg-brand-canvas/20">

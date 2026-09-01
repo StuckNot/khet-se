@@ -17,7 +17,7 @@ export async function generateMetadata({
 
   return {
     title: product?.name ?? "Product",
-    description: product?.description ?? "Farm-fresh organic staple from KhetSe.",
+    description: product?.description ?? "Farm-fresh staple from KhetSe.",
   };
 }
 
@@ -101,23 +101,23 @@ export default async function ProductDetailPage({
 
             {/* Name & Price */}
             <div className="space-y-3 text-left">
-              {product.region && (
+              {/* {product.region && (
                 <div className="flex items-center gap-1.5 text-xs font-bold text-brand-primary bg-brand-canvas/50 self-start px-2.5 py-1 rounded-md border border-brand-secondary/15 w-fit shadow-sm">
                   <MapPinIcon className="w-3.5 h-3.5 text-brand-accent" />
                   {product.region}
                 </div>
-              )}
+              )} */}
               <h1 className="font-display text-4xl sm:text-5xl text-brand-primary tracking-tight leading-[1.12]">
                 {product.name}
               </h1>
-              <div className="flex items-baseline gap-3">
+              {/* <div className="flex items-baseline gap-3">
                 <span className="font-display text-3xl text-brand-primary">
                   ₹{product.base_price}
                 </span>
                 <span className="text-xs text-brand-secondary font-medium">
-                  per harvest pack
+                  per pack
                 </span>
-              </div>
+              </div> */}
             </div>
 
             {/* Description */}
@@ -152,7 +152,7 @@ export default async function ProductDetailPage({
                 "100% Unpolished",
                 "Zero Pesticides",
                 "Milled to Order",
-                "NABL Lab Tested",
+                "Farm-to-Pantry in < 7 Days",
               ].map((badge) => (
                 <span
                   key={badge}
@@ -217,12 +217,12 @@ export default async function ProductDetailPage({
                 </h3>
                 <p className="text-xs sm:text-sm text-brand-secondary leading-relaxed pl-9">
                   {product.farmer_notes ||
-                    "No specific harvest notes available for this batch yet. Quality tested and approved."}
+                    "No specific harvest notes available for this batch yet. Quality approved."}
                 </p>
               </div>
 
               {/* Quality Guarantee */}
-              <div className="py-6 space-y-2">
+              {/* <div className="py-6 space-y-2">
                 <h3 className="text-sm font-bold text-brand-primary flex items-center gap-2">
                   <span className="w-7 h-7 rounded-lg bg-brand-green/15 text-success flex items-center justify-center text-base">
                     🔬
@@ -232,7 +232,7 @@ export default async function ProductDetailPage({
                 <p className="text-xs sm:text-sm text-brand-secondary leading-relaxed pl-9">
                   Every batch is rigorously tested for synthetic pesticides and heavy metals by NABL-accredited laboratories. Zero chemicals, 100% pure harvest.
                 </p>
-              </div>
+              </div> */}
 
               {/* Delivery */}
               <div className="py-6 space-y-2">
@@ -240,10 +240,10 @@ export default async function ProductDetailPage({
                   <span className="w-7 h-7 rounded-lg bg-brand-primary/10 text-brand-primary flex items-center justify-center text-base">
                     📦
                   </span>
-                  48-Hour Delivery
+                  7-Day Delivery
                 </h3>
                 <p className="text-xs sm:text-sm text-brand-secondary leading-relaxed pl-9">
-                  Stone-milled to order and dispatched within 48 hours of your purchase. Delivering to 18,000+ PIN codes across India from our Pune and Bangalore hubs.
+                  Stone-milled to order and dispatched within 7 days of your purchase. Delivering across Delhi from our hubs.
                 </p>
               </div>
 

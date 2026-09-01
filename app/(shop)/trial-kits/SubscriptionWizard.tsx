@@ -62,7 +62,7 @@ export default function SubscriptionWizard({ products }: SubscriptionWizardProps
           <div>
             <div className="mb-5">
               <h2 className="font-display text-2xl text-brand-primary mb-1">1. Choose Your Box</h2>
-              <p className="text-sm text-brand-secondary">Select the organic staples you want delivered.</p>
+              <p className="text-sm text-brand-secondary">Select the staples you want delivered.</p>
             </div>
             <div className="space-y-4">
               {products.map((product) => {
@@ -100,7 +100,7 @@ export default function SubscriptionWizard({ products }: SubscriptionWizardProps
                       <div className="flex-1">
                         <h3 className="font-display text-lg text-brand-primary leading-tight">{product.name}</h3>
                         <p className="text-xs text-brand-secondary mt-1.5 leading-relaxed line-clamp-2">{product.description}</p>
-                        <p className="font-display text-lg text-brand-primary mt-3">₹{product.base_price} <span className="text-xs font-sans text-brand-secondary">/ delivery</span></p>
+                        {/* <p className="font-display text-lg text-brand-primary mt-3">₹{product.base_price} <span className="text-xs font-sans text-brand-secondary">/ delivery</span></p> */}
                       </div>
                     </div>
                   </label>
@@ -183,10 +183,10 @@ export default function SubscriptionWizard({ products }: SubscriptionWizardProps
 
               <div className="flex justify-between items-end border-t border-brand-secondary/20 pt-4 mt-2">
                 <span className="text-brand-secondary">First delivery total</span>
-                <span className="font-semibold">₹{selectedProducts.reduce(
+                {/* <span className="font-semibold">₹{selectedProducts.reduce(
                   (total, product) => total + Number(product.base_price),
                   0
-                )}</span>
+                )}</span> */}
               </div>
             </div>
 
@@ -201,7 +201,7 @@ export default function SubscriptionWizard({ products }: SubscriptionWizardProps
             </a>
 
             <p className="mt-4 text-center text-[10px] text-brand-secondary uppercase tracking-widest font-bold">
-              We usually reply within 5 minutes
+              We usually reply within 30 minutes
             </p>
           </div>
         </div>

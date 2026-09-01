@@ -35,12 +35,12 @@ import type { Product, Testimonial } from "../lib/types";
 /**
  * Page-level SEO metadata.
  * Overrides the root layout defaults for the homepage only.
- * The title template in root layout will produce: "KhetSe — Farm-to-Pantry Organic Staples"
+ * The title template in root layout will produce: "KhetSe — Farm-to-Pantry Staples"
  */
 export const metadata: Metadata = {
-  title: "KhetSe — Farm-to-Pantry Organic Staples",
+  title: "KhetSe — Farm-to-Pantry Staples",
   description:
-    "Get 100% chemical-free organic staples — rice, lentils, flour, and spices — delivered from Indian farms to your pantry in under 48 hours. Subscribe and never run out.",
+    "Get 100% chemical-free staples — rice, lentils, flour, and spices — delivered from Indian farms to your pantry in under 48 hours. Subscribe and never run out.",
 };
 
 /**
@@ -170,7 +170,7 @@ export default async function HomePage() {
                 <div className="relative h-72 sm:h-80 w-full rounded-2xl overflow-hidden bg-brand-beige">
                   <Image
                     src="/images/hero/hero-harvest.png"
-                    alt="Golden wheat harvest and organic Indian grains"
+                    alt="Golden wheat harvest and Indian grains"
                     fill
                     className="object-cover object-center"
                     sizes="(max-width: 1024px) 100vw, 40vw"
@@ -298,8 +298,8 @@ export default async function HomePage() {
             <EmptyHarvestState />
           ) : (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
-              {products.map((product: Product) => (
-                <ProductCard key={product.id} product={product as any} />
+              {products.map((product: Product, index) => (
+                <ProductCard key={product.id} product={product as any} priority={index < 4} />
               ))}
             </div>
           )}
@@ -363,7 +363,7 @@ export default async function HomePage() {
           </div>
 
           {/* CTA */}
-          <div className="text-center">
+          {/* <div className="text-center">
             <Link
               href="/subscriptions"
               className="inline-flex items-center gap-2 bg-brand-accent hover:bg-brand-accent/85 text-white font-medium px-8 py-3.5 rounded-xl transition-all text-sm shadow-md"
@@ -371,7 +371,7 @@ export default async function HomePage() {
               <span>Explore Subscription Plans &amp; Calculator</span>
               <ArrowRightIcon className="w-4 h-4" />
             </Link>
-          </div>
+          </div> */}
 
         </div>
       </section>
@@ -397,7 +397,7 @@ export default async function HomePage() {
                 Try the 4-Pantry Discovery Starter Kit
               </h3>
               <p className="text-xs sm:text-sm text-brand-secondary">
-                Experience 500g Indrayani Rice, 500g Desi Toor Dal, 1kg Khapli Wheat Flour, 100g Lakadong Turmeric for just ₹499 with 100% risk-free guarantee.
+                Experience 500g Rice, 500g Desi Toor Dal, 1kg Wheat Flour, 100g Turmeric with 100% risk-free guarantee.
               </p>
             </div>
 
@@ -488,7 +488,7 @@ function EmptyHarvestState() {
         Our Farmers Are Currently Harvesting
       </h3>
       <p className="text-brand-secondary max-w-md text-center mb-6 text-sm">
-        Fresh organic staples are on their way from the fields. Check back soon
+        Fresh staples are on their way from the fields. Check back soon
         or sign up for our newsletter to be the first to know.
       </p>
       <Link
