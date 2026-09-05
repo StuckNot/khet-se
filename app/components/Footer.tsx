@@ -49,12 +49,12 @@ const Footer = () => {
                 <Image
                   src="/images/logo/f&f logo.png"
                   alt="Farm and Friends"
-                  width={140}
-                  height={48}
-                  className="object-contain h-12 w-auto group-hover:opacity-80 transition-opacity duration-200"
+                  width={180}
+                  height={64}
+                  className="object-contain h-20 w-auto -my-6 group-hover:opacity-80 transition-opacity duration-200"
                 />
               </Link>
-              <p className="text-xs text-brand-secondary leading-relaxed max-w-sm">
+              <p className="text-xs w-auto text-brand-secondary leading-relaxed max-w-sm">
                 Chemical free, farm-to-table staples delivered directly from our soil to your doorstep. Pure, sustainable, and transparent. Milled to order in within 7 days.
               </p>
             </div>  

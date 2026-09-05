@@ -8,4 +8,5 @@ export const categoryLabels: Record<string, string> = {
   spices: "Single-Origin Spices",
   kit: "Trial Discovery Kits",
   dairy: "Dairy & Ghee",
+  cooking_oil: "Cooking Oils",
 };

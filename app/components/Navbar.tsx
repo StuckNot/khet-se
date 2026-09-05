@@ -129,10 +129,10 @@ const Navbar = () => {
                 <Image
                   src="/images/logo/f&f logo.png"
                   alt="Farm and Friends"
-                  width={140}
-                  height={48}
+                  width={180}
+                  height={64}
                   priority
-                  className="object-contain h-12 w-auto group-hover:opacity-80 transition-opacity duration-200"
+                  className="object-contain h-20 w-auto group-hover:opacity-80 transition-opacity duration-200"
                 />
                 {/* <span className="font-sans text-xs tracking-widest text-brand-green uppercase font-bold">
                   खेत से

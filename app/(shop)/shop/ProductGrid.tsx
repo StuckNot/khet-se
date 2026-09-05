@@ -39,7 +39,9 @@ export default function ProductGrid({ products }: ProductGridProps) {
 
   // Dynamically derive unique categories from the product list
   const categories = useMemo(() => {
-    const uniqueCats = Array.from(new Set(products.map((p) => p.category)));
+    const uniqueCats = Array.from(
+      new Set(products.map((p) => p.category).filter((c) => c != null) as string[])
+    );
     const dynamicCategories = uniqueCats.map((cat) => ({
       id: cat,
       label: categoryLabels[cat] || cat,
@@ -114,9 +116,9 @@ export default function ProductGrid({ products }: ProductGridProps) {
 
       {/* Category Filter Pills */}
       <div className="flex items-center gap-2 overflow-x-auto pb-2 no-scrollbar">
-        {categories.map((cat) => (
+        {categories.map((cat, index) => (
           <button
-            key={cat.id}
+            key={cat.id ?? `cat-${index}`}
             onClick={() => setActiveCategory(cat.id)}
             className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-medium whitespace-nowrap transition-all duration-150 cursor-pointer ${
               activeCategory === cat.id
