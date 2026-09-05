@@ -1,6 +1,6 @@
 /**
  * ┌──────────────────────────────────────────────────────────────────────────────â”
- * │  Farm and Friends — Product Repository Interface                                       │
+ * │  KhetSe — Product Repository Interface                                       │
  * │  File: app/lib/repositories/product.repository.ts                            │
  * ├──────────────────────────────────────────────────────────────────────────────┤
  * │                                                                              │

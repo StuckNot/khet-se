@@ -1,6 +1,6 @@
 /**
  * ┌──────────────────────────────────────────────────────────────────────────────â”
- * │  Farm and Friends — Login / Registration Page                                         │
+ * │  KhetSe — Login / Registration Page                                         │
  * │  File: app/(shop)/login/page.tsx                                            │
  * ├──────────────────────────────────────────────────────────────────────────────┤
  * │                                                                              │
@@ -102,7 +102,7 @@ export default async function LoginPage({ searchParams }: LoginPageProps) {
 
         <div className="mt-6 text-center">
           <Link href="/" className="text-sm text-brand-primary/50 hover:text-brand-primary transition-colors">
-            â† Back to store
+            ← Back to store
           </Link>
         </div>
       </div>

@@ -1,6 +1,6 @@
 /**
  * ┌──────────────────────────────────────────────────────────────────────────────â”
- * │  Farm and Friends — Shared Product Card Component                                      │
+ * │  KhetSe — Shared Product Card Component                                      │
  * │  File: app/components/ProductCard.tsx                                        │
  * ├──────────────────────────────────────────────────────────────────────────────┤
  * │                                                                              │
@@ -33,11 +33,13 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import type { Product } from "@/app/lib/types";
+import type { Tables } from "@/types/database.types";
 import SelectProductButton from "./SelectProductButton";
 import { categoryLabels } from "@/app/lib/categoryLabels";
 
-export default function ProductCard({ product }: { product: Product }) {
+type Product = Tables<"products">;
+
+export default function ProductCard({ product, priority = false }: { product: Product, priority?: boolean }) {
   return (
     <div className="group bg-brand-canvas rounded-2xl border border-brand-secondary/15 overflow-hidden transition-all duration-300 hover:shadow-md hover:border-brand-green/50 flex flex-col justify-between">
       {/* Product Image — links to detail page */}
@@ -50,6 +52,7 @@ export default function ProductCard({ product }: { product: Product }) {
             src={product.image_url}
             alt={product.name}
             fill
+            priority={priority}
             className="object-cover group-hover:scale-105 transition-transform duration-500"
             sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
           />
@@ -67,12 +70,12 @@ export default function ProductCard({ product }: { product: Product }) {
                 {product.badge}
               </span>
             )}
-            {product.region && (
+            {/* {product.region && (
               <span className="bg-brand-canvas/95 text-brand-primary text-[10px] font-semibold px-2 py-0.5 rounded-md flex items-center gap-1 shadow-sm">
                 <MapPinIcon className="w-3 h-3 text-brand-accent" />
                 {product.region.split(",")[0]}
               </span>
-            )}
+            )} */}
           </div>
         )}
       </Link>
@@ -110,12 +113,12 @@ export default function ProductCard({ product }: { product: Product }) {
         </div>
 
         {/* Price & Action Button */}
-        <div className="flex items-center justify-between pt-3 border-t border-brand-beige">
-          <div className="text-left">
+        <div className="flex items-center justify-around pt-3 border-t border-brand-beige">
+          {/* <div className="text-left">
             <span className="font-display text-xl sm:text-2xl text-brand-primary">
               ₹{product.base_price}
             </span>
-          </div>
+          </div> */}
           <SelectProductButton product={product} />
         </div>
       </div>
@@ -123,9 +126,9 @@ export default function ProductCard({ product }: { product: Product }) {
   );
 }
 
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// ═══════════════════════════════════════════════════
 // Inline SVG Icons (no external dependency)
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// ═══════════════════════════════════════════════════
 
 const MapPinIcon = ({ className }: { className?: string }) => (
   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>

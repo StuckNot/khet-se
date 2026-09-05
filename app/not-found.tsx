@@ -1,13 +1,13 @@
 /**
  * ┌──────────────────────────────────────────────────────────────────────────────â”
- * │  Farm and Friends — Global 404 Not Found Page                                          │
+ * │  KhetSe — Global 404 Not Found Page                                          │
  * │  File: app/not-found.tsx                                                     │
  * ├──────────────────────────────────────────────────────────────────────────────┤
  * │                                                                              │
  * │  PURPOSE:                                                                    │
  * │  Rendered by Next.js for all 404 errors — when a user visits a URL that     │
  * │  doesn't match any route in the app. Replaces the default Next.js 404 page  │
- * │  with branded Farm and Friends styling.                                                │
+ * │  with branded KhetSe styling.                                                │
  * │                                                                              │
  * │  PLACEMENT:                                                                  │
  * │  At the root of `app/` so it covers ALL routes (shop, admin, API, etc.).    │

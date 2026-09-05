@@ -108,7 +108,7 @@ export default function ContactPage() {
             </div>
 
             {/* Milling & Fulfillment Centers */}
-            <div className="bg-brand-beige/70 rounded-3xl p-6 sm:p-8 border border-brand-secondary/15 space-y-4 shadow-sm">
+            {/* <div className="bg-brand-beige/70 rounded-3xl p-6 sm:p-8 border border-brand-secondary/15 space-y-4 shadow-sm">
               <h3 className="font-display text-xl text-brand-primary flex items-center gap-2">
                 <BuildingIcon className="w-5 h-5 text-brand-accent" />
                 Milling & Dispatch Hubs
@@ -125,7 +125,7 @@ export default function ContactPage() {
                   <p>[South India Hub Address TBD]</p>
                 </div>
               </div>
-            </div>
+            </div> */}
 
           </div>
 

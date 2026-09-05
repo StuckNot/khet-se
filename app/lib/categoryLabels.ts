@@ -2,7 +2,7 @@ export const categoryLabels: Record<string, string> = {
   staple: "Pantry Staple",
   add_on: "Add-On",
   seasonal: "Seasonal Harvest",
-  rice: "Heirloom Rice",
+  rice: "Rice",
   lentils: "Native Dals & Lentils",
   flour: "Stone-Ground Atta",
   spices: "Single-Origin Spices",

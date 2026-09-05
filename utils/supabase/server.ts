@@ -1,6 +1,6 @@
 /**
  * ┌──────────────────────────────────────────────────────────────────────────────â”
- * │  Farm and Friends — Supabase Server Client Factory                                     │
+ * │  KhetSe — Supabase Server Client Factory                                     │
  * │  File: utils/supabase/server.ts                                              │
  * ├──────────────────────────────────────────────────────────────────────────────┤
  * │                                                                              │

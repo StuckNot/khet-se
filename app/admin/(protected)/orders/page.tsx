@@ -1,6 +1,6 @@
 /**
  * ┌──────────────────────────────────────────────────────────────────────────────â”
- * │  Farm and Friends — Admin: Order Management Page                                       │
+ * │  KhetSe — Admin: Order Management Page                                       │
  * │  File: app/admin/orders/page.tsx                                             │
  * ├──────────────────────────────────────────────────────────────────────────────┤
  * │                                                                              │

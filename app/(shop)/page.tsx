@@ -1,6 +1,6 @@
 /**
  * ┌──────────────────────────────────────────────────────────────────────────────â”
- * │  Farm and Friends — Homepage                                                           │
+ * │  KhetSe — Homepage                                                           │
  * │  File: app/(shop)/page.tsx                                                   │
  * ├──────────────────────────────────────────────────────────────────────────────┤
  * │                                                                              │
@@ -20,27 +20,27 @@
  * │  IMAGES:                                                                     │
  * │  Hero and decorative images use temporary placeholder photography            │
  * │  stored in public/images/. These should be replaced with authentic           │
- * │  Farm and Friends farm/product photography for production.                             │
+ * │  KhetSe farm/product photography for production.                             │
  * └──────────────────────────────────────────────────────────────────────────────┘
  */
 
 import Link from "next/link";
 import Image from "next/image";
-import { getProductRepo, getTestimonialRepo } from "@/app/lib/repositories";
-import type { Product } from "@/app/lib/types";
 import type { Metadata } from "next";
 import ProductCard from "../components/ProductCard";
 import TestimonialsSection from "../components/TestimonialsSection";
+import { getProductRepo, getTestimonialRepo } from "../lib/repositories";
+import type { Product, Testimonial } from "../lib/types";
 
 /**
  * Page-level SEO metadata.
  * Overrides the root layout defaults for the homepage only.
- * The title template in root layout will produce: "Farm and Friends — Farm-to-Pantry Organic Staples"
+ * The title template in root layout will produce: "KhetSe — Farm-to-Pantry Staples"
  */
 export const metadata: Metadata = {
-  title: "Farm and Friends — Farm-to-Pantry Organic Staples",
+  title: "KhetSe — Farm-to-Pantry Staples",
   description:
-    "Get 100% chemical-free organic staples — rice, lentils, flour, and spices — delivered from Indian farms to your pantry in under 48 hours. Subscribe and never run out.",
+    "Get 100% chemical-free staples — rice, lentils, flour, and spices — delivered from Indian farms to your pantry in under 48 hours. Subscribe and never run out.",
 };
 
 /**
@@ -53,15 +53,26 @@ export const metadata: Metadata = {
 export const revalidate = 3600;
 
 export default async function HomePage() {
-  const products = await getProductRepo().getFeaturedProducts(4);
-  const testimonials = await getTestimonialRepo().getActiveTestimonials();
-  const error = null; // Repositories handle errors internally and return empty arrays on failure
+  let products: Product[] = [];
+  let testimonials: Testimonial[] = [];
+  let error = null;
+
+  try {
+    const productRepo = getProductRepo();
+    const testimonialRepo = getTestimonialRepo();
+    
+    products = await productRepo.getFeaturedProducts(4);
+    testimonials = await testimonialRepo.getActiveTestimonials();
+  } catch (err) {
+    console.error("Error fetching homepage data:", err);
+    error = err;
+  }
 
   return (
     <div className="space-y-0 bg-brand-canvas">
-      {/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+      {/* ═══════════════════════════════════════════════════
           SECTION 1: Hero
-          â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */}
+          ═══════════════════════════════════════════════════ */}
       <section className="relative overflow-hidden pt-10 pb-16 lg:pt-16 lg:pb-24">
         {/* Subtle organic background glows */}
         <div className="absolute top-0 right-0 w-96 h-96 bg-brand-green/10 rounded-full blur-3xl -z-10 translate-x-1/3 -translate-y-1/4" />
@@ -76,7 +87,7 @@ export default async function HomePage() {
               {/* Tagline Pill */}
               <div className="inline-flex items-center gap-2 bg-brand-beige text-brand-secondary px-3.5 py-1.5 rounded-full text-xs font-semibold tracking-wide border border-brand-secondary/15">
                 <span className="flex h-2 w-2 rounded-full bg-brand-accent" />
-                <span>Farm-to-Pantry in Under 48 Hours</span>
+                <span>Farm-to-Pantry within 7 Days</span>
                 <span className="text-brand-secondary/50">|</span>
                 <span className="text-brand-primary font-medium">Stone-Milled on Order</span>
               </div>
@@ -98,7 +109,7 @@ export default async function HomePage() {
               </div>
 
               {/* Value Checkpoints */}
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2 text-sm text-brand-primary">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2 text-sm text-brand-primary">
                 <div className="flex items-center gap-2">
                   <CheckCircleIcon className="w-4 h-4 text-brand-green shrink-0" />
                   <span className="font-medium text-xs sm:text-sm">0% Mineral Oil Polish</span>
@@ -107,10 +118,10 @@ export default async function HomePage() {
                   <CheckCircleIcon className="w-4 h-4 text-brand-green shrink-0" />
                   <span className="font-medium text-xs sm:text-sm">Slow Cold Stone Ground</span>
                 </div>
-                <div className="flex items-center gap-2">
+                {/* <div className="flex items-center gap-2">
                   <CheckCircleIcon className="w-4 h-4 text-brand-green shrink-0" />
                   <span className="font-medium text-xs sm:text-sm">100% Traceable to Farmer</span>
-                </div>
+                </div> */}
               </div>
 
               {/* CTAs */}
@@ -123,7 +134,7 @@ export default async function HomePage() {
                   <ArrowRightIcon className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </Link>
                 <Link
-                  href="/subscriptions"
+                  href="/trial-kits"
                   className="bg-brand-beige hover:bg-brand-beige/80 text-brand-primary font-medium px-7 py-4 rounded-xl transition-all duration-200 border border-brand-secondary/20 flex items-center justify-center gap-2 text-base"
                 >
                   <span>See How It Works</span>
@@ -153,13 +164,13 @@ export default async function HomePage() {
               <div className="rounded-3xl bg-brand-beige/80 p-4 sm:p-5 border border-brand-secondary/15 shadow-sm space-y-4">
                 {/*
                  * TEMPORARY PLACEHOLDER IMAGE
-                 * Replace with authentic Farm and Friends farm/product photography.
-                 * See: farmandfriends-supabase-schema-gaps.md → "Hero / Marketing Image Source"
+                 * Replace with authentic KhetSe farm/product photography.
+                 * See: khetse-supabase-schema-gaps.md → "Hero / Marketing Image Source"
                  */}
                 <div className="relative h-72 sm:h-80 w-full rounded-2xl overflow-hidden bg-brand-beige">
                   <Image
                     src="/images/hero/hero-harvest.png"
-                    alt="Golden wheat harvest and organic Indian grains"
+                    alt="Golden wheat harvest and Indian grains"
                     fill
                     className="object-cover object-center"
                     sizes="(max-width: 1024px) 100vw, 40vw"
@@ -178,10 +189,10 @@ export default async function HomePage() {
                   {/* Caption */}
                   <div className="absolute bottom-0 left-0 right-0 p-5 sm:p-6 text-white text-left space-y-1">
                     <h3 className="font-display text-xl sm:text-2xl text-brand-canvas leading-tight">
-                      Indrayani Rice &amp; Khapli Wheat
+                      Chemical-Free Rice &amp; Wheat
                     </h3>
                     <p className="text-xs text-brand-canvas/90 font-sans">
-                      Harvested at Maval &amp; Solapur • Tested 0% Chemical Residue
+                      Freshly Harvested • Tested 0% Chemical Residue
                     </p>
                   </div>
                 </div>
@@ -211,16 +222,16 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+      {/* ═══════════════════════════════════════════════════
           SECTION 2: Trust Badges
-          â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */}
+          ═══════════════════════════════════════════════════ */}
       <section className="py-8 bg-brand-beige/60 border-y border-brand-secondary/10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
             <TrustBadge
               icon={<WheatIcon className="w-6 h-6" />}
-              title="100% Organic Certified"
-              subtitle="NPOP & PGS-India verified soil, zero synthetic inputs or GMOs"
+              title="Freshly Stone-Milled"
+              subtitle="Small-batch milled for maximum freshness, aroma and natural flavour"
               badge="Zero Chemicals"
             />
             <TrustBadge
@@ -245,9 +256,9 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+      {/* ═══════════════════════════════════════════════════
           SECTION 3: Featured Harvest
-          â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */}
+          ═══════════════════════════════════════════════════ */}
       <section className="py-12 bg-brand-canvas">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
@@ -287,8 +298,8 @@ export default async function HomePage() {
             <EmptyHarvestState />
           ) : (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
-              {products.map((product: Product) => (
-                <ProductCard key={product.id} product={product} />
+              {products.map((product: Product, index) => (
+                <ProductCard key={product.id} product={product as any} priority={index < 4} />
               ))}
             </div>
           )}
@@ -307,9 +318,9 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+      {/* ═══════════════════════════════════════════════════
           SECTION 4: Why Subscribe
-          â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */}
+          ═══════════════════════════════════════════════════ */}
       <section className="py-16 bg-brand-beige/60 border-y border-brand-secondary/10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
@@ -319,7 +330,7 @@ export default async function HomePage() {
               The 3-Step Method
             </span>
             <h2 className="font-display text-3xl sm:text-4xl text-brand-primary">
-              Why Subscribe with Farm and Friends?
+              Why Subscribe with KhetSe?
             </h2>
             <p className="text-base text-brand-secondary">
               Freshly milled staples on your schedule, delivered with zero middleman markups.
@@ -352,7 +363,7 @@ export default async function HomePage() {
           </div>
 
           {/* CTA */}
-          <div className="text-center">
+          {/* <div className="text-center">
             <Link
               href="/subscriptions"
               className="inline-flex items-center gap-2 bg-brand-accent hover:bg-brand-accent/85 text-white font-medium px-8 py-3.5 rounded-xl transition-all text-sm shadow-md"
@@ -360,21 +371,21 @@ export default async function HomePage() {
               <span>Explore Subscription Plans &amp; Calculator</span>
               <ArrowRightIcon className="w-4 h-4" />
             </Link>
-          </div>
+          </div> */}
 
         </div>
       </section>
 
-      {/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+      {/* ═══════════════════════════════════════════════════
           SECTION 4.5: Testimonials
-          â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */}
+          ═══════════════════════════════════════════════════ */}
       {testimonials && testimonials.length > 0 && (
-        <TestimonialsSection testimonials={testimonials} />
+        <TestimonialsSection testimonials={testimonials as any} />
       )}
 
-      {/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+      {/* ═══════════════════════════════════════════════════
           SECTION 5: Trial Kit Teaser Banner
-          â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */}
+          ═══════════════════════════════════════════════════ */}
       <section className="py-8 pb-16 bg-brand-canvas">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="bg-brand-beige rounded-3xl p-8 sm:p-12 border border-brand-secondary/20 flex flex-col md:flex-row items-center justify-between gap-8 text-left">
@@ -386,7 +397,7 @@ export default async function HomePage() {
                 Try the 4-Pantry Discovery Starter Kit
               </h3>
               <p className="text-xs sm:text-sm text-brand-secondary">
-                Experience 500g Indrayani Rice, 500g Desi Toor Dal, 1kg Khapli Wheat Flour, 100g Lakadong Turmeric for just ₹499 with 100% risk-free guarantee.
+                Experience 500g Rice, 500g Desi Toor Dal, 1kg Wheat Flour, 100g Turmeric with 100% risk-free guarantee.
               </p>
             </div>
 
@@ -404,9 +415,9 @@ export default async function HomePage() {
   );
 }
 
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// ═══════════════════════════════════════════════════
 // Sub-components (inline, page-specific)
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// ═══════════════════════════════════════════════════
 
 function TrustBadge({
   icon,
@@ -477,7 +488,7 @@ function EmptyHarvestState() {
         Our Farmers Are Currently Harvesting
       </h3>
       <p className="text-brand-secondary max-w-md text-center mb-6 text-sm">
-        Fresh organic staples are on their way from the fields. Check back soon
+        Fresh staples are on their way from the fields. Check back soon
         or sign up for our newsletter to be the first to know.
       </p>
       <Link
@@ -490,9 +501,9 @@ function EmptyHarvestState() {
   );
 }
 
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// ═══════════════════════════════════════════════════
 // Inline SVG Icons (no external dependency)
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// ═══════════════════════════════════════════════════
 
 const ArrowRightIcon = ({ className }: { className?: string }) => (
   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>

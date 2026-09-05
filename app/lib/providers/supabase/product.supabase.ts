@@ -1,6 +1,6 @@
 /**
  * ┌──────────────────────────────────────────────────────────────────────────────â”
- * │  Farm and Friends — Supabase Product Provider                                          │
+ * │  KhetSe — Supabase Product Provider                                          │
  * │  File: app/lib/providers/supabase/product.supabase.ts                        │
  * ├──────────────────────────────────────────────────────────────────────────────┤
  * │                                                                              │

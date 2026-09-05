@@ -1,5 +1,5 @@
 /**
- * │  Farm and Friends — Repository Factory                                                 │
+ * │  KhetSe — Repository Factory                                                 │
  * │                                                                              │
  * │  This file is the SINGLE source of truth for which database is currently     │
  * │  driving the customer-facing read paths.                                     │

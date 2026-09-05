@@ -9,26 +9,28 @@ import Link from "next/link";
 export const metadata: Metadata = {
   title: "Trial Kits & Subscriptions",
   description:
-    "Choose your organic staple box, set your delivery frequency, and start your Farm and Friends subscription. Weekly, bi-weekly, or monthly — cancel anytime.",
+    "Choose your staple box, set your delivery frequency, and start your KhetSe subscription. Weekly, bi-weekly, or monthly — cancel anytime.",
 };
 
 export default async function TrialKitsPage() {
-  // Fetch only active products
-  const products = await getProductRepo().getActiveProducts();
-  const error = null;
+  let products: any[] = [];
+  let error = null;
+
+  try {
+    const productRepo = getProductRepo();
+    products = await productRepo.getActiveProducts();
+  } catch (err) {
+    error = err;
+  }
 
   const faqs = [
     {
       q: "Why should I try a Trial Kit first?",
-      a: "We know switching your household staples is a deliberate choice. Our trial kits let your family test the aroma, cooking time, and digestibility of stone-milled organic staples for 1 week without any recurring commitment.",
-    },
-    {
-      q: "What is the Zero-Risk Taste Guarantee?",
-      a: "If you cook with our staples and do not notice a distinct difference in aroma and lightness compared to your current grocery brand, simply let us know on WhatsApp or email for an immediate 100% refund — no questions asked and no return needed.",
+      a: "We know switching your household staples is a deliberate choice. Our trial kits let your family test the aroma, cooking time, and digestibility of stone-milled staples for 1 week without any recurring commitment.",
     },
     {
       q: "How fresh are the items in the trial kit?",
-      a: "All grains and dals are milled and packed within 24â€“48 hours of dispatch from our partner farm hubs in Maharashtra and Karnataka.",
+      a: "All grains and dals are milled and packed, dispatch from our partner farm hubs.",
     },
     {
       q: "Can I convert my trial kit to a monthly subscription?",
@@ -50,7 +52,7 @@ export default async function TrialKitsPage() {
             Taste the Farm Difference in Your Kitchen
           </h1>
           <p className="text-base text-brand-secondary max-w-2xl mx-auto leading-relaxed">
-            Sample our freshly harvested, stone-milled staples before committing to a monthly plan. Delivered in eco-friendly zero-plastic packaging.
+            Sample our freshly harvested, stone-milled staples before committing to a monthly plan. Delivered in eco-friendly packaging.
           </p>
         </div>
 
@@ -72,7 +74,7 @@ export default async function TrialKitsPage() {
               The 100% Unadulterated Taste Guarantee
             </h3>
             <p className="text-xs sm:text-sm text-brand-secondary leading-relaxed">
-              If you or your family don't notice a significant difference in fresh stone-milled flavor and digestion, contact our team within 14 days for a full refund.
+              Experience the authentic taste of farm-fresh grains and dals, milled to perfection and delivered straight to your kitchen.
             </p>
           </div>
         </div>

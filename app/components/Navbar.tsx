@@ -1,6 +1,6 @@
 /**
- * ┌──────────────────────────────────────────────────────────────────────────────â”
- * │  Farm and Friends — Main Navigation Bar                                                │
+ * ┌──────────────────────────────────────────────────────────────────────────────â” 
+ * │  Farm and Friends — Main Navigation Bar                                      │
  * │  File: app/components/Navbar.tsx                                             │
  * ├──────────────────────────────────────────────────────────────────────────────┤
  * │                                                                              │
@@ -23,6 +23,7 @@
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useSelectionStore } from "@/store/selectionStore";
 const Navbar = () => {
@@ -53,30 +54,59 @@ const Navbar = () => {
   const navLinks = [
     { name: "Shop All", href: "/shop" },
     { name: "Trial Kits", href: "/trial-kits", badge: "Starter" },
-    { name: "Subscription Plans", href: "/subscriptions" },
+    // { name: "Subscription Plans", href: "/subscriptions" },
     { name: "Our Story", href: "/story" },
-    { name: "The Farm", href: "/farm" },
+    // { name: "The Farm", href: "/farm" },
     { name: "Contact", href: "/contact" },
   ];
 
   return (
     <>
       {/* Announcement Bar */}
-      <div className="bg-brand-green/15 text-brand-primary text-xs py-2 px-4 border-b border-brand-green/20">
-        <div className="max-w-7xl mx-auto flex items-center justify-between">
+      <div className="bg-brand-green/15 text-brand-primary text-xs py-2 border-b border-brand-green/20 overflow-hidden relative">
+        {/* Mobile Marquee (Visible only on small screens) */}
+        <div className="block sm:hidden whitespace-nowrap overflow-hidden">
+          <div className="animate-marquee flex w-max min-w-full">
+            {/* First Set */}
+            <div className="flex items-center gap-2 pr-8 shrink-0">
+              <span className="inline-block w-2 h-2 rounded-full bg-brand-accent animate-pulse shrink-0 ml-4" />
+              <span className="font-semibold tracking-wide text-xs">
+                Fresh Batch Milling: Delivered from farm to pantry in &lt; 7 days
+              </span>
+              <span className="inline-block text-brand-green font-bold px-1">•</span>
+              <span className="inline-block text-brand-secondary">
+                Free delivery on all monthly subscriptions
+              </span>
+            </div>
+            {/* Second Set (Duplicate for seamless loop) */}
+            <div className="flex items-center gap-2 pr-8 shrink-0">
+              <span className="inline-block w-2 h-2 rounded-full bg-brand-accent animate-pulse shrink-0 ml-4" />
+              <span className="font-semibold tracking-wide text-xs">
+                Fresh Batch Milling: Delivered from farm to pantry in &lt; 7 days
+              </span>
+              <span className="inline-block text-brand-green font-bold px-1">•</span>
+              <span className="inline-block text-brand-secondary">
+                Free delivery on all monthly subscriptions
+              </span>
+            </div>
+          </div>
+        </div>
+
+        {/* Desktop Static (Visible only on sm and above) */}
+        <div className="hidden sm:flex max-w-7xl mx-auto items-center justify-between px-4">
           <div className="flex items-center gap-2 mx-auto sm:mx-0">
             <span className="inline-block w-2 h-2 rounded-full bg-brand-accent animate-pulse" />
             <span className="font-semibold tracking-wide text-xs">
-              Fresh Batch Milling: Delivered from farm to pantry in &lt; 48 hours
+              Fresh Batch Milling: Delivered from farm to pantry in &lt; 7 days
             </span>
             <span className="hidden md:inline-block text-brand-green font-bold">•</span>
             <span className="hidden md:inline-block text-brand-secondary">
-              Free nationwide delivery on all monthly subscriptions
+              Free delivery on all monthly subscriptions
             </span>
           </div>
           <div className="hidden lg:flex items-center gap-3 text-brand-primary text-[11px] uppercase tracking-wider font-semibold">
             <span className="flex items-center gap-1 text-success">
-              <SproutIcon className="w-3.5 h-3.5" /> 100% Certified Organic Soil
+              <SproutIcon className="w-3.5 h-3.5" /> 100% Chemical-Free
             </span>
           </div>
         </div>
@@ -95,18 +125,18 @@ const Navbar = () => {
 
             {/* Brand Logo */}
             <div className="flex items-center gap-3">
-              <Link href="/" className="group text-left focus:outline-none">
-                <div className="flex items-baseline gap-2">
-                  <span className="font-display text-3xl sm:text-4xl text-brand-primary tracking-tight group-hover:text-brand-secondary transition-colors">
-                    Farm and Friends
-                  </span>
-                  {/* <span className="font-sans text-xs tracking-widest text-brand-green uppercase font-bold">
-                    खेत से
-                  </span> */}
-                </div>
-                <p className="text-[10px] tracking-wider text-brand-secondary/80 uppercase -mt-1 font-medium">
-                  Farm-to-Pantry Staples
-                </p>
+              <Link href="/" className="group focus:outline-none">
+                <Image
+                  src="/images/logo/f&f logo.png"
+                  alt="Farm and Friends"
+                  width={140}
+                  height={48}
+                  priority
+                  className="object-contain h-12 w-auto group-hover:opacity-80 transition-opacity duration-200"
+                />
+                {/* <span className="font-sans text-xs tracking-widest text-brand-green uppercase font-bold">
+                  खेत से
+                </span> */}
               </Link>
             </div>
 
@@ -144,13 +174,14 @@ const Navbar = () => {
               {/* Selected Items Button */}
               <button
                 onClick={() => toggleDrawer()}
-                className="relative flex items-center gap-2 bg-transparent hover:bg-brand-beige text-brand-primary border border-brand-secondary/25 px-3.5 py-2 rounded-xl transition-all duration-200 active:scale-95 cursor-pointer"
+                className="relative flex items-center justify-center gap-2 bg-transparent hover:bg-brand-beige text-brand-primary border border-brand-secondary/25 p-2 sm:px-3.5 sm:py-2 rounded-xl transition-all duration-200 active:scale-95 cursor-pointer"
                 aria-label="Selected Items"
               >
-                <ChecklistIcon className="w-4 h-4 text-brand-secondary" />
-                <span className="font-medium text-xs sm:text-sm tracking-wide">Selected Items</span>
+                <BagIcon className="w-5 h-5 sm:hidden text-brand-secondary" />
+                <ChecklistIcon className="hidden sm:block w-4 h-4 text-brand-secondary" />
+                <span className="hidden sm:inline font-medium text-xs sm:text-sm tracking-wide">Selected Items</span>
                 {mounted && itemCount > 0 && (
-                  <span className="bg-brand-accent text-white text-[11px] font-bold px-2 py-0.5 rounded-full ml-0.5">
+                  <span className="absolute -top-1.5 -right-1.5 sm:relative sm:top-0 sm:right-0 bg-brand-accent text-white text-[10px] sm:text-[11px] font-bold px-1.5 py-0.5 sm:px-2 rounded-full sm:ml-0.5 shadow-sm">
                     {itemCount}
                   </span>
                 )}

@@ -58,7 +58,7 @@ export async function submitContactMessage(formData: FormData) {
         <h3 style="color: #4A2C1A; margin-bottom: 8px;">Message</h3>
         <p style="color: #333; line-height: 1.6; white-space: pre-wrap;">${message}</p>
         <hr style="border: none; border-top: 1px solid #eee; margin: 16px 0;" />
-        <p style="font-size: 12px; color: #999;">Submitted via farmandfriends.in/contact Â· Reply-To is set to the customer's email.</p>
+        <p style="font-size: 12px; color: #999;">Submitted via farmandfriends.in/contact &middot; Reply-To is set to the customer's email.</p>
       </div>
     `,
   });

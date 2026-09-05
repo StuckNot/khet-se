@@ -3,13 +3,13 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "The Farm",
-  description: "The Soil & Farmer Collective. Meet the custodians who nurture ancient heritage seeds with organic cow-based Jeevamrit and traditional wisdom.",
+  description: "The Soil & Farmer Collective. Meet the custodians who nurture ancient heritage seeds with cow-based Jeevamrit and traditional wisdom.",
 };
 
 const agroZones = [
   {
     name: "Western Ghats (Maval Valley)",
-    soil: "Rich volcanic black basalt soil with high organic carbon",
+    soil: "Rich volcanic black basalt soil with high carbon",
     crops: "Indrayani Fragrant Rice, Nachni (Ragi)",
     rainfall: "Heavy monsoon runoff from Sahyadri ranges",
   },
@@ -48,7 +48,7 @@ export default function TheFarmPage() {
             The Soil & Farmer Collective
           </h1>
           <p className="text-base sm:text-lg text-brand-secondary max-w-2xl mx-auto leading-relaxed">
-            We do not buy from anonymous brokers. Meet the custodians who nurture ancient heritage seeds with organic cow-based Jeevamrit and traditional wisdom.
+            We do not buy from anonymous brokers. Meet the custodians who nurture ancient heritage seeds with cow-based Jeevamrit and traditional wisdom.
           </p>
         </div>
 
@@ -62,7 +62,7 @@ export default function TheFarmPage() {
               Where We Grow: Soil & Climate Zones
             </h3>
             <p className="text-xs sm:text-sm text-brand-secondary">
-              Different heirloom crops demand specific regional soils to develop their full nutritional density and aroma.
+              Different crops demand specific regional soils to develop their full nutritional density and aroma.
             </p>
           </div>
 

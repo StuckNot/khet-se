@@ -1,6 +1,6 @@
 /**
  * ┌──────────────────────────────────────────────────────────────────────────────â”
- * │  Farm and Friends — Shop Layout (Server Component)                                    │
+ * │  KhetSe — Shop Layout (Server Component)                                    │
  * │  File: app/(shop)/layout.tsx                                                │
  * ├──────────────────────────────────────────────────────────────────────────────┤
  * │                                                                              │
@@ -15,9 +15,9 @@
  * │        │                                                                     │
  * │        ├── supabase.auth.getUser() → user | null                             │
  * │        │                                                                     │
- * │        ├── <Navbar user={user} />   â† Client Component                       │
- * │        ├── <main>{children}</main>  â† Page content (RSC)                     │
- * │        └── <Footer />               â† Client Component                       │
+ * │        ├── <Navbar user={user} />   ← Client Component                       │
+ * │        ├── <main>{children}</main>  ← Page content (RSC)                     │
+ * │        └── <Footer />               ← Client Component                       │
  * │                                                                              │
  * └──────────────────────────────────────────────────────────────────────────────┘
  */

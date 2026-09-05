@@ -108,9 +108,9 @@ export default function SelectionDrawer() {
                       <h3 className="font-bold text-brand-primary leading-tight pr-6">
                         {product.name}
                       </h3>
-                      <p className="text-sm font-medium text-brand-primary/60 mt-1">
+                      {/* <p className="text-sm font-medium text-brand-primary/60 mt-1">
                         ₹{product.base_price}
-                      </p>
+                      </p> */}
                     </div>
 
                     <button
