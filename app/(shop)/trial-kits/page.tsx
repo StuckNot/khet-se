@@ -9,7 +9,7 @@ import Link from "next/link";
 export const metadata: Metadata = {
   title: "Trial Kits & Subscriptions",
   description:
-    "Choose your staple box, set your delivery frequency, and start your KhetSe subscription. Weekly, bi-weekly, or monthly — cancel anytime.",
+    "Choose your staple box, set your delivery frequency, and start your Farm and Friends subscription. Weekly, bi-weekly, or monthly — cancel anytime.",
 };
 
 export default async function TrialKitsPage() {

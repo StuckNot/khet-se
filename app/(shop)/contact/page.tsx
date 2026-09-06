@@ -2,6 +2,10 @@
 
 import React, { useState } from "react";
 import { submitContactMessage } from "./actions";
+import { generateGeneralWhatsAppLink } from "@/utils/whatsapp";
+
+const WHATSAPP_LINK = generateGeneralWhatsAppLink("Hi Farm and Friends, I have a query regarding your products.");
+const CONTACT_EMAIL = process.env.NEXT_PUBLIC_CONTACT_EMAIL || "info@farmandfriends.in";
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -72,27 +76,35 @@ export default function ContactPage() {
               <h3 className="font-display text-2xl text-brand-primary">Direct Channels</h3>
 
               <div className="space-y-4 text-xs sm:text-sm">
-                <div className="flex items-start gap-4 p-4 rounded-2xl bg-brand-beige/60 border border-brand-secondary/10">
-                  <div className="w-10 h-10 rounded-xl bg-success/20 flex items-center justify-center text-success shrink-0">
+                <a
+                  href={WHATSAPP_LINK}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-start gap-4 p-4 rounded-2xl bg-brand-beige/60 border border-brand-secondary/10 hover:border-success/40 hover:bg-success/5 transition-all duration-200 group"
+                >
+                  <div className="w-10 h-10 rounded-xl bg-success/20 flex items-center justify-center text-success shrink-0 group-hover:bg-success/30 transition-colors">
                     <MessageCircleIcon className="w-5 h-5" />
                   </div>
                   <div>
                     <span className="text-[10px] uppercase font-bold text-success">Instant WhatsApp</span>
-                    <p className="font-bold text-brand-primary">+91 88518 19808</p>
+                    <p className="font-bold text-brand-primary group-hover:text-success transition-colors">+91 88518 19808</p>
                     <p className="text-[11px] text-brand-secondary">Milling batch reminders & quick swaps</p>
                   </div>
-                </div>
+                </a>
 
-                <div className="flex items-start gap-4 p-4 rounded-2xl bg-brand-beige/60 border border-brand-secondary/10">
-                  <div className="w-10 h-10 rounded-xl bg-brand-accent/20 flex items-center justify-center text-brand-accent shrink-0">
+                <a
+                  href={`mailto:${CONTACT_EMAIL}`}
+                  className="flex items-start gap-4 p-4 rounded-2xl bg-brand-beige/60 border border-brand-secondary/10 hover:border-brand-accent/40 hover:bg-brand-accent/5 transition-all duration-200 group"
+                >
+                  <div className="w-10 h-10 rounded-xl bg-brand-accent/20 flex items-center justify-center text-brand-accent shrink-0 group-hover:bg-brand-accent/30 transition-colors">
                     <MailIcon className="w-5 h-5" />
                   </div>
                   <div>
                     <span className="text-[10px] uppercase font-bold text-brand-secondary">Email Care</span>
-                    <p className="font-bold text-brand-primary">info@farmandfriends.in</p>
+                    <p className="font-bold text-brand-primary group-hover:text-brand-accent transition-colors">{CONTACT_EMAIL}</p>
                     <p className="text-[11px] text-brand-secondary">Responses within 4 business hours</p>
                   </div>
-                </div>
+                </a>
 
                 <div className="flex items-start gap-4 p-4 rounded-2xl bg-brand-beige/60 border border-brand-secondary/10">
                   <div className="w-10 h-10 rounded-xl bg-success/20 flex items-center justify-center text-success shrink-0">

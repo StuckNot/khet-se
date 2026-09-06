@@ -17,7 +17,7 @@ export async function generateMetadata({
 
   return {
     title: product?.name ?? "Product",
-    description: product?.description ?? "Farm-fresh staple from KhetSe.",
+    description: product?.description ?? "Farm-fresh staple from Farm and Friends.",
   };
 }
 

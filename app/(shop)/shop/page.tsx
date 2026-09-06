@@ -8,7 +8,7 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Shop All Staples",
   description:
-    "Browse KhetSe's full range of 100% trusted staples. Filter by pantry staples, add-ons, and seasonal harvests.",
+    "Browse Farm and Friend's full range of 100% trusted staples. Filter by pantry staples, add-ons, and seasonal harvests.",
 };
 
 /**

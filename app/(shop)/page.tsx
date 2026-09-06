@@ -38,7 +38,7 @@ import type { Product, Testimonial } from "../lib/types";
  * The title template in root layout will produce: "KhetSe — Farm-to-Pantry Staples"
  */
 export const metadata: Metadata = {
-  title: "KhetSe — Farm-to-Pantry Staples",
+  title: "Farm and Friends — Farm-to-Pantry Staples",
   description:
     "Get 100% chemical-free staples — rice, lentils, flour, and spices — delivered from Indian farms to your pantry in under 48 hours. Subscribe and never run out.",
 };
@@ -330,7 +330,7 @@ export default async function HomePage() {
               The 3-Step Method
             </span>
             <h2 className="font-display text-3xl sm:text-4xl text-brand-primary">
-              Why Subscribe with KhetSe?
+              Why Subscribe with Farm and Friends?
             </h2>
             <p className="text-base text-brand-secondary">
               Freshly milled staples on your schedule, delivered with zero middleman markups.
