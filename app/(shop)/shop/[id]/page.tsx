@@ -110,14 +110,14 @@ export default async function ProductDetailPage({
               <h1 className="font-display text-4xl sm:text-5xl text-brand-primary tracking-tight leading-[1.12]">
                 {product.name}
               </h1>
-              {/* <div className="flex items-baseline gap-3">
+              <div className="flex items-baseline gap-3">
                 <span className="font-display text-3xl text-brand-primary">
                   ₹{product.base_price}
                 </span>
-                <span className="text-xs text-brand-secondary font-medium">
+                {/* <span className="text-xs text-brand-secondary font-medium">
                   per pack
-                </span>
-              </div> */}
+                </span> */}
+              </div>
             </div>
 
             {/* Description */}
@@ -167,7 +167,10 @@ export default async function ProductDetailPage({
             <div className="flex flex-col sm:flex-row gap-3 pt-2">
               <div className="flex-1">
                 <a
-                  href={generateSingleProductWhatsAppLink(product as any)}
+                  href={generateSingleProductWhatsAppLink(
+                    product as any,
+                    product.min_order_quantity ?? undefined
+                  )}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center justify-center gap-2 rounded-xl bg-[#25D366] hover:bg-[#20bd5a] px-6 py-3 text-xs sm:text-sm font-bold text-white transition-colors shadow-sm w-full h-full"
@@ -183,6 +186,17 @@ export default async function ProductDetailPage({
                 Start a Trial Kit
               </Link>
             </div>
+
+            {/* Minimum Order Quantity notice */}
+            {product.min_order_quantity && product.min_order_quantity > 1 && (
+              <div className="flex items-center gap-2 bg-amber-50 border border-amber-200/70 rounded-xl px-4 py-3 text-xs text-amber-800">
+                <span className="text-base">📦</span>
+                <span>
+                  <span className="font-bold">Minimum order:</span>{" "}
+                  {product.min_order_quantity} units
+                </span>
+              </div>
+            )}
 
             {/* Detail Sections */}
             <div className="divide-y divide-brand-secondary/10 border-y border-brand-secondary/10">
@@ -236,15 +250,31 @@ export default async function ProductDetailPage({
 
               {/* Delivery */}
               <div className="py-6 space-y-2">
-                <h3 className="text-sm font-bold text-brand-primary flex items-center gap-2">
-                  <span className="w-7 h-7 rounded-lg bg-brand-primary/10 text-brand-primary flex items-center justify-center text-base">
-                    📦
-                  </span>
-                  7-Day Delivery
-                </h3>
-                <p className="text-xs sm:text-sm text-brand-secondary leading-relaxed pl-9">
-                  Stone-milled to order and dispatched within 7 days of your purchase. Delivering across Delhi from our hubs.
-                </p>
+                {product.same_day_delivery ? (
+                  <>
+                    <h3 className="text-sm font-bold text-brand-primary flex items-center gap-2">
+                      <span className="w-7 h-7 rounded-lg bg-sky-500/10 text-sky-600 flex items-center justify-center text-base">
+                        ⚡
+                      </span>
+                      Same Day Delivery
+                    </h3>
+                    <p className="text-xs sm:text-sm text-brand-secondary leading-relaxed pl-9">
+                      Order before noon and receive this product the same day. Delivering across Delhi from our local hubs.
+                    </p>
+                  </>
+                ) : (
+                  <>
+                    <h3 className="text-sm font-bold text-brand-primary flex items-center gap-2">
+                      <span className="w-7 h-7 rounded-lg bg-brand-primary/10 text-brand-primary flex items-center justify-center text-base">
+                        📦
+                      </span>
+                      7-Day Delivery
+                    </h3>
+                    <p className="text-xs sm:text-sm text-brand-secondary leading-relaxed pl-9">
+                      Stone-milled to order and dispatched within 7 days of your purchase. Delivering across Delhi from our hubs.
+                    </p>
+                  </>
+                )}
               </div>
 
             </div>

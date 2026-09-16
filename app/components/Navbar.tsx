@@ -53,7 +53,7 @@ const Navbar = () => {
 
   const navLinks = [
     { name: "Shop All", href: "/shop" },
-    { name: "Trial Kits", href: "/trial-kits", badge: "Starter" },
+    { name: "Subscription Plans", href: "/trial-kits", badge: "Popular" },
     // { name: "Subscription Plans", href: "/subscriptions" },
     { name: "Our Story", href: "/story" },
     // { name: "The Farm", href: "/farm" },

@@ -22,11 +22,9 @@
 "use client";
 
 import React, { useState, useMemo } from "react";
-import type { Tables } from "@/types/database.types";
+import type { Product } from "@/app/lib/types";
 import ProductCard from "../../components/ProductCard";
 import { categoryLabels } from "@/app/lib/categoryLabels";
-
-type Product = Tables<"products">;
 
 interface ProductGridProps {
   products: Product[];

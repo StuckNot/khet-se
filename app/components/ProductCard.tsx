@@ -33,11 +33,9 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import type { Tables } from "@/types/database.types";
+import type { Product } from "@/app/lib/types";
 import SelectProductButton from "./SelectProductButton";
 import { categoryLabels } from "@/app/lib/categoryLabels";
-
-type Product = Tables<"products">;
 
 export default function ProductCard({ product, priority = false }: { product: Product, priority?: boolean }) {
   return (
@@ -62,20 +60,19 @@ export default function ProductCard({ product, priority = false }: { product: Pr
           </span>
         )}
 
-        {/* Origin Pill & Badge */}
-        {(product.badge || product.region) && (
+        {/* Origin Pill, Badge & Same Day Delivery badge */}
+        {(product.badge || product.region || product.same_day_delivery) && (
           <div className="absolute top-3 left-3 flex flex-col gap-1 z-10">
             {product.badge && (
               <span className="bg-brand-primary text-brand-canvas text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-md shadow-sm">
                 {product.badge}
               </span>
             )}
-            {/* {product.region && (
-              <span className="bg-brand-canvas/95 text-brand-primary text-[10px] font-semibold px-2 py-0.5 rounded-md flex items-center gap-1 shadow-sm">
-                <MapPinIcon className="w-3 h-3 text-brand-accent" />
-                {product.region.split(",")[0]}
+            {product.same_day_delivery && (
+              <span className="bg-sky-500 text-white text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-md shadow-sm flex items-center gap-1">
+                ⚡ Same Day
               </span>
-            )} */}
+            )}
           </div>
         )}
       </Link>
@@ -114,11 +111,11 @@ export default function ProductCard({ product, priority = false }: { product: Pr
 
         {/* Price & Action Button */}
         <div className="flex items-center justify-around pt-3 border-t border-brand-beige">
-          {/* <div className="text-left">
+          <div className="text-left">
             <span className="font-display text-xl sm:text-2xl text-brand-primary">
               ₹{product.base_price}
             </span>
-          </div> */}
+          </div>
           <SelectProductButton product={product} />
         </div>
       </div>

@@ -100,7 +100,7 @@ export default function SubscriptionWizard({ products }: SubscriptionWizardProps
                       <div className="flex-1">
                         <h3 className="font-display text-lg text-brand-primary leading-tight">{product.name}</h3>
                         <p className="text-xs text-brand-secondary mt-1.5 leading-relaxed line-clamp-2">{product.description}</p>
-                        {/* <p className="font-display text-lg text-brand-primary mt-3">₹{product.base_price} <span className="text-xs font-sans text-brand-secondary">/ delivery</span></p> */}
+                        <p className="font-display text-lg text-brand-primary mt-3">₹{product.base_price} <span className="text-xs font-sans text-brand-secondary">/ delivery</span></p>
                       </div>
                     </div>
                   </label>
@@ -183,10 +183,10 @@ export default function SubscriptionWizard({ products }: SubscriptionWizardProps
 
               <div className="flex justify-between items-end border-t border-brand-secondary/20 pt-4 mt-2">
                 <span className="text-brand-secondary">First delivery total</span>
-                {/* <span className="font-semibold">₹{selectedProducts.reduce(
+                <span className="font-semibold">₹{selectedProducts.reduce(
                   (total, product) => total + Number(product.base_price),
                   0
-                )}</span> */}
+                )}</span>
               </div>
             </div>
 

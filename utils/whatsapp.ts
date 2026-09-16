@@ -1,4 +1,6 @@
 import type { Product } from "@/app/lib/types";
+import type { CartItem } from "@/store/selectionStore";
+
 
 /**
  * generateMultiProductWhatsAppLink
@@ -7,7 +9,7 @@ import type { Product } from "@/app/lib/types";
  * - Product A
  * - Product B"
  */
-export function generateMultiProductWhatsAppLink(products: Product[]): string {
+export function generateMultiProductWhatsAppLink(items: CartItem[]): string {
   const WHATSAPP_NUMBER = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER;
   if (!WHATSAPP_NUMBER) {
     console.error("NEXT_PUBLIC_WHATSAPP_NUMBER is not defined");
@@ -15,14 +17,19 @@ export function generateMultiProductWhatsAppLink(products: Product[]): string {
 
   const baseNumber = WHATSAPP_NUMBER || "918851819808";
 
-  if (!products || products.length === 0) {
+  if (!items || items.length === 0) {
     return `https://wa.me/${baseNumber}`;
   }
 
   const intro = "Hi, I'd like to order:";
-  const productList = products.map((p) => `- ${p.name}`).join("\n");
+  const productList = items
+    .map(({ product, quantity }) => {
+      const qty = quantity > 1 ? ` x${quantity}` : "";
+      return `- ${product.name}${qty}`;
+    })
+    .join("\n");
   const message = `${intro}\n${productList}`;
-  
+
   const encodedMessage = encodeURIComponent(message);
   return `https://wa.me/${baseNumber}?text=${encodedMessage}`;
 }
@@ -32,7 +39,10 @@ export function generateMultiProductWhatsAppLink(products: Product[]): string {
  * Builds a wa.me URL for ordering a single product directly from a product card/page.
  * e.g. "Hi, I'd like to order: Product A"
  */
-export function generateSingleProductWhatsAppLink(product: Product): string {
+export function generateSingleProductWhatsAppLink(
+  product: Product,
+  minOrderQty?: number | null
+): string {
   const WHATSAPP_NUMBER = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER;
   if (!WHATSAPP_NUMBER) {
     console.error("NEXT_PUBLIC_WHATSAPP_NUMBER is not defined");
@@ -44,9 +54,10 @@ export function generateSingleProductWhatsAppLink(product: Product): string {
     return `https://wa.me/${baseNumber}`;
   }
 
-  const message = `Hi, I'd like to order:\n- ${product.name}`;
+  const qty = minOrderQty && minOrderQty > 1 ? ` x${minOrderQty}` : "";
+  const message = `Hi, I'd like to order:\n- ${product.name}${qty}`;
   const encodedMessage = encodeURIComponent(message);
-  
+
   return `https://wa.me/${baseNumber}?text=${encodedMessage}`;
 }
 

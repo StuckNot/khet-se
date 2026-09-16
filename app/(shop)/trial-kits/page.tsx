@@ -41,7 +41,7 @@ export default async function TrialKitsPage() {
   return (
     <div className="min-h-screen bg-brand-canvas py-12 sm:py-16 space-y-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
-        
+
         {/* Page Hero */}
         <div className="max-w-3xl mx-auto text-center space-y-4">
           <span className="inline-flex items-center gap-2 bg-brand-green/20 text-success px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider border border-brand-green/30">
@@ -52,8 +52,8 @@ export default async function TrialKitsPage() {
             Taste the Farm Difference in Your Kitchen
           </h1>
           <p className="text-base text-brand-secondary max-w-2xl mx-auto leading-relaxed">
-            Sample our freshly harvested, stone-milled staples before committing to a monthly plan. Delivered in eco-friendly packaging.
-          </p>
+            {/* Sample our freshly harvested, stone-milled staples before committing to a monthly plan. Delivered in eco-friendly packaging. */}
+            Never run out of pure staples. Freshly stone-milled within 7 days, with full freedom to pause, swap, or cancel anytime.          </p>
         </div>
 
         {error ? (

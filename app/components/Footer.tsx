@@ -72,7 +72,7 @@ const Footer = () => {
                 </li>
                 <li>
                   <Link href="/trial-kits" className="hover:text-brand-accent transition-colors">
-                    Trial Starter Kits
+                    Subscription Plans
                   </Link>
                 </li>
                 {/* <li>
@@ -165,12 +165,12 @@ const Footer = () => {
               <Link href="/contact" className="hover:text-brand-primary transition-colors">
                 Help &amp; Support
               </Link>
-              <Link href="/privacy" className="hover:text-brand-primary transition-colors">
+              {/* <Link href="/privacy" className="hover:text-brand-primary transition-colors">
                 Privacy Policy
               </Link>
               <Link href="/terms" className="hover:text-brand-primary transition-colors">
                 Terms of Service
-              </Link>
+              </Link> */}
             </div>
           </div>
 

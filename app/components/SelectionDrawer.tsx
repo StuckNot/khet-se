@@ -5,16 +5,63 @@ import Image from "next/image";
 import { useSelectionStore } from "@/store/selectionStore";
 import { generateMultiProductWhatsAppLink } from "@/utils/whatsapp";
 
+// ─────────────────────────────────────────────────────────────
+// QuantityStepper
+// A focused, single-responsibility sub-component.
+// All business logic (MOQ floor) lives in the store — the UI
+// just reflects the floor by disabling the − button.
+// ─────────────────────────────────────────────────────────────
+function QuantityStepper({
+  productId,
+  quantity,
+  moq,
+}: {
+  productId: string;
+  quantity: number;
+  moq: number;
+}) {
+  const { setQuantity } = useSelectionStore();
+  const atFloor = quantity <= moq;
+
+  return (
+    <div className="flex items-center gap-1 bg-brand-beige rounded-lg border border-brand-secondary/15 overflow-hidden">
+      <button
+        onClick={() => setQuantity(productId, quantity - 1)}
+        disabled={atFloor}
+        aria-label="Decrease quantity"
+        className="w-7 h-7 flex items-center justify-center text-brand-primary transition-colors
+          hover:bg-brand-secondary/10 disabled:opacity-30 disabled:cursor-not-allowed"
+      >
+        <MinusIcon className="w-3 h-3" />
+      </button>
+
+      <span className="min-w-[1.75rem] text-center text-sm font-bold text-brand-primary tabular-nums px-0.5">
+        {quantity}
+      </span>
+
+      <button
+        onClick={() => setQuantity(productId, quantity + 1)}
+        aria-label="Increase quantity"
+        className="w-7 h-7 flex items-center justify-center text-brand-primary transition-colors hover:bg-brand-secondary/10"
+      >
+        <PlusIcon className="w-3 h-3" />
+      </button>
+    </div>
+  );
+}
+
+// ─────────────────────────────────────────────────────────────
+// SelectionDrawer
+// ─────────────────────────────────────────────────────────────
 export default function SelectionDrawer() {
   const {
-    selectedProducts,
+    items,
     isDrawerOpen,
     toggleDrawer,
     toggleSelection,
     clearSelection,
   } = useSelectionStore();
 
-  // Handle client-side hydration (though selectionStore isn't persisted, it's good practice)
   const [mounted, setMounted] = useState(false);
   useEffect(() => {
     setMounted(true);
@@ -42,9 +89,9 @@ export default function SelectionDrawer() {
         <div className="flex items-center justify-between border-b border-brand-primary/10 px-6 py-5 bg-brand-canvas">
           <div className="flex items-center gap-3">
             <h2 className="text-xl font-bold text-brand-primary">Selected Items</h2>
-            {selectedProducts.length > 0 && (
+            {items.length > 0 && (
               <span className="bg-brand-accent text-white text-[11px] font-bold px-2 py-0.5 rounded-full">
-                {selectedProducts.length}
+                {items.length}
               </span>
             )}
           </div>
@@ -59,7 +106,7 @@ export default function SelectionDrawer() {
 
         {/* Selected Items */}
         <div className="flex-1 overflow-y-auto p-6">
-          {selectedProducts.length === 0 ? (
+          {items.length === 0 ? (
             <div className="flex h-full flex-col items-center justify-center text-center">
               <ChecklistIcon className="h-12 w-12 text-brand-primary/20 mb-4" />
               <p className="text-lg font-bold text-brand-primary">No items selected.</p>
@@ -83,57 +130,87 @@ export default function SelectionDrawer() {
                   Clear All
                 </button>
               </div>
-              {selectedProducts.map((product) => (
-                <div key={product.id} className="flex gap-4 border-b border-brand-primary/5 pb-6">
-                  {/* Image or Placeholder */}
-                  <div className="relative h-20 w-20 flex-shrink-0 rounded-md bg-brand-primary/5 flex items-center justify-center border border-brand-primary/10 overflow-hidden">
-                    {product.image_url ? (
-                      <Image
-                        src={product.image_url}
-                        alt={product.name}
-                        fill
-                        className="object-cover"
-                        sizes="80px"
-                      />
-                    ) : (
-                      <span className="text-[10px] font-bold text-brand-primary/30 uppercase tracking-wider text-center px-1">
-                        {product.category.replace("_", " ")}
-                      </span>
-                    )}
-                  </div>
+              {items.map(({ product, quantity }) => {
+                const moq = product.min_order_quantity ?? 1;
+                const floorQty = moq > 1 ? moq : 1;
+                const lineTotal = product.base_price * quantity;
 
-                  {/* Details */}
-                  <div className="flex flex-1 flex-col justify-between py-1">
-                    <div>
-                      <h3 className="font-bold text-brand-primary leading-tight pr-6">
-                        {product.name}
-                      </h3>
-                      {/* <p className="text-sm font-medium text-brand-primary/60 mt-1">
-                        ₹{product.base_price}
-                      </p> */}
+                return (
+                  <div key={product.id} className="flex gap-4 border-b border-brand-primary/5 pb-6">
+                    {/* Thumbnail */}
+                    <div className="relative h-20 w-20 flex-shrink-0 rounded-md bg-brand-primary/5 flex items-center justify-center border border-brand-primary/10 overflow-hidden">
+                      {product.image_url ? (
+                        <Image
+                          src={product.image_url}
+                          alt={product.name}
+                          fill
+                          className="object-cover"
+                          sizes="80px"
+                        />
+                      ) : (
+                        <span className="text-[10px] font-bold text-brand-primary/30 uppercase tracking-wider text-center px-1">
+                          {product.category.replace("_", " ")}
+                        </span>
+                      )}
                     </div>
 
-                    <button
-                      onClick={() => toggleSelection(product)}
-                      className="text-xs font-bold text-red-500/70 hover:text-red-500 transition-colors flex items-center gap-1 w-fit mt-3"
-                    >
-                      <TrashIcon className="h-3.5 w-3.5" /> Remove
-                    </button>
+                    {/* Details */}
+                    <div className="flex flex-1 flex-col justify-between py-1 min-w-0">
+                      {/* Name */}
+                      <h3 className="font-bold text-brand-primary leading-tight truncate pr-1">
+                        {product.name}
+                      </h3>
+
+                      {/* Price line — always show unit price; show total when qty > 1 */}
+                      <p className="text-sm text-brand-primary/60 mt-0.5">
+                        ₹{product.base_price}
+                        {quantity > 1 && (
+                          <span className="ml-1.5 text-xs text-brand-secondary/70 font-medium">
+                            × {quantity} = ₹{lineTotal}
+                          </span>
+                        )}
+                      </p>
+
+
+                      {/* MOQ hint — subtle reminder of minimum */}
+                      {moq > 1 && (
+                        <p className="text-[10px] text-amber-600 font-medium mt-0.5">
+                          Min. {moq} units
+                        </p>
+                      )}
+
+                      {/* Stepper + Remove row */}
+                      <div className="flex items-center justify-between mt-3">
+                        <QuantityStepper
+                          productId={product.id}
+                          quantity={quantity}
+                          moq={floorQty}
+                        />
+                        <button
+                          onClick={() => toggleSelection(product)}
+                          className="text-xs font-bold text-red-500/60 hover:text-red-500 transition-colors flex items-center gap-1"
+                          aria-label={`Remove ${product.name} from order`}
+                        >
+                          <TrashIcon className="h-3.5 w-3.5" /> Remove
+                        </button>
+                      </div>
+                    </div>
                   </div>
-                </div>
-              ))}
+                );
+              })}
+
             </div>
           )}
         </div>
 
         {/* Footer */}
-        {selectedProducts.length > 0 && (
+        {items.length > 0 && (
           <div className="border-t border-brand-primary/10 bg-brand-canvas p-6 shadow-[0_-10px_40px_-15px_rgba(0,0,0,0.05)]">
             <p className="text-xs text-brand-primary/60 mb-4 text-center leading-relaxed">
               Ready to order? We'll create a WhatsApp message with your selected items.
             </p>
             <a
-              href={generateMultiProductWhatsAppLink(selectedProducts)}
+              href={generateMultiProductWhatsAppLink(items)}
               target="_blank"
               rel="noopener noreferrer"
               onClick={() => toggleDrawer(false)}
@@ -150,6 +227,19 @@ export default function SelectionDrawer() {
 }
 
 // --- Icons ---
+const MinusIcon = ({ className }: { className?: string }) => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className={className}>
+    <path d="M5 12h14" />
+  </svg>
+);
+
+const PlusIcon = ({ className }: { className?: string }) => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className={className}>
+    <path d="M12 5v14" />
+    <path d="M5 12h14" />
+  </svg>
+);
+
 const XIcon = ({ className }: { className?: string }) => (
   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
     <path d="M18 6 6 18" />

@@ -39,6 +39,10 @@ export interface Product {
   taste_notes: string | null;
   lab_report_id: string | null;
   created_at: string | null;
+  /** If true, show "Same Day Delivery" badge/section on card and detail page. Defaults to false when absent. */
+  same_day_delivery?: boolean | null;
+  /** Minimum units a customer must order. Auto-fills quantity in the cart. Treated as 1 when absent. */
+  min_order_quantity?: number | null;
 }
 
 // â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
