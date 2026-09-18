@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Farm and Friends — Reach the Farm Team</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --brand-primary: #4A2C1A;
+            --brand-secondary: #7B4B2A;
+            --brand-accent: #C26D3A;
+            --brand-canvas: #FAF7F2;
+            --brand-beige: #F3E9DC;
+            --brand-green: #6D8B74;
+            --dim: #C9B79E;
+            --hole: #FAF7F2;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root:not([data-theme="light"]) {
+                --brand-primary: #F3E9DC;
+                --brand-secondary: #D8C3A5;
+                --brand-accent: #E0895A;
+                --brand-canvas: #221510;
+                --brand-beige: #33221A;
+                --brand-green: #7FA087;
+                --dim: #5B4A3A;
+                --hole: #221510;
+            }
+        }
+
+        :root[data-theme="dark"] {
+            --brand-primary: #F3E9DC;
+            --brand-secondary: #D8C3A5;
+            --brand-accent: #E0895A;
+            --brand-canvas: #221510;
+            --brand-beige: #33221A;
+            --brand-green: #7FA087;
+            --dim: #5B4A3A;
+            --hole: #221510;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            background: var(--brand-canvas);
+            color: var(--brand-primary);
+            font-family: 'Inter', system-ui, sans-serif;
+            display: flex;
+            justify-content: center;
+            padding: 0 18px 48px;
+            overflow-x: hidden;
+        }
+
+        .page {
+            width: 100%;
+            max-width: 480px;
+        }
+
+        /* ---------- Header ---------- */
+        .hero {
+            position: relative;
+            padding: 54px 4px 30px;
+            overflow: hidden;
+        }
+
+        .hero-word {
+            position: absolute;
+            top: -6px;
+            right: -18px;
+            font-family: 'DM Serif Display', Georgia, serif;
+            font-size: 6.6rem;
+            line-height: 1;
+            color: var(--brand-green);
+            opacity: 0.16;
+            transform: rotate(-4deg);
+            white-space: nowrap;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .logo-row {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 26px;
+            max-width: 100%;
+        }
+
+        .logo-img {
+            height: 76px;
+            width: auto;
+            display: block;
+        }
+
+        .logo-fallback {
+            display: none;
+            align-items: center;
+            height: 46px;
+            font-family: 'DM Serif Display', Georgia, serif;
+            font-size: 1.5rem;
+            color: var(--brand-primary);
+        }
+
+        @media (max-width: 600px) {
+            .logo-img {
+                height: 65px;
+            }
+        }
+
+        .dispatch-badge {
+            margin-left: auto;
+            font-size: 0.68rem;
+            color: var(--brand-secondary);
+            border: 1px solid var(--brand-accent);
+            border-radius: 999px;
+            padding: 5px 11px;
+            white-space: nowrap;
+        }
+
+        h1 {
+            position: relative;
+            z-index: 1;
+            font-family: 'DM Serif Display', Georgia, serif;
+            font-weight: 400;
+            font-size: 2.4rem;
+            line-height: 1.12;
+            margin: 0 0 12px;
+            color: var(--brand-primary);
+            max-width: 15ch;
+        }
+
+        .hero-sub {
+            position: relative;
+            z-index: 1;
+            font-size: 0.95rem;
+            line-height: 1.55;
+            color: var(--brand-secondary);
+            max-width: 34ch;
+            margin: 0;
+        }
+
+        /* ---------- Ledger of channels ---------- */
+        .ledger {
+            margin-top: 8px;
+        }
+
+        .row {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 17px 4px;
+            text-decoration: none;
+            color: inherit;
+            position: relative;
+            border-top: 1px solid rgba(74, 44, 26, 0.12);
+        }
+
+        .ledger .row:first-child {
+            border-top: none;
+        }
+
+        .icon-badge {
+            flex: none;
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--brand-accent);
+            color: var(--brand-canvas);
+        }
+
+        .icon-badge svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        .row.inactive .icon-badge {
+            background: transparent;
+            color: var(--dim);
+            border: 1.5px dashed var(--dim);
+        }
+
+        .row-text {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .row-title {
+            font-weight: 600;
+            font-size: 1rem;
+            margin: 0;
+            color: var(--brand-primary);
+        }
+
+        .row.inactive .row-title {
+            color: var(--brand-secondary);
+        }
+
+        .row-sub {
+            margin: 2px 0 0;
+            font-size: 0.82rem;
+            color: var(--brand-secondary);
+        }
+
+        .row.inactive .row-sub {
+            color: var(--dim);
+        }
+
+        .go {
+            flex: none;
+            width: 26px;
+            height: 26px;
+            color: var(--brand-accent);
+        }
+
+        .go svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        .soon {
+            flex: none;
+            font-size: 0.68rem;
+            color: var(--dim);
+            border: 1px solid var(--dim);
+            padding: 3px 9px;
+            border-radius: 999px;
+        }
+
+        .row.live {
+            transition: background-color 0.15s ease;
+        }
+
+        .row.live:hover {
+            background: rgba(194, 109, 58, 0.06);
+        }
+
+        .row.live:focus-visible {
+            outline: 2px solid var(--brand-accent);
+            outline-offset: 2px;
+        }
+
+        .row.inactive {
+            cursor: default;
+        }
+
+        /* ---------- Primary CTA ---------- */
+        .cta {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 30px;
+            background: var(--brand-primary);
+            color: var(--brand-canvas);
+            text-decoration: none;
+            padding: 17px 22px;
+            border-radius: 4px;
+        }
+
+        .cta-label {
+            font-size: 0.98rem;
+            font-weight: 600;
+        }
+
+        .cta-sub {
+            font-size: 0.78rem;
+            opacity: 0.75;
+            margin-top: 2px;
+        }
+
+        .cta:hover {
+            background: var(--brand-secondary);
+        }
+
+        .cta-arrow {
+            flex: none;
+            width: 20px;
+            height: 20px;
+        }
+
+        footer {
+            margin-top: 34px;
+            text-align: center;
+            font-size: 0.72rem;
+            color: var(--dim);
+            line-height: 1.7;
+        }
+
+        @media (max-width: 400px) {
+            .hero-word {
+                font-size: 4.8rem;
+                top: -4px;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="page">
+
+        <div class="hero">
+            <div class="hero-word">Fresh</div>
+
+            <div class="logo-row">
+                <img class="logo-img" src="public/images/logo/f&f logo.png" alt="Farm and Friends"
+                    onerror="this.style.display='none'; document.getElementById('logo-fallback').style.display='flex';">
+                <span class="dispatch-badge">Dispatch hub · Delhi</span>
+            </div>
+
+            <h1>Reach the farm team directly.</h1>
+            <p class="hero-sub">Every line to us, in one place — no third-party inbox, no middleman. Pick a channel
+                below.</p>
+        </div>
+
+        <div class="ledger">
+
+            <a class="row live"
+                href="https://wa.me/918851819808?text=Hi%20Farm%20and%20Friends%2C%20I%20have%20a%20query%20regarding%20your%20products."
+                target="_blank" rel="noopener">
+                <span class="icon-badge" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path
+                            d="M17.5 14.4c-.3-.1-1.7-.8-2-.9-.3-.1-.5-.1-.7.1-.2.3-.7.9-.9 1.1-.2.2-.3.2-.6.1-1.6-.7-2.7-1.6-3.6-3.2-.1-.3-.1-.4.1-.6l.5-.6c.2-.2.2-.4.1-.6-.1-.3-.6-1.5-.8-2-.2-.4-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.4-.2.3-.9 1-.9 2.3 0 1.4 1 2.7 1.1 2.9.1.2 2 3.1 4.8 4.2 2.4.9 2.9.7 3.4.7.5-.1 1.7-.7 1.9-1.4.2-.6.2-1.2.2-1.3-.1-.1-.3-.2-.6-.3zM12 3C7 3 3 7 3 12c0 1.7.5 3.4 1.4 4.8L3 21l4.4-1.4c1.3.7 2.9 1.1 4.6 1.1 5 0 9-4 9-9s-4-9-9-9z" />
+                    </svg>
+                </span>
+                <span class="row-text">
+                    <p class="row-title">Message us on WhatsApp</p>
+                    <p class="row-sub">Milling batch reminders &amp; quick swaps</p>
+                </span>
+                <span class="go" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M9 6l6 6-6 6" />
+                    </svg>
+                </span>
+            </a>
+
+            <a class="row live" href="mailto:farmnfriendsonline@gmail.com">
+                <span class="icon-badge" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <rect x="3" y="5" width="18" height="14" rx="1.5" />
+                        <path d="M4 6.5l8 6 8-6" />
+                    </svg>
+                </span>
+                <span class="row-text">
+                    <p class="row-title">Email the farm team</p>
+                    <p class="row-sub">Replies within 4 business hours</p>
+                </span>
+                <span class="go" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M9 6l6 6-6 6" />
+                    </svg>
+                </span>
+            </a>
+
+            <a class="row live" href="https://www.instagram.com/farmandfriends.official?stkn=Z2o0MDVxc214NmZx"
+                target="_blank" rel="noopener">
+                <span class="icon-badge" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                        <rect x="3.5" y="3.5" width="17" height="17" rx="4.5" />
+                        <circle cx="12" cy="12" r="3.7" />
+                        <circle cx="17.1" cy="6.9" r="0.9" fill="currentColor" stroke="none" />
+                    </svg>
+                </span>
+                <span class="row-text">
+                    <p class="row-title">Follow the harvest</p>
+                    <p class="row-sub">Behind the scenes from the fields</p>
+                </span>
+                <span class="go" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M9 6l6 6-6 6" />
+                    </svg>
+                </span>
+            </a>
+
+            <span class="row inactive" aria-disabled="true">
+                <span class="icon-badge" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path
+                            d="M4.5 3.5A1.8 1.8 0 1 0 4.5 7 1.8 1.8 0 0 0 4.5 3.5zM3 8.7h3v11.8H3zM9 8.7h2.9v1.6h.04c.4-.8 1.4-1.6 3-1.6 3.2 0 3.8 2.1 3.8 4.9v6.9h-3v-6.1c0-1.5 0-3.3-2-3.3-2 0-2.4 1.6-2.4 3.2v6.2H9z" />
+                    </svg>
+                </span>
+                <span class="row-text">
+                    <p class="row-title">LinkedIn</p>
+                    <p class="row-sub">Company updates</p>
+                </span>
+                <span class="soon">Coming soon</span>
+            </span>
+
+            <span class="row inactive" aria-disabled="true">
+                <span class="icon-badge" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path
+                            d="M21.6 7.6a2.7 2.7 0 0 0-1.9-1.9C18 5.2 12 5.2 12 5.2s-6 0-7.7.5a2.7 2.7 0 0 0-1.9 1.9A28 28 0 0 0 2 12a28 28 0 0 0 .4 4.4 2.7 2.7 0 0 0 1.9 1.9c1.7.5 7.7.5 7.7.5s6 0 7.7-.5a2.7 2.7 0 0 0 1.9-1.9A28 28 0 0 0 22 12a28 28 0 0 0-.4-4.4zM10 15.3V8.7l5.6 3.3z" />
+                    </svg>
+                </span>
+                <span class="row-text">
+                    <p class="row-title">YouTube</p>
+                    <p class="row-sub">Farm &amp; recipe stories</p>
+                </span>
+                <span class="soon">Coming soon</span>
+            </span>
+
+        </div>
+
+        <a class="cta" href="https://farmandfriends.in" target="_blank" rel="noopener">
+            <span>
+                <span class="cta-label">Shop the full pantry</span><br>
+                <span class="cta-sub">farmandfriends.in</span>
+            </span>
+            <span class="cta-arrow" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
+                    stroke-linejoin="round">
+                    <path d="M9 6l6 6-6 6" />
+                </svg>
+            </span>
+        </a>
+
+        <footer>
+            © 2026 Farm and Friends India Pvt Ltd.<br>
+            Pure, unadulterated staples — from Indian soil to your doorstep.
+        </footer>
+
+    </div>
+</body>
+
+</html>
