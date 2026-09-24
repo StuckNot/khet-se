@@ -98,6 +98,7 @@ export default function RootLayout({
       lang="en"
       className={`${dmSerif.variable} ${inter.variable} h-full antialiased`}
     >
+      <meta name="trustpilot-one-time-domain-verification-id" content="6fc501a2-e4c1-4084-9e91-658fe1144cfb"/>
       <body className="min-h-full flex flex-col">{children}</body>
     </html>
   );
