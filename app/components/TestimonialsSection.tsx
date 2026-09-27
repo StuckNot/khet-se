@@ -1,5 +1,6 @@
 import React from "react";
 import type { Tables } from "@/types/database.types";
+import TrustpilotWidget from "./TrustpilotWidget";
 
 type Testimonial = Tables<"testimonials">;
 
@@ -13,7 +14,7 @@ export default function TestimonialsSection({ testimonials }: TestimonialsSectio
   return (
     <section className="py-20 bg-brand-beige/40 border-t border-brand-secondary/10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
+
         <div className="max-w-3xl mx-auto text-center space-y-3 mb-14">
           <span className="text-xs font-bold text-brand-secondary uppercase tracking-wider bg-brand-canvas px-3.5 py-1 rounded-full border border-brand-secondary/15 inline-block">
             Pantry Experiences
@@ -69,6 +70,9 @@ export default function TestimonialsSection({ testimonials }: TestimonialsSectio
           ))}
         </div>
 
+        {/* <div className="m-10">
+          <TrustpilotWidget />
+        </div> */}
       </div>
     </section>
   );

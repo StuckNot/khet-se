@@ -1,6 +1,6 @@
 /**
  * ┌──────────────────────────────────────────────────────────────────────────────â”
- * │  KhetSe — Supabase Testimonial Provider                                      │
+ * │  Farm and Friends — Supabase Testimonial Provider                                      │
  * │  File: app/lib/providers/supabase/testimonial.supabase.ts                    │
  * ├──────────────────────────────────────────────────────────────────────────────┤
  * │                                                                              │

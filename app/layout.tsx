@@ -48,6 +48,7 @@ const inter = Inter({
  * @see https://nextjs.org/docs/app/api-reference/functions/generate-metadata
  */
 export const metadata: Metadata = {
+  metadataBase: new URL("https://farmandfriends.in"),
   title: {
     default: "Farm and Friends — Farm-to-Pantry Organic Staples",
     template: "%s | Farm and Friends",
@@ -72,19 +73,30 @@ export const metadata: Metadata = {
     title: "Farm and Friends — Farm-to-Pantry Staples",
     description:
       "100% chemical-free, lab-tested staples from farm to your pantry in under 48 hours.",
+    images: [
+      {
+        url: "/images/og-default.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Farm and Friends — Pure organic staples from Indian farms",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "Farm and Friends — Farm-to-Pantry Staples",
     description:
       "100% chemical-free, lab-tested staples from farm to your pantry in under 48 hours.",
+    images: ["/images/og-default.jpg"],
   },
   robots: {
     index: true,
     follow: true,
   },
   icons: {
-    icon: "/favicon.png",
+    icon: [
+      { url: "/favicon.png", sizes: "32x32", type: "image/png" },
+    ],
   },
 };
 
@@ -99,7 +111,30 @@ export default function RootLayout({
       className={`${dmSerif.variable} ${inter.variable} h-full antialiased`}
     >
       <meta name="trustpilot-one-time-domain-verification-id" content="6fc501a2-e4c1-4084-9e91-658fe1144cfb"/>
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Organization",
+              name: "Farm and Friends",
+              url: "https://farmandfriends.in",
+              logo: "https://farmandfriends.in/images/logo/farm-and-friends-logo.png",
+              description:
+                "100% chemical-free organic staples delivered from verified Indian farms.",
+              sameAs: [],
+              contactPoint: {
+                "@type": "ContactPoint",
+                contactType: "customer service",
+                email: "info@farmandfriends.in",
+                telephone: "+91-88518-19808",
+              },
+            }),
+          }}
+        />
+        {children}
+      </body>
     </html>
   );
 }

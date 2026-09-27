@@ -127,7 +127,7 @@ const Navbar = () => {
             <div className="flex items-center gap-3">
               <Link href="/" className="group focus:outline-none">
                 <Image
-                  src="/images/logo/f&f logo.png"
+                  src="/images/logo/farm-and-friends-logo.png"
                   alt="Farm and Friends"
                   width={180}
                   height={64}

@@ -35,7 +35,6 @@ body {
   background-color: var(--color-brand-canvas);
   color: var(--color-brand-primary);
   font-family: var(--font-sans);
-  scroll-behavior: smooth;
 }
 
 /* Subtle paper/earth texture grain overlay */

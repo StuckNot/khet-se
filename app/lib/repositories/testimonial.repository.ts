@@ -1,6 +1,6 @@
 /**
  * ┌──────────────────────────────────────────────────────────────────────────────â”
- * │  KhetSe — Testimonial Repository Interface                                   │
+ * │  Farm and Friends — Testimonial Repository Interface                                   │
  * │  File: app/lib/repositories/testimonial.repository.ts                        │
  * ├──────────────────────────────────────────────────────────────────────────────┤
  * │                                                                              │

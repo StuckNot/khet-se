@@ -1,6 +1,6 @@
 /**
  * ┌──────────────────────────────────────────────────────────────────────────────â”
- * │  KhetSe — Homepage                                                           │
+ * │  Farm and Friends — Homepage                                                           │
  * │  File: app/(shop)/page.tsx                                                   │
  * ├──────────────────────────────────────────────────────────────────────────────┤
  * │                                                                              │
@@ -20,7 +20,7 @@
  * │  IMAGES:                                                                     │
  * │  Hero and decorative images use temporary placeholder photography            │
  * │  stored in public/images/. These should be replaced with authentic           │
- * │  KhetSe farm/product photography for production.                             │
+ * │  Farm and Friends farm/product photography for production.                             │
  * └──────────────────────────────────────────────────────────────────────────────┘
  */
 
@@ -35,7 +35,7 @@ import type { Product, Testimonial } from "../lib/types";
 /**
  * Page-level SEO metadata.
  * Overrides the root layout defaults for the homepage only.
- * The title template in root layout will produce: "KhetSe — Farm-to-Pantry Staples"
+ * The title template in root layout will produce: "Farm and Friends — Farm-to-Pantry Staples"
  */
 export const metadata: Metadata = {
   title: "Farm and Friends — Farm-to-Pantry Staples",
@@ -164,8 +164,8 @@ export default async function HomePage() {
               <div className="rounded-3xl bg-brand-beige/80 p-4 sm:p-5 border border-brand-secondary/15 shadow-sm space-y-4">
                 {/*
                  * TEMPORARY PLACEHOLDER IMAGE
-                 * Replace with authentic KhetSe farm/product photography.
-                 * See: khetse-supabase-schema-gaps.md → "Hero / Marketing Image Source"
+                 * Replace with authentic Farm and Friends farm/product photography.
+                 * See: Farm and Friends-supabase-schema-gaps.md → "Hero / Marketing Image Source"
                  */}
                 <div className="relative h-72 sm:h-80 w-full rounded-2xl overflow-hidden bg-brand-beige">
                   <Image

@@ -1,6 +1,6 @@
 /**
  * ┌──────────────────────────────────────────────────────────────────────────────â”
- * │  KhetSe — Shared Product Card Component                                      │
+ * │  Farm and Friends — Shared Product Card Component                                      │
  * │  File: app/components/ProductCard.tsx                                        │
  * ├──────────────────────────────────────────────────────────────────────────────┤
  * │                                                                              │

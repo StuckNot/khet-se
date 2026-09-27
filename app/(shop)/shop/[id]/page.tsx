@@ -15,9 +15,35 @@ export async function generateMetadata({
   const productRepo = getProductRepo();
   const product = await productRepo.getProductById(id);
 
+  if (!product) {
+    return { title: "Product Not Found" };
+  }
+
+  const title = `${product.name} — Farm and Friends`;
+  const description = product.description
+    ? `${product.description} | 100% chemical-free, farm-to-pantry organic ${product.category}. Order from Farm and Friends.`
+    : `Buy ${product.name} — 100% chemical-free, organic ${product.category} delivered farm-to-pantry by Farm and Friends.`;
+
   return {
-    title: product?.name ?? "Product",
-    description: product?.description ?? "Farm-fresh staple from Farm and Friends.",
+    title: product.name,
+    description,
+    alternates: {
+      canonical: `/shop/${id}`,
+    },
+    openGraph: {
+      title,
+      description,
+      images: product.image_url
+        ? [{ url: product.image_url, alt: `${product.name} — organic ${product.category} by Farm and Friends` }]
+        : [],
+      type: "website",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: product.image_url ? [product.image_url] : [],
+    },
   };
 }
 
@@ -41,6 +67,58 @@ export default async function ProductDetailPage({
 
   return (
     <div className="min-h-screen bg-brand-canvas py-12 sm:py-20">
+      {/* Product JSON-LD Structured Data */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Product",
+            name: product.name,
+            description: product.description ?? `Farm-fresh ${product.category} from Farm and Friends.`,
+            image: product.image_url ?? undefined,
+            brand: { "@type": "Brand", name: "Farm and Friends" },
+            offers: {
+              "@type": "Offer",
+              price: product.base_price,
+              priceCurrency: "INR",
+              availability: "https://schema.org/InStock",
+              url: `https://farmandfriends.in/shop/${id}`,
+            },
+          }),
+        }}
+      />
+
+      {/* BreadcrumbList JSON-LD Structured Data */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            itemListElement: [
+              {
+                "@type": "ListItem",
+                position: 1,
+                name: "Shop All",
+                item: "https://farmandfriends.in/shop",
+              },
+              {
+                "@type": "ListItem",
+                position: 2,
+                name: categoryLabels[product.category] || product.category,
+              },
+              {
+                "@type": "ListItem",
+                position: 3,
+                name: product.name,
+                item: `https://farmandfriends.in/shop/${id}`,
+              },
+            ],
+          }),
+        }}
+      />
+
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
         {/* Breadcrumb */}
@@ -80,12 +158,13 @@ export default async function ProductDetailPage({
             {product.image_url ? (
               <Image
                 src={product.image_url}
-                alt={product.name}
+                alt={`${product.name} — organic ${categoryLabels[product.category] || product.category} by Farm and Friends`}
                 fill
                 className="object-cover"
                 sizes="(max-width: 1024px) 100vw, 50vw"
                 priority
               />
+
             ) : (
               <div className="absolute inset-0 flex flex-col items-center justify-center gap-3">
                 <span className="text-7xl opacity-40">🌾</span>

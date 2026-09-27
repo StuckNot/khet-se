@@ -1,6 +1,6 @@
 /**
  * ┌──────────────────────────────────────────────────────────────────────────────â”
- * │  KhetSe — Authentication Server Actions                                      │
+ * │  Farm and Friends — Authentication Server Actions                                      │
  * │  File: app/(shop)/login/actions.ts                                           │
  * ├──────────────────────────────────────────────────────────────────────────────┤
  * │                                                                              │

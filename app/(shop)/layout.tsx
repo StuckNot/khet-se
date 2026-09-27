@@ -1,6 +1,6 @@
 /**
  * ┌──────────────────────────────────────────────────────────────────────────────â”
- * │  KhetSe — Shop Layout (Server Component)                                    │
+ * │  Farm and Friends — Shop Layout (Server Component)                                    │
  * │  File: app/(shop)/layout.tsx                                                │
  * ├──────────────────────────────────────────────────────────────────────────────┤
  * │                                                                              │
@@ -36,7 +36,7 @@ export default function ShopLayout({
     <div className="flex min-h-screen flex-col bg-brand-canvas">
       <Navbar />
       <SelectionDrawer />
-      <main className="flex-grow">
+      <main id="main-content" className="flex-grow">
         {children}
       </main>
       <Footer />

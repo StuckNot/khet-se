@@ -1,6 +1,6 @@
 /**
  * ┌──────────────────────────────────────────────────────────────────────────────â”
- * │  KhetSe — Trial Kits / Subscription Wizard Form                              │
+ * │  Farm and Friends — Trial Kits / Subscription Wizard Form                              │
  * │  File: app/(shop)/trial-kits/SubscriptionWizard.tsx                          │
  * ├──────────────────────────────────────────────────────────────────────────────┤
  * │                                                                              │
