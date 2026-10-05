@@ -6,7 +6,7 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Our Story",
   description:
-    "Reclaiming the soul of Indian staples. Learn why we started Farm and Friends and our 48-hour farm-to-doorstep promise.",
+    "Reclaiming the soul of Indian staples. Learn why we started Farm and Friends and our 7-day farm-to-doorstep promise.",
 };
 
 export default function OurStoryPage() {
@@ -147,7 +147,7 @@ export default function OurStoryPage() {
           </div>
         </div>
 
-        {/* The 48-Hour Journey Timeline */}
+        {/* The 7-Day Journey Timeline */}
         <div className="bg-brand-beige/60 rounded-3xl p-8 sm:p-14 border border-brand-secondary/15 text-left space-y-10 shadow-sm">
           <div className="text-center max-w-2xl mx-auto space-y-2">
             <span className="text-xs font-bold text-success uppercase tracking-wider">

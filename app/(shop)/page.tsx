@@ -40,7 +40,7 @@ import type { Product, Testimonial } from "../lib/types";
 export const metadata: Metadata = {
   title: "Farm and Friends — Farm-to-Pantry Staples",
   description:
-    "Get 100% chemical-free staples — rice, lentils, flour, and spices — delivered from Indian farms to your pantry in under 48 hours. Subscribe and never run out.",
+    "Get 100% chemical-free staples — rice, lentils, flour, and spices — delivered from Indian farms to your pantry in 7 days. Subscribe and never run out.",
 };
 
 /**

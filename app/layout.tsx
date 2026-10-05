@@ -54,7 +54,7 @@ export const metadata: Metadata = {
     template: "%s | Farm and Friends",
   },
   description:
-    "100% chemical-free organic staples delivered directly from verified Indian farms to your pantry in under 48 hours. Subscribe and never run out of rice, lentils, flour, or spices again.",
+    "100% chemical-free organic staples delivered directly from verified Indian farms to your pantry in 7 days. Subscribe and never run out of rice, lentils, flour, or spices again.",
   keywords: [
     "organic food India",
     "farm to pantry",
@@ -72,7 +72,7 @@ export const metadata: Metadata = {
     siteName: "Farm and Friends",
     title: "Farm and Friends — Farm-to-Pantry Staples",
     description:
-      "100% chemical-free, lab-tested staples from farm to your pantry in under 48 hours.",
+      "100% chemical-free, lab-tested staples from farm to your pantry in 7 days.",
     images: [
       {
         url: "/images/og-default.jpg",
@@ -86,7 +86,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Farm and Friends — Farm-to-Pantry Staples",
     description:
-      "100% chemical-free, lab-tested staples from farm to your pantry in under 48 hours.",
+      "100% chemical-free, lab-tested staples from farm to your pantry in 7 days.",
     images: ["/images/og-default.jpg"],
   },
   robots: {
@@ -110,7 +110,6 @@ export default function RootLayout({
       lang="en"
       className={`${dmSerif.variable} ${inter.variable} h-full antialiased`}
     >
-      <meta name="trustpilot-one-time-domain-verification-id" content="6fc501a2-e4c1-4084-9e91-658fe1144cfb"/>
       <body className="min-h-full flex flex-col">
         <script
           type="application/ld+json"
@@ -122,12 +121,12 @@ export default function RootLayout({
               url: "https://farmandfriends.in",
               logo: "https://farmandfriends.in/images/logo/farm-and-friends-logo.png",
               description:
-                "100% chemical-free organic staples delivered from verified Indian farms.",
+                "100% chemical-free staples delivered from Indian farms.",
               sameAs: [],
               contactPoint: {
                 "@type": "ContactPoint",
                 contactType: "customer service",
-                email: "info@farmandfriends.in",
+                email: "farmnfriendsonline@gmail.com",
                 telephone: "+91-88518-19808",
               },
             }),

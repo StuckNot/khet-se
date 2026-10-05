@@ -75,7 +75,7 @@ export default function SubscriptionsPage() {
             Curated Monthly Subscription Plans
           </h1>
           <p className="text-base text-brand-secondary max-w-2xl mx-auto leading-relaxed">
-            Never run out of pure staples. Freshly stone-milled within 48 hours of dispatch, with full freedom to pause, swap, or cancel anytime.
+            Never run out of pure staples. Freshly stone-milled, with full freedom to pause, swap, or cancel anytime.
           </p>
 
           {/* Delivery Frequency Switch */}
